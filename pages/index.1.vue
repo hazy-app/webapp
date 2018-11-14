@@ -6,7 +6,8 @@
         title="صفحه اصلی"
         sidebar />
       <appInnerContent>
-        <nuxt-link to="/index.1">1</nuxt-link>
+        salam
+        <nuxt-link to="/">/</nuxt-link>
       </appInnerContent>
     </fvContent>
   </fvMain>
@@ -79,9 +80,8 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('home creastssedz')
-    this.$alerts.toast('این یه مسیج خوبه', 'success')
+  created() {
+    console.log('home created')
   },
   middleware: 'auth'
 }

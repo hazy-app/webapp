@@ -8,17 +8,21 @@
     "dev": "nuxt",
     "build:framevuerk": "framevuerk-builder -c ./framevuerk-config.js",
     "build": "nuxt build --spa",
-    "start": "nuxt start --spa",
+    "start": "nuxt start --ssr",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.0.0",
+    "base-64": "^0.1.0",
+    "cookie-universal-nuxt": "^2.0.5",
     "cross-env": "^5.2.0",
-    "framevuerk": "^2.0.1",
-    "nuxt": "^2.0.0"
+    "font-awesome": "^4.7.0",
+    "framevuerk": "^2.0.7",
+    "nuxt": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -28,7 +32,9 @@
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-vue": "^4.0.0",
     "framevuerk-builder": "^2.0.0",
+    "node-sass": "^4.10.0",
     "nodemon": "^1.11.0",
-    "prettier": "1.14.3"
+    "prettier": "1.14.3",
+    "sass-loader": "^7.1.0"
   }
 }

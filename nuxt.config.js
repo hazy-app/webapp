@@ -1,6 +1,8 @@
 const pkg = require('./package')
+const fs = require('fs')
+const path = require('path')
 
-module.exports = {
+const ret = {
   mode: 'universal',
 
   /*
@@ -29,10 +31,32 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/framevuerk'],
+  plugins: [
+    '~/plugins/index',
+    '~/plugins/axios',
+    '~/plugins/app',
+    '~/plugins/alerts'
+  ],
 
   env: {
-    direction: process.env.WEBAPP_DIRECTION || 'rtl'
+    direction: process.env.direction,
+    lang: process.env.lang,
+    clientId: process.env.clientId,
+    apiKey: process.env.apiKey,
+    appId: process.env.appId,
+    accountUrl: process.env.accountUrl,
+    productUrl: process.env.productUrl,
+    filemanagerUrl: process.env.filemanagerUrl,
+    searchUrl: process.env.searchUrl,
+    paymentUrl: process.env.paymentUrl,
+    geoUrl: process.env.geoUrl,
+    clubUrl: process.env.clubUrl,
+    cashoutUrl: process.env.cashoutUrl,
+    creditUrl: process.env.creditUrl,
+    socialUrl: process.env.socialUrl,
+    qrUrl: process.env.qrUrl,
+    appUrl: process.env.appUrl,
+    transportUrl: process.env.transportUrl
   },
 
   /*
@@ -40,7 +64,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
   /*
   ** Axios module configuration
@@ -69,3 +94,12 @@ module.exports = {
     }
   }
 }
+
+try {
+  const defaultEnvs = require(path.resolve(__dirname, './.default.env.json'))
+  Object.keys(defaultEnvs).forEach(envKey => {
+    ret.env[envKey] = ret.env[envKey] || defaultEnvs[envKey]
+  })
+} catch (e) {}
+
+module.exports = ret
