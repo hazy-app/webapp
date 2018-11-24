@@ -1,4 +1,4 @@
-# hazy-app
+# hazy-webapp
 
 > hazy web application
 
