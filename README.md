@@ -1,6 +1,6 @@
-# paygear-webapp
+# hazy-app
 
-> Paygear web application
+> hazy web application
 
 ## Build Setup
 

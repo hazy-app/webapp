@@ -21,8 +21,10 @@ export default {
       default: 'username'
     }
   },
-  fvValidate() {
-    return this.validityCheck()
+  computed: {
+    fvValidate() {
+      return this.validityCheck()
+    }
   },
   methods: {
     validityCheck() {

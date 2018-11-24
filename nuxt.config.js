@@ -31,32 +31,13 @@ const ret = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    '~/plugins/index',
-    '~/plugins/axios',
-    '~/plugins/app',
-    '~/plugins/alerts'
-  ],
+  plugins: ['~/plugins/index', '~/plugins/app', '~/plugins/axios'],
 
   env: {
-    direction: process.env.direction,
-    lang: process.env.lang,
-    clientId: process.env.clientId,
-    apiKey: process.env.apiKey,
-    appId: process.env.appId,
-    accountUrl: process.env.accountUrl,
-    productUrl: process.env.productUrl,
-    filemanagerUrl: process.env.filemanagerUrl,
-    searchUrl: process.env.searchUrl,
-    paymentUrl: process.env.paymentUrl,
-    geoUrl: process.env.geoUrl,
-    clubUrl: process.env.clubUrl,
-    cashoutUrl: process.env.cashoutUrl,
-    creditUrl: process.env.creditUrl,
-    socialUrl: process.env.socialUrl,
-    qrUrl: process.env.qrUrl,
-    appUrl: process.env.appUrl,
-    transportUrl: process.env.transportUrl
+    BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3002',
+    DIRECTION: process.env.DIRECTION || 'ltr',
+    LANG: process.env.LANG || 'en',
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY
   },
 
   /*
@@ -65,6 +46,7 @@ const ret = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
+    'nuxt-user-agent',
     ['cookie-universal-nuxt', { parseJSON: false }]
   ],
   /*
@@ -94,12 +76,5 @@ const ret = {
     }
   }
 }
-
-try {
-  const defaultEnvs = require(path.resolve(__dirname, './.default.env.json'))
-  Object.keys(defaultEnvs).forEach(envKey => {
-    ret.env[envKey] = ret.env[envKey] || defaultEnvs[envKey]
-  })
-} catch (e) {}
 
 module.exports = ret

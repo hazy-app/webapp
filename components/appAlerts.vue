@@ -12,7 +12,7 @@
     </fvToast>
     <fvDialog 
       :value="confirmVisible"
-      class="fv-col-xs-10 fv-col-sm-8 fv-col-md-6 fv-col-xl-4"
+      class="fv-col-xs-10 fv-col-sm-8 fv-col-md-6 fv-col-xl-4 fv-no-padding"
       @input="$emit('confirmClose', false)">
       <p class="fv-padding"> {{ confirmContent }} </p>
       <div class="fv-padding fv-flex fv-grow">
@@ -100,6 +100,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-toast {
+  z-index: 1000;
   & > i {
     vertical-align: middle;
   }

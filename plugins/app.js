@@ -1,19 +1,26 @@
 import Vue from 'vue'
+import moment from 'moment'
+import Modela from 'modela'
+import appAlerts from '~/components/appAlerts.vue'
 
 import appHeader from '~/components/appHeader.vue'
-import appSidebar from '~/components/appSidebar.vue'
 import appInnerContent from '~/components/appInnerContent.vue'
 import appInput from '~/components/appInput.vue'
-import appUserLink from '~/components/appUserLink.vue'
+import appAccountLink from '~/components/appAccountLink.vue'
+import appRecaptcha from '~/components/appRecaptcha.vue'
+
 Vue.component('appHeader', appHeader)
-Vue.component('appSidebar', appSidebar)
 Vue.component('appInnerContent', appInnerContent)
 Vue.component('appInput', appInput)
-Vue.component('appUserLink', appUserLink)
+Vue.component('appAccountLink', appAccountLink)
+Vue.component('appRecaptcha', appRecaptcha)
 
-Vue.prototype.$getFileUrl = Vue.getFileUrl = src => {
-  if (src.indexOf('http') === 0) {
-    return src.trim()
-  }
-  return `${process.env.filemanagerUrl}/v3/${src.trim()}`
+Vue.filter('dateFromNow', date => {
+  return moment(date).fromNow()
+})
+export default ({ app }, inject) => {
+  inject('modela', (param = {}) => {
+    return new Modela(param)
+  })
+  inject('alerts', new (Vue.extend(appAlerts))())
 }

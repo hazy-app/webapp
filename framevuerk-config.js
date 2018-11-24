@@ -1,6 +1,6 @@
 const configs = []
 const baseConfig = {
-  'primary-color': '#1169C4',
+  'primary-color': '#000',
   'secondary-color': '#A08C08',
   'danger-color': '#BF2B2B',
   'warning-color': '#BB8A2A',
@@ -9,7 +9,7 @@ const baseConfig = {
   'header-bg-color': '#1169C4',
   'sidebar-bg-color': '#16212D',
   'footer-bg-color': '#16212D',
-  padding: '1em',
+  padding: '1.5em',
   'transition-speed': '0.35s',
   'border-radius': '0',
   'shadow-size': '0'

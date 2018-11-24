@@ -1,14 +1,14 @@
 {
-  "name": "paygear-webapp",
+  "name": "hazy-app",
   "version": "1.0.0",
-  "description": "Paygear web application",
+  "description": "Hazy web application",
   "author": "nainemom <nainemom@gmail.com>",
-  "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt -p 3003",
+    "dev:spa": "nuxt --spa -p 3003",
     "build:framevuerk": "framevuerk-builder -c ./framevuerk-config.js",
     "build": "nuxt build --spa",
-    "start": "nuxt start --ssr",
+    "start": "nuxt start --ssr -p 3003",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
@@ -21,8 +21,11 @@
     "cookie-universal-nuxt": "^2.0.5",
     "cross-env": "^5.2.0",
     "font-awesome": "^4.7.0",
-    "framevuerk": "^2.0.7",
-    "nuxt": "^2.2.0"
+    "framevuerk": "^2.0.10",
+    "modela": "^0.4.0",
+    "moment": "^2.22.2",
+    "nuxt": "^2.2.0",
+    "nuxt-user-agent": "^1.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
