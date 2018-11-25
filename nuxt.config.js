@@ -31,7 +31,7 @@ const ret = {
       },
       {
         itemprop: 'image',
-        content: '/hazy.png'
+        content: 'https://hazy.herokuapp.com/hazy.png'
       },
       // Open Graph
       {
@@ -52,7 +52,7 @@ const ret = {
       },
       {
         property: 'og:image',
-        content: '/hazy.png'
+        content: 'https://hazy.herokuapp.com/hazy.png'
       },
       // twitter
       {
@@ -78,7 +78,7 @@ const ret = {
       },
       {
         property: 'twitter:image:src',
-        content: '/hazy_card.png'
+        content: 'https://hazy.herokuapp.com/hazy_card.png'
       },
       // facebook
       {
@@ -90,7 +90,7 @@ const ret = {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico'
+        href: 'https://hazy.herokuapp.com/favicon.ico'
       },
       {
         rel: 'stylesheet',
