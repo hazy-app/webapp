@@ -211,7 +211,13 @@ export default {
   },
   head() {
     return {
-      title: 'Hazy'
+      title: 'Hazy',
+      meta: [
+        {
+          property: 'twitter:description',
+          content: `Send anonymous message to @${this.user.username}`
+        }
+      ]
     }
   },
   async asyncData({ params, query, store, $axios, redirect }) {
