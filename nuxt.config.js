@@ -63,7 +63,6 @@ const ret = {
         property: 'twitter:description',
         content: pkg.description
       },
-
       {
         property: 'twitter:site',
         content: '@nainemom'
