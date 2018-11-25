@@ -7,12 +7,13 @@
     "dev": "nuxt -p 3003 -H 0.0.0.0",
     "dev:spa": "nuxt --spa -p 3003 -H 0.0.0.0",
     "build:framevuerk": "framevuerk-builder -c ./framevuerk-config.js",
-    "build": "nuxt build --spa",
+    "build": "npm run build:framevuerk && nuxt build --spa",
     "start": "nuxt start --ssr -p 3003 -H 0.0.0.0",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.5.3",
