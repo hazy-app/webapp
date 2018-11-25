@@ -211,7 +211,7 @@ export default {
   },
   head() {
     return {
-      title: 'Hazy - Send and Receive anonymous messages'
+      title: 'Hazy'
     }
   },
   async asyncData({ params, query, store, $axios, redirect }) {

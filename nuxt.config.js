@@ -13,10 +13,84 @@ const ret = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      // standard
+      {
+        name: 'description',
+        content: pkg.description
+      },
+      // schema.org
+      {
+        itemprop: 'name',
+        content: 'Hazy'
+      },
+      {
+        itemprop: 'description',
+        content: pkg.description
+      },
+      {
+        itemprop: 'image',
+        content: 'https://hazy-app.github.io/framevuerk.png'
+      },
+      // Open Graph
+      {
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        property: 'og:title',
+        content: 'Hazy'
+      },
+      {
+        property: 'og:description',
+        content: pkg.description
+      },
+      {
+        property: 'og:site_name',
+        content: 'Hazy'
+      },
+      {
+        property: 'og:image',
+        content: 'https://hazy-app.github.io/hazy.png'
+      },
+      // twitter
+      {
+        property: 'twitter:title',
+        content: 'Hazy'
+      },
+      {
+        property: 'twitter:description',
+        content: pkg.description
+      },
+
+      {
+        property: 'twitter:site',
+        content: '@nainemom'
+      },
+      {
+        property: 'twitter:creator',
+        content: '@nainemom'
+      },
+      {
+        property: 'twitter:card',
+        content: 'summary_large_image'
+      },
+      {
+        property: 'twitter:image:src',
+        content: 'https://hazy-app.github.io/hazy_banner.jpg'
+      },
+      // facebook
+      {
+        property: 'fb:admins',
+        content: '100005486080043'
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: 'https://hazy-app.github.io//favicon.ico'
+      },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Lobster'
@@ -31,7 +105,7 @@ const ret = {
   /*
   ** Customize the progress-bar color
   */
-  loading: '~~/components/AppLoading.vue',
+  loading: '~~/components/appLoading.vue',
 
   /*
   ** Global CSS
@@ -44,10 +118,16 @@ const ret = {
   plugins: ['~/plugins/index', '~/plugins/app', '~/plugins/axios'],
 
   env: {
-    BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3002',
+    BASE_URL:
+      process.env.BASE_URL ||
+      (process.env.NODE_ENV === 'development'
+        ? 'http://127.0.0.1:3002'
+        : 'https://hazy.herokuapp.com'),
     DIRECTION: process.env.DIRECTION || 'ltr',
     LANG: process.env.LANG || 'en',
-    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY
+    RECAPTCHA_SITE_KEY:
+      process.env.RECAPTCHA_SITE_KEY ||
+      '6Lfj3HwUAAAAAGKohyJRasw6EsMoQGu2i0dOw1Ti'
   },
 
   /*

@@ -1,7 +1,7 @@
 {
   "name": "hazy-webapp",
   "version": "1.0.0",
-  "description": "Hazy web application",
+  "description": "Send and Receive anonymous messages",
   "author": "nainemom <nainemom@gmail.com>",
   "scripts": {
     "dev": "nuxt -p 3003 -H 0.0.0.0",

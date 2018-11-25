@@ -119,7 +119,7 @@ export default {
   },
   head() {
     return {
-      title: 'Hazy - Send and Receive anonymous messages'
+      title: 'Hazy'
     }
   }
 }
