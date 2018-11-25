@@ -118,16 +118,10 @@ const ret = {
   plugins: ['~/plugins/index', '~/plugins/app', '~/plugins/axios'],
 
   env: {
-    BASE_URL:
-      process.env.BASE_URL ||
-      (process.env.NODE_ENV === 'development'
-        ? 'http://127.0.0.1:3002'
-        : 'https://hazy.herokuapp.com'),
+    BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3002',
     DIRECTION: process.env.DIRECTION || 'ltr',
     LANG: process.env.LANG || 'en',
-    RECAPTCHA_SITE_KEY:
-      process.env.RECAPTCHA_SITE_KEY ||
-      '6Lfj3HwUAAAAAGKohyJRasw6EsMoQGu2i0dOw1Ti'
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY
   },
 
   /*
