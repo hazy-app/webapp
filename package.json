@@ -12,7 +12,8 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "deploy": "./publish.sh"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.5.3",
