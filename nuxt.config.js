@@ -30,7 +30,7 @@ const ret = {
       },
       {
         itemprop: 'image',
-        content: 'https://hazy-app.github.io/framevuerk.png'
+        content: 'https://hazy-app.github.io/hazy.png'
       },
       // Open Graph
       {
