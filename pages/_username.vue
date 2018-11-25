@@ -28,7 +28,7 @@
         </div>
         <fvForm 
           class="fv-row fv-border fv-shadow fv-radius form"
-          @submit.prevent="send">
+          @submit="send">
           <fvFormElement 
             class="fv-col-12" 
             label="Message">

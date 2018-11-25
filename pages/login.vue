@@ -6,7 +6,7 @@
       <appInnerContent xs>
         <fvForm 
           class="fv-row fv-border fv-shadow fv-radius"
-          @submit.prevent="login">
+          @submit="login">
           <fvFormElement 
             class="fv-col-12" 
             label="Username">
