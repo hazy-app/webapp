@@ -1,50 +1,41 @@
 <template>
-  <fvAvatar 
-    :src="avatar" 
-    :name="username" />
+  <div 
+    :style="{width: size, height: size}" 
+    class="hazy fv-border fv-shadow">
+    <img 
+      :src="avatar" 
+      alt="Hazy" >
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    user: {
-      type: Object,
-      default: undefined
+    size: {
+      type: String,
+      default: '4rem'
     }
   },
   data() {
     return {
-      avatar: undefined,
+      avatar: require('~/static/hazy.svg'),
       username: undefined
     }
-  },
-  async created() {
-    this.avatar = this.user
-      ? ''
-      : (() => {
-          return `https://randomuser.me/api/portraits/lego/${Math.floor(
-            Math.random() * 11
-          )}.jpg`
-        })()
-    this.username = this.user
-      ? this.user.username
-      : (() => {
-          const list = [
-            '!@#',
-            '@$$',
-            '%$#',
-            '&^%',
-            '*%#',
-            '$&(',
-            '@$!',
-            '*%#',
-            '%@_',
-            '_-#',
-            '%$#'
-          ]
-          return list[Math.floor(Math.random() * 11)]
-        })()
-    console.log(this.username)
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.hazy {
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 50%;
+  overflow: visible;
+
+  & > img {
+    width: 130%;
+    margin-left: -15%;
+    margin-top: -25%;
+  }
+}
+</style>

@@ -27,6 +27,6 @@
 
 <style scoped>
 section {
-  min-width: 367px;
+  min-width: 280px;
 }
 </style>

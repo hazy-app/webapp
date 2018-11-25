@@ -7,4 +7,7 @@ export default function({ store, redirect, app: { $axios, $cookies } }) {
   if (authorization) {
     $axios.setHeader('authorization', authorization)
   }
+  $axios.onRequest(async config => {
+    return config
+  })
 }

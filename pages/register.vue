@@ -1,39 +1,41 @@
 <template>
   <fvMain>
-    <!-- <appSidebar/> -->
     <fvContent>
-      <appHeader> Login </appHeader>
+      <appHeader :home="true"> Register </appHeader>
       <appInnerContent xs>
-        <br>
         <fvForm 
           class="fv-row fv-border fv-shadow fv-radius"
-          @submit="login">
+          @submit="register">
           <fvFormElement 
             class="fv-col-12" 
-            label="Username">
+            label="Username*">
             <fvInput 
               v-model="form.username"
+              :required="usernameChecker"
+              name="username" 
               autofocus 
-              placeholder="Enter your username" 
-              required />
+              placeholder="Enter your username" />
+            <small class="fv-text-light fv-block fv-padding-sm"> Username only can contain any letters from a to z and any numbers from 0 through 9. plus <i>-</i> and <i>_</i>. </small>
           </fvFormElement>
           <fvFormElement 
             class="fv-col-12" 
-            label="Password">
+            label="Password*">
             <fvInput 
               v-model="form.password"
-              type="password"
-              placeholder="Enter your password" 
+              type="password" 
+              name="password"
+              placeholder="Enter your password"
               required />
           </fvFormElement>
           <fvFormElement 
             class="fv-col-12" 
-            label="Password Again">
+            label="Password Again*">
             <fvInput 
               v-model="form.password2"
+              :required="passwordAgainChecker"
               type="password"
               placeholder="Enter your password again" 
-              required />
+            />
           </fvFormElement>
           <fvFormElement 
             class="fv-col-12" 
@@ -42,6 +44,7 @@
               v-model="form.password_hint"
               placeholder="Enter your password hint" />
           </fvFormElement>
+          <small class="fv-text-light fv-block fv-padding-sm"> Password hint can help you to recover your password if you forgot it. </small>
           <fvFormElement
             class="fv-col-12">
             <div class="fv-text-center">
@@ -83,7 +86,13 @@ export default {
     }
   },
   methods: {
-    async login() {
+    passwordAgainChecker(pass) {
+      return pass && pass === this.form.password
+    },
+    usernameChecker(uname) {
+      return /^[a-zA-Z0-9\_\-]+$/.test(uname)
+    },
+    async register() {
       this.$root.$loading.start()
       try {
         const response = await this.$axios.$post(
@@ -95,24 +104,22 @@ export default {
             recaptcha: this.form.recaptcha
           }
         )
-        await this.$store.dispatch('login', {
-          username: this.form.username,
-          password: this.form.password,
-          recaptcha: this.form.recaptcha
-        })
-        const redirect = decodeURIComponent(this.$route.query.redirect || '/')
         this.$root.$loading.finish()
         this.$alerts.toast(
           'Your account successfully created on Hazy!',
           'success'
         )
-        this.$router.push(redirect)
+        this.$router.push('/login')
       } catch (e) {
+        this.form.recaptcha = false
         this.$root.$loading.finish()
-        console.log(e.response)
-        // console.log(Object.keys(e))
-        this.$alerts.toast(e.data.message, 'failed')
+        this.$alerts.toast(e.response.data.message, 'failed')
       }
+    }
+  },
+  head() {
+    return {
+      title: 'Hazy - Send and Receive anonymous messages'
     }
   }
 }

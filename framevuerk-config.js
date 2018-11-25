@@ -6,21 +6,14 @@ const baseConfig = {
   'warning-color': '#BB8A2A',
   'info-color': '#22A4C1',
   'bg-color': '#fff',
-  'header-bg-color': '#1169C4',
-  'sidebar-bg-color': '#16212D',
-  'footer-bg-color': '#16212D',
-  padding: '1.5em',
+  'header-bg-color': '#000',
+  'sidebar-bg-color': '#000',
+  'footer-bg-color': '#000',
+  padding: '1em',
   'transition-speed': '0.35s',
   'border-radius': '0',
   'shadow-size': '0'
 }
-
-configs.push(
-  Object.assign(JSON.parse(JSON.stringify(baseConfig)), {
-    'config-name': 'rtl',
-    direction: 'rtl'
-  })
-)
 
 configs.push(
   Object.assign(JSON.parse(JSON.stringify(baseConfig)), {

@@ -2,9 +2,8 @@
   <fvMain>
     <!-- <appSidebar/> -->
     <fvContent>
-      <appHeader> Login </appHeader>
+      <appHeader :home="true"> Login </appHeader>
       <appInnerContent xs>
-        <br>
         <fvForm 
           class="fv-row fv-border fv-shadow fv-radius"
           @submit="login">
@@ -13,6 +12,7 @@
             label="Username">
             <fvInput 
               v-model="form.username"
+              name="username"
               autofocus 
               placeholder="Enter your username" 
               required />
@@ -23,6 +23,7 @@
             <fvInput 
               v-model="form.password"
               type="password"
+              name="password"
               placeholder="Enter your password" 
               required />
           </fvFormElement>
@@ -73,18 +74,23 @@ export default {
           password: this.form.password,
           recaptcha: this.form.recaptcha
         })
-        const redirect = decodeURIComponent(this.$route.query.redirect || '/')
+        const redirect = decodeURIComponent(
+          this.$route.query.redirect || `/${this.form.username}`
+        )
         this.$root.$loading.finish()
         this.$alerts.toast('Welcome to Hazy!', 'success')
         this.$router.push(redirect)
       } catch (e) {
+        this.form.recaptcha = false
         this.$root.$loading.finish()
-        this.$alerts.toast(e.data.message, 'failed')
+        this.$alerts.toast(e.response.data.message, 'failed')
       }
+    }
+  },
+  head() {
+    return {
+      title: 'Hazy - Send and Receive anonymous messages'
     }
   }
 }
 </script>
-
-<style>
-</style>

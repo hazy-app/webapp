@@ -54,7 +54,6 @@ export const actions = {
       )
     })(auth)
 
-    console.log(parsedToken)
     commit('SET', {
       key: 'parsedToken',
       value: parsedToken
