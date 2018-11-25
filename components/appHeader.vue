@@ -39,7 +39,7 @@
           v-if="$attrs.login"
           to="/login"
           class="fv-link">
-          <i class="fa fa-sign-in"/> Login / Reqister
+          <i class="fa fa-sign-in"/> Enter
         </nuxt-link>
       </div>
       <div class="fv-grow fv-hidden-sm" />
