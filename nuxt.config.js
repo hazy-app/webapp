@@ -77,7 +77,7 @@ const ret = {
       },
       {
         property: 'twitter:image:src',
-        content: '/hazy_banner.png'
+        content: '/hazy-banner.png'
       },
       // facebook
       {
