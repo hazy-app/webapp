@@ -33,12 +33,14 @@
             class="fv-col-12" 
             label="Message">
             <fvTextarea 
-              v-model="form.text" 
+              ref="input" 
+              v-model="form.text"
               placeholder="Enter your message"
               class="fv-size-lg"
               autofocus
               auto-height
-              required/>
+              required
+              @input="setInputDirection"/>
           </fvFormElement>
           <fvFormElement
             class="fv-col-12">
@@ -52,7 +54,7 @@
             <p> <i class="fa fa-info-circle" /> @{{ user.username }} never understand who you are! </p>
             <p> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
               class="fv-link" 
-              to="/login"> Click here </nuxt-link> to register! </p>
+              to="/register"> Click here </nuxt-link> to register! </p>
           </div>
           <div class="fv-flex fv-col-12">
             <fvButton 
@@ -91,12 +93,14 @@
               size="3rem"/>
           </div>
           <div class="fv-border fv-shadow fv-radius fv-grow">
-            <p class="fv-padding-sm fv-font-lg message-text">{{ message.text }}</p>
-            <small class="fv-flex fv-padding-sm fv-margin-top">
+            <p 
+              :style="{'direction': $calcDirection(message.text)}" 
+              class="fv-padding-sm fv-font-lg message-text">{{ message.text }}</p>
+            <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
               <div class="fv-grow" />
               <div 
-                :title="message.create_date" 
-                class="fv-margin-end-sm fa-text-gray">
+                :title="message.create_date | dateReadable" 
+                class="fv-margin-end fa-text-gray">
                 <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
               </div>
               <div>
@@ -141,6 +145,10 @@ export default {
     }
   },
   methods: {
+    setInputDirection(str) {
+      const direction = this.$calcDirection(str)
+      this.$refs.input.$el.style.direction = direction
+    },
     copyLink() {
       copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
