@@ -31,7 +31,7 @@ const ret = {
       },
       {
         itemprop: 'image',
-        content: 'https://hazy.herokuapp.com/hazy.png'
+        content: 'https://hazy.herokuapp.com/hazy.jpg'
       },
       // Open Graph
       {
@@ -52,7 +52,7 @@ const ret = {
       },
       {
         property: 'og:image',
-        content: 'https://hazy.herokuapp.com/hazy.png'
+        content: 'https://hazy.herokuapp.com/hazy.jpg'
       },
       // twitter
       {
