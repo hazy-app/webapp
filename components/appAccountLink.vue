@@ -3,7 +3,7 @@
     :style="{width: size, height: size}" 
     class="hazy fv-border fv-shadow">
     <img 
-      :src="avatar" 
+      :src="'/avatars/'+avatarIndex+'.svg'" 
       alt="Hazy" >
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      avatar: require('~/static/hazy.svg'),
+      avatarIndex: Math.floor(Math.random() * 5) + 1,
       username: undefined
     }
   }
