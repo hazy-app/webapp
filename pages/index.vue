@@ -22,16 +22,16 @@
               class="fv-button"
               target="_blank"> <i class="fa fa-github" /> Github </a>
             <nuxt-link 
-              v-if="!$store.state.parsedToken.username"
-              to="/register"
-              class="fv-button fv-primary"> <i class="fa fa-sign-in" /> Register </nuxt-link>
+              v-if="!$store.state.parsedToken.username" 
+              to="/login"
+              class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
             <fvButton 
               v-if="$store.state.parsedToken.username"
               @click="$logout"> <i class="fa fa-sign-out" /> Logout </fvButton>
             <nuxt-link 
-              v-if="!$store.state.parsedToken.username" 
-              to="/login"
-              class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+              v-if="!$store.state.parsedToken.username"
+              to="/register"
+              class="fv-button fv-primary"> <i class="fa fa-sign-in" /> Register </nuxt-link>
             <nuxt-link 
               v-if="$store.state.parsedToken.username" 
               :to="'/' + $store.state.parsedToken.username"
