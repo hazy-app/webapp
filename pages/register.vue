@@ -44,7 +44,7 @@
               v-model="form.password_hint"
               placeholder="Enter your password hint" />
           </fvFormElement>
-          <small class="fv-text-light fv-block fv-padding-sm"> Password hint can help you to recover your password if you forgot it. </small>
+          <small class="fv-col-12 fv-text-light"> Password hint can help you to recover your password if you forgot it. </small>
           <fvFormElement
             class="fv-col-12">
             <div class="fv-text-center">
