@@ -27,6 +27,9 @@
               placeholder="Enter your password" 
               required />
           </fvFormElement>
+          <div class="fv-col-12 fv-text-light">
+            <p v-if="password_hint"> <i class="fa fa-key" /> Your password hint was "{{ password_hint }}"! </p>
+          </div>
           <fvFormElement
             class="fv-col-12">
             <div class="fv-text-center">
@@ -62,10 +65,22 @@ export default {
         username: '',
         password: '',
         recaptcha: false
-      }
+      },
+      password_hint: null
+    }
+  },
+  watch: {
+    'form.username'() {
+      this.password_hint = null
     }
   },
   methods: {
+    async loadPasswordHint() {
+      const user = await this.$axios.$get(
+        `${process.env.BASE_URL}/users/${this.form.username}`
+      )
+      return user.password_hint
+    },
     async login() {
       this.$root.$loading.start()
       try {
@@ -83,6 +98,10 @@ export default {
       } catch (e) {
         this.form.recaptcha = false
         this.$root.$loading.finish()
+        if (e.response.status === 401) {
+          this.form.password = ''
+          this.password_hint = await this.loadPasswordHint()
+        }
         this.$alerts.toast(e.response.data.message, 'failed')
       }
     }
