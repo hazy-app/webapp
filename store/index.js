@@ -86,7 +86,7 @@ export const actions = {
     } catch (e) {
       console.log('login() => failed. so clearing accestoken.')
       await dispatch('clearAuthorization')
-      throw new Error(e.response)
+      throw e
     }
   },
   logout({ dispatch }) {
