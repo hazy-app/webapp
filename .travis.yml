@@ -12,5 +12,5 @@ install:
 script:
   - echo $TRAVIS_COMMIT  
   - COLLECT_ERROR=True fandogh login --username=$FANDOGH_USERNAME --password=$FANDOGH_PASSWORD
-  - ./publish_image $TRAVIS_COMMIT || travis_terminate 1
+  - ./publish_image.sh $TRAVIS_COMMIT || travis_terminate 1
   - ./deploy_service.sh $TRAVIS_COMMIT || travis_terminate 1;
