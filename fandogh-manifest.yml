@@ -3,3 +3,6 @@ name: hazy
 spec:
   image: hazy-webapp:${IMAGE_VERSION}
   port: 3003
+domains:
+  name: hazyapp.com
+  name: www.hazyapp.com
