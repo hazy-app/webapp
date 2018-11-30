@@ -1,0 +1,17 @@
+branches:
+  only:
+  - master
+  - develop
+language: python
+cache: yarn
+python:
+  - "3.5" 
+# command to install dependencies
+install:
+  - pip install fandogh-cli --upgrade
+# command to run tests
+script:
+  - echo $TRAVIS_COMMIT  
+  - COLLECT_ERROR=True fandogh login --username=$FANDOGH_USERNAME --password=$FANDOGH_PASSWORD
+  - ./publish_image $TRAVIS_COMMIT || travis_terminate 1
+  - ./deploy_service.sh $TRAVIS_COMMIT || travis_terminate 1;
