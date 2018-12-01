@@ -3,7 +3,7 @@ FROM node:8
 WORKDIR /app 
 
 COPY . /app 
-ENV BASE_URL="https://hazy-api.herokuapp.com" 
+ENV BASE_URL="https://api.hazyapp.com" 
 ENV DIRECTION="ltr" 
 ENV HOST="0.0.0.0" 
 ENV PORT="3003" 
