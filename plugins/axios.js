@@ -1,6 +1,4 @@
-import axios from 'axios'
-
-export default function({ store, redirect, app: { $axios, $cookies } }) {
+export default function({ app: { $axios, $cookies } }) {
   $axios.setHeader('Content-Type', 'application/json')
   const authorization = $cookies.get('authorization')
 
