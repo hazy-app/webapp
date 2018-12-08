@@ -6,7 +6,7 @@
       class="app-toast"
       @input="$emit('toastClose', false)">
       <i 
-        :class="{'fa-check-circle': toastType === 'success', 'fa-exclamation-circle': toastType === 'error'}" 
+        :class="{'fa-check-circle': toastType === 'success', 'fa-exclamation-circle': toastType === 'error', 'fa-commenting-o': toastType === 'message'}" 
         class="fa fv-font-lg" />
       <span> {{ toastContent }} </span>
     </fvToast>
