@@ -1,4 +1,5 @@
-import axios from '../plugins/axios'
+import firebase from 'firebase/app'
+import 'firebase/messaging'
 
 export const state = () => {
   return {
@@ -83,9 +84,33 @@ export const actions = {
       await dispatch('setAuthorization', {
         authorization: response.data
       })
+      if (window && window.localStorage.fcmToken) {
+        await dispatch('setMyFcmToken', {
+          fcmToken: window.localStorage.fcmToken
+        })
+      }
     } catch (e) {
       console.log('login() => failed. so clearing accestoken.')
       await dispatch('clearAuthorization')
+      throw e
+    }
+  },
+  async setMyFcmToken({ state }, { fcmToken }) {
+    try {
+      await this.$axios.delete(
+        `${process.env.BASE_URL}/users/${
+          state.parsedToken.username
+        }/fcm-tokens/${fcmToken}`
+      )
+      await this.$axios.post(
+        `${process.env.BASE_URL}/users/${
+          state.parsedToken.username
+        }/fcm-tokens`,
+        {
+          fcmToken
+        }
+      )
+    } catch (e) {
       throw e
     }
   },
@@ -113,7 +138,7 @@ export const actions = {
       })
     }
   },
-  setSidebarVisibility({ commit, state }, value) {
+  setSidebarVisibility({ commit }, value) {
     commit('SET', {
       key: 'sidebarVisibility',
       value: value
