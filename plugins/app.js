@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import moment from 'moment'
 import Modela from 'modela'
-import appAlerts from '~/components/appAlerts.vue'
 
+import appAlerts from '~/components/appAlerts.vue'
 import appHeader from '~/components/appHeader.vue'
 import appInnerContent from '~/components/appInnerContent.vue'
 import appInput from '~/components/appInput.vue'
@@ -27,6 +27,9 @@ export default ({ app, store, router }, inject) => {
   inject('modela', (param = {}) => {
     return new Modela(param)
   })
+
+  inject('eventBus', new Vue())
+
   inject('alerts', new (Vue.extend(appAlerts))())
 
   inject('calcDirection', str => {
