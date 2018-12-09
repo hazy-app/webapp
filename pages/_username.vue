@@ -146,12 +146,16 @@ export default {
     }
   },
   mounted() {
-    this.$eventBus.$on('newMessage', this.insertNewMessage)
-    window.addEventListener('focus', this.sync)
+    if (this.isMine) {
+      this.$eventBus.$on('newMessage', this.insertNewMessage)
+      window.addEventListener('focus', this.sync)
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('focus', this.sync)
   },
   methods: {
     async sync() {
-      console.log('syncing...')
       this.loading = true
       const response = await this.$axios.$get(
         `${process.env.BASE_URL}/users/${
