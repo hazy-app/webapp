@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     fvValidate() {
-      return !!this.value
+      return process.env.NODE_ENV === 'development' ? true : !!this.value
     }
   },
   watch: {

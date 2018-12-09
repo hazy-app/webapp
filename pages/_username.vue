@@ -84,9 +84,10 @@
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
           </div>
         </div>
+
         <div 
           v-for="message in messages"
-          :key="message.id" 
+          :key="message._id" 
           class="fv-margin-bottom fv-flex">
           <div class="fv-margin-end-sm">
             <appAccountLink 
@@ -144,7 +145,30 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$eventBus.$on('newMessage', this.insertNewMessage)
+    window.addEventListener('focus', this.sync)
+  },
   methods: {
+    async sync() {
+      console.log('syncing...')
+      this.loading = true
+      const response = await this.$axios.$get(
+        `${process.env.BASE_URL}/users/${
+          this.$store.state.parsedToken.username
+        }/messages?per_page=10&page=1`
+      )
+      const messages = response.result
+        .filter(
+          msgn => this.messages.findIndex(msgo => msgo._id === msgn._id) === -1
+        )
+        .reverse()
+        .forEach(this.insertNewMessage)
+      this.loading = false
+    },
+    insertNewMessage(message) {
+      this.messages.unshift(message)
+    },
     setInputDirection(str) {
       const direction = this.$calcDirection(str)
       this.$refs.input.$el.style.direction = direction

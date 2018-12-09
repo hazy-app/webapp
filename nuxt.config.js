@@ -1,6 +1,4 @@
 const pkg = require('./package')
-const fs = require('fs')
-const path = require('path')
 
 const ret = {
   mode: 'universal',
@@ -115,13 +113,28 @@ const ret = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/index', '~/plugins/app', '~/plugins/axios'],
+  plugins: [
+    '~/plugins/index',
+    '~/plugins/app',
+    '~/plugins/axios',
+    {
+      src: '~/plugins/client-script',
+      ssr: false
+    }
+  ],
 
   env: {
     BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3002',
     DIRECTION: process.env.DIRECTION || 'ltr',
     LANG: process.env.LANG || 'en',
-    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY
+    RECAPTCHA_SITE_KEY:
+      process.env.RECAPTCHA_SITE_KEY ||
+      '6Lfj3HwUAAAAAGKohyJRasw6EsMoQGu2i0dOw1Ti',
+    FIREBASE_API_KEY:
+      process.env.FIREBASE_API_KEY || 'AIzaSyCpRi2Rbkb-JNyXjaQTT_3YoN-1FdzkmwA',
+    FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID || 'hazy-223207',
+    FIREBASE_MESSAGING_SENDER_ID:
+      process.env.FIREBASE_MESSAGING_SENDER_ID || '432488206155'
   },
 
   /*
@@ -129,6 +142,7 @@ const ret = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
+    '@nuxtjs/pwa',
     '@nuxtjs/axios',
     'nuxt-user-agent',
     ['cookie-universal-nuxt', { parseJSON: false }]
@@ -140,6 +154,10 @@ const ret = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  manifest: {
+    /* Do not change this id. it's static and is not current app id */
+    gcm_sender_id: '103953800507'
+  },
   /*
   ** Build configuration
   */
