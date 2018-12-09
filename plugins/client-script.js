@@ -7,9 +7,9 @@ export default async ({ store, app: { $alerts, $eventBus } }) => {
 
   // Firebase init
   var config = {
-    apiKey: 'AIzaSyCpRi2Rbkb-JNyXjaQTT_3YoN-1FdzkmwA',
-    projectId: 'hazy-223207',
-    messagingSenderId: '432488206155'
+    apiKey: process.env.FIREBASE_API_KEY,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
   }
   try {
     firebase.initializeApp(config)
