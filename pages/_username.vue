@@ -101,8 +101,17 @@
               <div class="fv-grow" />
               <div 
                 :title="message.create_date | dateReadable" 
-                class="fv-margin-end fa-text-gray">
-                <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
+                class="fv-margin-end fv-hidden-xs">
+                <span class="fa fa-text-gray">
+                  <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
+                </span>
+              </div>
+              <div class="fv-margin-end">
+                <a 
+                  class="fv-link fa-text-info" 
+                  @click="coppyMessage(message)">
+                  <i class="fa fa-share" /> Share
+                </a>
               </div>
               <div>
                 <a 
@@ -180,6 +189,10 @@ export default {
     copyLink() {
       copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
+    },
+    coppyMessage(message) {
+      copy(`https://hazyapp.com/messages/${message._id}`)
+      this.$alerts.toast('Message link copied to clipboard!')
     },
     async send() {
       this.$root.$loading.start()
