@@ -1,4 +1,5 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/messaging'
 
 export default async ({ store, app: { $alerts, $eventBus } }) => {
   if ('Notification' in window) {
