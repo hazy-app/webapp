@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import moment from 'moment'
+import timeago from 'timeago.js'
 import Modela from 'modela'
 
 import appAlerts from '~/components/appAlerts.vue'
@@ -16,11 +16,12 @@ Vue.component('appAccountLink', appAccountLink)
 Vue.component('appRecaptcha', appRecaptcha)
 
 Vue.filter('dateFromNow', date => {
-  return moment(date).fromNow()
+  return timeago().format(date)
 })
 
 Vue.filter('dateReadable', date => {
-  return moment(date)
+  const dt = new Date(date)
+  return `${dt.toDateString()} ${dt.toTimeString()}`
 })
 
 export default ({ app, store, router }, inject) => {
