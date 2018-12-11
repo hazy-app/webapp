@@ -8,7 +8,7 @@
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"
         :home="true">
-        @{{ user.username }}
+        @{{ $route.params.username }}
       </appHeader>
       <!-- If it is mine -->
       <appHeader
@@ -191,7 +191,11 @@ export default {
       this.$alerts.toast('Link copied to clipboard!')
     },
     coppyMessage(message) {
-      copy(`https://hazyapp.com/messages/${message._id}`)
+      copy(
+        `${window.document.location.protocol}//${
+          window.document.location.host
+        }/${this.$store.state.parsedToken.username}/messages/${message._id}`
+      )
       this.$alerts.toast('Message link copied to clipboard!')
     },
     async send() {
