@@ -1,5 +1,7 @@
 # hazy-webapp
 
+![build status](https://api.travis-ci.org/hazy-app/webapp.svg?branch=master)
+
 > hazy web application
 
 ## Build Setup
