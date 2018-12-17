@@ -2,7 +2,6 @@
   <fvMain>
     <fvContent>
       <appHeader
-        v-if="!isMine"
         :inbox="$store.state.parsedToken.username"
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"
@@ -32,6 +31,7 @@
               </div>
             </small>
           </div>
+
         </div>
       </appInnerContent>
     </fvContent>
@@ -69,6 +69,9 @@ export default {
           params.message
         }`
       )
+      if (store.state.parsedToken.username === params.username) {
+        ret.isMine = true
+      }
     } catch (e) {
       throw {
         statusCode: 404,
