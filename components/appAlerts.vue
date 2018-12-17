@@ -3,7 +3,7 @@
     <fvToast 
       :value="toastVisible" 
       :timeout="toastTimeout"
-      class="app-toast"
+      class="app-toast fv-no-wrap"
       @input="$emit('toastClose', false)">
       <i 
         :class="{'fa-check-circle': toastType === 'success', 'fa-exclamation-circle': toastType === 'error', 'fa-commenting-o': toastType === 'message'}" 
