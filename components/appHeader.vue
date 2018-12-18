@@ -15,7 +15,7 @@
           v-if="$attrs.home"
           to="/"
           class="fv-link">
-          <i class="fa fa-home"/> Home
+          <i class="fa fa-home"/> <span class="fv-hidden-xs"> Home </span>
         </nuxt-link>
         <span 
           v-if="$attrs.inbox" 
@@ -24,7 +24,7 @@
           v-if="$attrs.inbox"
           :to="'/' + $store.state.parsedToken.username"
           class="fv-link">
-          <i class="fa fa-inbox"/> Inbox
+          <i class="fa fa-inbox"/> <span class="fv-hidden-xs"> Inbox </span>
         </nuxt-link>
         <span 
           v-if="$attrs.logout || $attrs.login || $attrs.profile" 
@@ -33,13 +33,13 @@
           v-if="$attrs.logout"
           class="fv-link"
           @click="logout">
-          <i class="fa fa-sign-out"/> Logout
+          <i class="fa fa-sign-out"/> <span class="fv-hidden-xs"> Logout </span>
         </a>
         <nuxt-link 
           v-if="$attrs.login"
           to="/login"
           class="fv-link">
-          <i class="fa fa-sign-in"/> Enter
+          <i class="fa fa-sign-in"/> <span class="fv-hidden-xs"> Enter </span>
         </nuxt-link>
       </div>
       <div class="fv-grow fv-hidden-sm" />

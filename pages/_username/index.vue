@@ -26,44 +26,10 @@
         <div class="fv-text-center profile-container">
           <appAccountLink size="8rem" />
         </div>
-        <fvForm 
-          class="fv-row fv-border fv-shadow fv-radius form"
-          @submit="send">
-          <fvFormElement 
-            class="fv-col-12" 
-            label="Message">
-            <fvTextarea 
-              ref="input" 
-              v-model="form.text"
-              placeholder="Enter your message"
-              class="fv-size-lg"
-              autofocus
-              auto-height
-              required
-              @input="setInputDirection"/>
-          </fvFormElement>
-          <fvFormElement
-            class="fv-col-12">
-            <div class="fv-text-center">
-              <no-ssr>
-                <appRecaptcha v-model="form.recaptcha" />
-              </no-ssr>
-            </div>
-          </fvFormElement>
-          <div class="fv-col-12 fv-text-light">
-            <p> <i class="fa fa-info-circle" /> @{{ user.username }} never understand who you are! </p>
-            <p> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
-              class="fv-link" 
-              to="/register"> Click here </nuxt-link> to register! </p>
-          </div>
-          <div class="fv-flex fv-col-12">
-            <fvButton 
-              type="submit" 
-              class="fv-primary fv-grow fv-size-lg">
-              <i class="fa fa-send" /> Send
-            </fvButton>
-          </div>
-        </fvForm>
+        <appMessageSender 
+          :user="$route.params.username" 
+          class="fv-border fv-shadow fv-radius form"
+          @sent="$router.push('/' + $route.params.username + '/messages/' + $event._id)"/>
       </appInnerContent>
 
       <!-- If it is mine -->
@@ -107,11 +73,13 @@
                 </span>
               </div>
               <div class="fv-margin-end">
-                <a 
-                  class="fv-link fa-text-info" 
-                  @click="coppyMessage(message)">
-                  <i class="fa fa-share" /> Share
-                </a>
+                <nuxt-link 
+                  :to="'/' + $route.params.username + '/messages/' + message._id" 
+                  class="fv-link fa-text-info">
+                  <i 
+                    :class="{'fa-envelope-o': !message.reply_date, 'fa-envelope-open-o': message.reply_date}" 
+                    class="fa" /> Open
+                </nuxt-link>
               </div>
               <div>
                 <a 
@@ -189,14 +157,6 @@ export default {
     copyLink() {
       copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
-    },
-    coppyMessage(message) {
-      copy(
-        `${window.document.location.protocol}//${
-          window.document.location.host
-        }/${this.$store.state.parsedToken.username}/messages/${message._id}`
-      )
-      this.$alerts.toast('Message link copied to clipboard!')
     },
     async send() {
       this.$root.$loading.start()

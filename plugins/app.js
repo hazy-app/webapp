@@ -8,12 +8,14 @@ import appInnerContent from '~/components/appInnerContent.vue'
 import appInput from '~/components/appInput.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appRecaptcha from '~/components/appRecaptcha.vue'
+import appMessageSender from '~/components/appMessageSender.vue'
 
 Vue.component('appHeader', appHeader)
 Vue.component('appInnerContent', appInnerContent)
 Vue.component('appInput', appInput)
 Vue.component('appAccountLink', appAccountLink)
 Vue.component('appRecaptcha', appRecaptcha)
+Vue.component('appMessageSender', appMessageSender)
 
 Vue.filter('dateFromNow', date => {
   return timeago().format(date)
