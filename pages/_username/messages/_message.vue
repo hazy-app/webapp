@@ -50,6 +50,7 @@
               v-else-if="isMine && !message.reply"
               :user="$route.params.username" 
               :message="message._id" 
+              :recaptcha="false"
               message-label="Reply to message"
               button-text="Reply"
               button-icon="fa fa-reply"
