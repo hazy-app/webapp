@@ -29,7 +29,7 @@
         <appMessageSender 
           :user="$route.params.username" 
           class="fv-border fv-shadow fv-radius form"
-          @sent="$router.push('/' + $route.params.username + '/messages/' + $event._id)"/>
+          @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
       </appInnerContent>
 
       <!-- If it is mine -->
@@ -74,7 +74,7 @@
               </div>
               <div class="fv-margin-end">
                 <nuxt-link 
-                  :to="'/' + $route.params.username + '/messages/' + message._id" 
+                  :to="'/' + $route.params.username + '/messages/' + message.uuid" 
                   class="fv-link fa-text-info">
                   <i 
                     :class="{'fa-envelope-o': !message.reply_date, 'fa-envelope-open-o': message.reply_date}" 
@@ -207,7 +207,7 @@ export default {
           await this.$axios.$delete(
             `${process.env.BASE_URL}/users/${
               this.$store.state.parsedToken.username
-            }/messages/${message._id}`
+            }/messages/${message.uuid}`
           )
           const index = this.messages.findIndex(msg => msg._id === message._id)
           this.messages.splice(index, 1)

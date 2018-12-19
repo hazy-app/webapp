@@ -49,7 +49,7 @@
             <appMessageSender 
               v-else-if="isMine && !message.reply"
               :user="$route.params.username" 
-              :message="message._id" 
+              :message="message.uuid" 
               :recaptcha="false"
               message-label="Reply to message"
               button-text="Reply"
