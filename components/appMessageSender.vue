@@ -16,6 +16,7 @@
         @input="setInputDirection"/>
     </fvFormElement>
     <fvFormElement
+      v-if="recaptcha"
       class="fv-col-12">
       <div class="fv-text-center">
         <no-ssr>
@@ -61,6 +62,10 @@ export default {
     buttonIcon: {
       type: String,
       default: 'fa fa-send'
+    },
+    recaptcha: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -71,7 +76,6 @@ export default {
   }),
   computed: {
     isReply() {
-      console.log(this.message, typeof this.message)
       return typeof this.message !== 'undefined'
     },
     apiUrl() {
@@ -92,7 +96,7 @@ export default {
           this.apiUrl,
           {
             [this.isReply ? 'reply' : 'text']: this.form.text,
-            recaptcha: this.form.recaptcha
+            recaptcha: this.form.recaptcha || undefined
           }
         )
         this.$root.$loading.finish()
