@@ -34,7 +34,9 @@ export const actions = {
 
     if (authorization) {
       console.log('setAuthorization() => setting cookie from passed params.')
-      this.$cookies.set('authorization', auth)
+      this.$cookies.set('authorization', auth, {
+        maxAge: 1872000 // 30 days
+      })
     }
 
     console.log('setAuthorization() => setting tokens to $axios.')
