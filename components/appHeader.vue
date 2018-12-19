@@ -1,5 +1,11 @@
 <template>
   <div class="app-header">
+    <a 
+      v-if="!isHazyAppCom" 
+      :href="hazyAppLink"
+      class="fv-block fv-bg-danger fv-text-center fv-padding-start fv-padding-end top-alert">
+      You are using old version of <b>Hazy</b>, switch to the new version by clicking here!
+    </a>
     <div class="fv-flex">
       <div class="fv-grow fv-hidden-sm" />
       <div class="fv-col-md-8 fv-col-lg-6 fv-flex">
@@ -49,6 +55,20 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isHazyAppCom: true,
+      hazyAppLink: 'https://hazyapp.com'
+    }
+  },
+  mounted() {
+    if (window && window.document && document.location.host !== 'hazyapp.com') {
+      this.isHazyAppCom = false
+      this.hazyAppLink = document.location.href
+        .replace(document.location.host, 'hazyapp.com')
+        .replace('http://', 'https://')
+    }
+  },
   methods: {
     async logout() {
       await this.$logout()
@@ -60,9 +80,9 @@ export default {
 
 <style lang="scss" scoped>
 .app-header {
-  height: 4rem;
-  max-height: 4rem;
-  min-height: 4rem;
   line-height: 2.6rem;
+}
+.top-alert {
+  color: #fff;
 }
 </style>
