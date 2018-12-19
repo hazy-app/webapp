@@ -38,17 +38,54 @@
               class="fv-button fv-primary"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
           </div>
         </div>
+        <div class="fv-padding-top fv-padding-bottom"/>
+        <div class="fv-row fv-text-center">
+          <div class="fv-col-sm-6">
+            <div class="fv-border fv-radius fv-shadow fv-padding">
+              <h2><appNumberBanner :number="report.total_users"/></h2>
+              <p>Users</p>
+            </div>
+          </div>
+          <div class="fv-col-sm-6">
+            <div class="fv-border fv-radius fv-shadow fv-padding">
+              <h2><appNumberBanner :number="report.total_messages"/></h2>
+              <p>Messages</p>
+            </div>
+          </div>
+        </div>
       </appInnerContent>
     </fvContent>
   </fvMain>
 </template>
 
 <script>
+import appNumberBanner from '~/components/appNumberBanner.vue'
+
 export default {
+  components: {
+    appNumberBanner
+  },
+  data() {
+    return {
+      report: {}
+    }
+  },
   head() {
     return {
       title: 'Hazy'
     }
+  },
+  async asyncData({ params, query, store, $axios, redirect }) {
+    const ret = {}
+    try {
+      ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
+    } catch (e) {
+      ret.report = {
+        total_messages: 0,
+        total_users: 0
+      }
+    }
+    return ret
   }
 }
 </script>
@@ -67,6 +104,10 @@ export default {
 }
 
 .logo-container__buttons > * {
+  margin: 0.25em;
+}
+
+.report-container__box {
   margin: 0.25em;
 }
 </style>
