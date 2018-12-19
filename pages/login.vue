@@ -5,6 +5,7 @@
       <appHeader :home="true"> Login </appHeader>
       <appInnerContent xs>
         <fvForm 
+          method="POST"
           class="fv-row fv-border fv-shadow fv-radius"
           @submit="login">
           <fvFormElement 

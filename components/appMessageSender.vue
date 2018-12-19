@@ -1,5 +1,6 @@
 <template>
   <fvForm 
+    method="POST"
     class="fv-row"
     @submit="send">
     <fvFormElement 
