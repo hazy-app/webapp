@@ -21,4 +21,8 @@ h5 {
   font-family: 'Lobster', cursive;
   font-size: 3.5rem;
 }
+
+.fv-content {
+  display: block;
+}
 </style>
