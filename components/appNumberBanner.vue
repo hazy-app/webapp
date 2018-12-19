@@ -41,10 +41,10 @@ export default {
       })
     },
     async setLocalNumber() {
-      const repeatTimes = 15 + Math.floor(Math.random() * 15)
+      const repeatTimes = 10
       this.animating = false
       for (let i = 0; i <= repeatTimes; i++) {
-        await this.setRandom(150)
+        await this.setRandom(200)
       }
       this.localNumber = this.number
     },
@@ -52,7 +52,7 @@ export default {
       this.animating = true
       setTimeout(async () => {
         while (this.animating) {
-          await this.setRandom(150)
+          await this.setRandom(200)
         }
       })
     },
