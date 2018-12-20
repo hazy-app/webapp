@@ -1,5 +1,5 @@
 <template>
-  <div class="fv-row fv-no-padding">
+  <div class="fv-row app-inner-content">
     <div class="fv-grow fv-hidden-xs" />
     <section 
       v-if="typeof $attrs.xs !== 'undefined'" 
@@ -26,6 +26,10 @@
 </template>
 
 <style scoped>
+.app-inner-content {
+  padding: 0;
+}
+
 section {
   min-width: 280px;
 }
