@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      localNumber: 0,
+      localNumber: '1$7',
       animating: true
     }
   },
