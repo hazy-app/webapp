@@ -30,6 +30,8 @@ export default {
   background-color: #fff;
   border-radius: 50%;
   overflow: visible;
+  position: sticky;
+  top: 0.5rem;
 
   & > img {
     width: 130%;

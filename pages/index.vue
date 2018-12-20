@@ -5,8 +5,10 @@
         :inbox="$store.state.parsedToken.username"
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"> Hazy </appHeader>
-      <appInnerContent sm>
-        <div class="fv-text-center fv-padding-sm logo-container">
+      <appInnerContent 
+        class="fv-padding-sm fv-text-center" 
+        sm>
+        <div class="fv-text-center logo-container">
           <img 
             class="logo-container__logo"
             src="/hazy.svg" 
@@ -39,19 +41,19 @@
           </div>
         </div>
         <div class="fv-padding-top fv-padding-bottom"/>
-        <div class="fv-flex fv-text-center fv-margin-sm fv-border fv-radius fv-shadow">
-          <div class="fv-grow">
+        <div class="fv-text-center fv-padding-start fv-padding-end fv-border fv-radius fv-shadow report-container">
+          <span class="fv-inline-block">
             <div class="fv-padding">
               <h2><appNumberBanner :number="report.total_users"/></h2>
               <p>Users</p>
             </div>
-          </div>
-          <div class="fv-grow fv-border-start">
+          </span>
+          <span class="fv-inline-block">
             <div class="fv-padding">
               <h2><appNumberBanner :number="report.total_messages"/></h2>
               <p>Messages</p>
             </div>
-          </div>
+          </span>
         </div>
       </appInnerContent>
     </fvContent>
@@ -107,7 +109,8 @@ export default {
   margin: 0.25em;
 }
 
-.report-container__box {
-  margin: 0.25em;
+.report-container {
+  max-width: 400px;
+  margin: 0 auto;
 }
 </style>
