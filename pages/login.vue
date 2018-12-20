@@ -3,7 +3,9 @@
     <!-- <appSidebar/> -->
     <fvContent>
       <appHeader :home="true"> Login </appHeader>
-      <appInnerContent xs>
+      <appInnerContent 
+        class="fv-padding-sm" 
+        xs>
         <fvForm 
           method="POST"
           class="fv-row fv-border fv-shadow fv-radius"

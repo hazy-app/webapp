@@ -1,5 +1,5 @@
 <template>
-  <span> {{ localNumber }} </span>
+  <span v-html="localNumber"/>
 </template>
 
 <script>
@@ -7,27 +7,28 @@ export default {
   props: {
     number: {
       type: Number,
-      default: 0
+      default: undefined
     }
   },
   data() {
     return {
-      localNumber: 0
+      localNumber: '1$7',
+      animating: true
     }
   },
   watch: {
     number() {
-      this.startAnimation()
+      this.start()
     }
   },
-  mounted() {
-    this.startAnimation()
+  created() {
+    this.start()
   },
   methods: {
     setRandom(ts = 50) {
       return new Promise(resolve => {
         const availableChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '%', '$', '#']
-        const charLen = this.number.toString().length
+        const charLen = (this.number || '012').toString().length
         const gen = () =>
           availableChars[Math.floor(Math.random() * availableChars.length)]
         setTimeout(() => {
@@ -39,12 +40,28 @@ export default {
         }, ts)
       })
     },
-    async startAnimation() {
-      const repeatTimes = 15 + Math.floor(Math.random() * 15)
+    async setLocalNumber() {
+      const repeatTimes = 10
+      this.animating = false
       for (let i = 0; i <= repeatTimes; i++) {
-        await this.setRandom(50 + Math.floor(Math.random() * 50))
+        await this.setRandom(200)
       }
       this.localNumber = this.number
+    },
+    async infiniteAnimation() {
+      this.animating = true
+      setTimeout(async () => {
+        while (this.animating) {
+          await this.setRandom(200)
+        }
+      })
+    },
+    start() {
+      if (typeof this.number !== 'undefined') {
+        this.setLocalNumber()
+      } else {
+        this.infiniteAnimation()
+      }
     }
   }
 }

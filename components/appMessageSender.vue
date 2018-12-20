@@ -24,7 +24,7 @@
         </no-ssr>
       </div>
     </fvFormElement>
-    <div class="fv-col-12 fv-text-light">
+    <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
       <p v-if="typeof message === 'undefined'"> <i class="fa fa-info-circle" /> @{{ user }} never understand who you are! </p>
       <p v-if="!$store.state.parsedToken.username"> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 

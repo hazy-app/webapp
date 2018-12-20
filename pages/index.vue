@@ -5,7 +5,9 @@
         :inbox="$store.state.parsedToken.username"
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"> Hazy </appHeader>
-      <appInnerContent sm>
+      <appInnerContent 
+        class="fv-padding-sm fv-text-center" 
+        sm>
         <div class="fv-text-center logo-container">
           <img 
             class="logo-container__logo"
@@ -39,19 +41,19 @@
           </div>
         </div>
         <div class="fv-padding-top fv-padding-bottom"/>
-        <div class="fv-row fv-text-center">
-          <div class="fv-col-sm-6">
-            <div class="fv-border fv-radius fv-shadow fv-padding">
+        <div class="fv-text-center fv-padding-start fv-padding-end fv-border fv-radius fv-shadow report-container">
+          <span class="fv-inline-block">
+            <div class="fv-padding">
               <h2><appNumberBanner :number="report.total_users"/></h2>
               <p>Users</p>
             </div>
-          </div>
-          <div class="fv-col-sm-6">
-            <div class="fv-border fv-radius fv-shadow fv-padding">
+          </span>
+          <span class="fv-inline-block">
+            <div class="fv-padding">
               <h2><appNumberBanner :number="report.total_messages"/></h2>
               <p>Messages</p>
             </div>
-          </div>
+          </span>
         </div>
       </appInnerContent>
     </fvContent>
@@ -81,8 +83,8 @@ export default {
       ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
     } catch (e) {
       ret.report = {
-        total_messages: 0,
-        total_users: 0
+        total_messages: undefined,
+        total_users: undefined
       }
     }
     return ret
@@ -99,7 +101,7 @@ export default {
 
 .logo-container__text {
   & > p {
-    font-size: 1.4em;
+    font-size: 1.3em;
   }
 }
 
@@ -107,7 +109,8 @@ export default {
   margin: 0.25em;
 }
 
-.report-container__box {
-  margin: 0.25em;
+.report-container {
+  max-width: 400px;
+  margin: 0 auto;
 }
 </style>

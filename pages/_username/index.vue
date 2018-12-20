@@ -22,6 +22,7 @@
       <!-- If it is not mine -->
       <appInnerContent 
         v-if="!isMine" 
+        class="fv-padding-sm"
         sm>
         <div class="fv-text-center profile-container">
           <appAccountLink size="8rem" />
@@ -35,6 +36,7 @@
       <!-- If it is mine -->
       <appInnerContent 
         v-else 
+        class="fv-padding-sm"
         sm>
         <div 
           class="fv-padding fv-text-center fv-margin-bottom">
@@ -55,15 +57,13 @@
           v-for="message in messages"
           :key="message._id" 
           class="fv-margin-bottom fv-flex">
-          <div class="fv-margin-end-sm">
-            <appAccountLink 
-              size="3rem"/>
-          </div>
           <div class="fv-border fv-shadow fv-radius fv-grow">
             <p 
               :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text">{{ message.text }}</p>
-            <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
+              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><nuxt-link 
+                :to="'/' + $route.params.username + '/messages/' + message.uuid" 
+                class="fv-block"><span class="fv-text-light">@anonymous:</span> {{ message.text }}</nuxt-link></p>
+            <small class="fv-flex fv-padding-sm fv-padding-top">
               <div class="fv-grow" />
               <div 
                 :title="message.create_date | dateReadable" 
@@ -106,8 +106,12 @@
 
 <script>
 import copy from 'clipboard-copy'
+import appAccountLink from '~/components/appAccountLink.vue'
 
 export default {
+  components: {
+    appAccountLink
+  },
   data() {
     return {
       isMine: false,

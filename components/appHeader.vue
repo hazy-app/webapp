@@ -11,6 +11,10 @@
       <div class="fv-col-md-8 fv-col-lg-6 fv-flex">
         <div class="fv-grow fv-dir-start">
           <h1 class="fv-font-xl">
+            <img 
+              class="logo"
+              src="/hazy.svg" 
+              alt="Hazy" >
             <slot />
           </h1>
         </div>
@@ -84,5 +88,9 @@ export default {
 }
 .top-alert {
   color: #fff;
+}
+.logo {
+  vertical-align: middle;
+  height: 2rem;
 }
 </style>

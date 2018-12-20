@@ -9,7 +9,9 @@
         Message for <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>
       </appHeader>
 
-      <appInnerContent sm>
+      <appInnerContent 
+        class="fv-padding-sm" 
+        sm>
         <div 
           class="fv-padding fv-text-center fv-margin-bottom">
           <p v-if="!message.reply_date && !isMine"> <i class="fa fa-info-circle" /> If you wanna check <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link> reply, keep the message link yourself! </p>
@@ -23,15 +25,11 @@
         </div>
 
         <div class="fv-margin-top fv-flex">
-          <div class="fv-margin-end-sm">
-            <appAccountLink 
-              size="3rem"/>
-          </div>
           <div class="fv-border fv-shadow fv-radius fv-grow">
             <p 
               :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text">{{ message.text }}</p>
-            <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
+              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><span class="fv-text-light">@anonymous:</span> {{ message.text }}</p>
+            <small class="fv-flex fv-padding-sm fv-padding-top">
               <div class="fv-grow" />
               <div 
                 :title="message.create_date | dateReadable">
@@ -59,7 +57,7 @@
               v-else>
               <p 
                 :style="{'direction': $calcDirection(message.reply)}" 
-                class="fv-padding-sm fv-font-lg message-text"><small class="fv-text-light">@{{ $route.params.username }}:</small> {{ message.reply }}</p>
+                class="fv-padding-sm fv-font-lg message-text"><span class="fv-text-light">@{{ $route.params.username }}:</span> {{ message.reply }}</p>
               <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
                 <div class="fv-grow" />
                 <div 
