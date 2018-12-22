@@ -139,6 +139,10 @@ const ret = {
     {
       src: '~/plugins/client-script',
       ssr: false
+    },
+    {
+      src: '~/plugins/sent-messages',
+      ssr: false
     }
   ],
 
