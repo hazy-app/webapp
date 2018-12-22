@@ -24,6 +24,9 @@
               class="fv-button"
               target="_blank"> <i class="fa fa-github" /> Github </a>
             <nuxt-link 
+              to="/sent-messages"
+              class="fv-button"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
+            <nuxt-link 
               v-if="!$store.state.parsedToken.username" 
               to="/login"
               class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
