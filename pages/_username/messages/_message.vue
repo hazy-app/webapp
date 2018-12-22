@@ -14,8 +14,7 @@
         sm>
         <div 
           class="fv-padding fv-text-center fv-margin-bottom">
-          <p v-if="!message.reply_date && !isMine"> <i class="fa fa-info-circle" /> If you wanna check <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link> reply, keep the message link yourself! </p>
-          <p v-else-if="isMine"> <i class="fa fa-info-circle" /> Share this message to your friends! </p>
+          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share this message to your friends! </p>
           <p v-else-if="!isMine"> <i class="fa fa-info-circle" /> If you are not <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>, be careful for sharing this message to public places. </p>
           <div class="fv-margin-top">
             <fvButton 
