@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      localNumber: '1$7',
+      localNumber: this.randomStr(3),
       animating: true
     }
   },
@@ -25,17 +25,21 @@ export default {
     this.start()
   },
   methods: {
+    randomStr(len = 1) {
+      let ret = ''
+      const availableChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '%', '$', '#']
+      const gen = () =>
+        availableChars[Math.floor(Math.random() * availableChars.length)]
+      for (let i = 0; i < len; i++) {
+        ret += gen()
+      }
+      return ret
+    },
     setRandom(ts = 50) {
       return new Promise(resolve => {
-        const availableChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '%', '$', '#']
-        const charLen = (this.number || '012').toString().length
-        const gen = () =>
-          availableChars[Math.floor(Math.random() * availableChars.length)]
         setTimeout(() => {
-          this.localNumber = ''
-          for (let i = 0; i < charLen; i++) {
-            this.localNumber += gen()
-          }
+          const charLen = (this.number || '012').toString().length
+          this.localNumber = this.randomStr(charLen)
           resolve()
         }, ts)
       })
