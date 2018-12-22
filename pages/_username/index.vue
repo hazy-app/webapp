@@ -30,6 +30,7 @@
         <appMessageSender 
           :user="$route.params.username" 
           class="fv-border fv-shadow fv-radius form"
+          save-button
           @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
       </appInnerContent>
 
