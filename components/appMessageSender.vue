@@ -15,6 +15,14 @@
         required
         @input="setInputDirection"/>
     </fvFormElement>
+    <fvFormElement 
+      v-if="saveButton"
+      label="Save to Local Storage" 
+      class="fv-col-12"
+      inline>
+      <fvSwitch 
+        v-model="saveToLocalStorage" />
+    </fvFormElement>
     <fvFormElement
       v-if="recaptcha"
       class="fv-col-12">
@@ -25,6 +33,7 @@
       </div>
     </fvFormElement>
     <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
+      <p v-if="saveButton"> <i class="fa fa-info-circle" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
       <p v-if="typeof message === 'undefined'"> <i class="fa fa-info-circle" /> @{{ user }} never understand who you are! </p>
       <p v-if="!$store.state.parsedToken.username"> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 
@@ -63,6 +72,10 @@ export default {
       type: String,
       default: 'fa fa-send'
     },
+    saveButton: {
+      type: Boolean,
+      default: false
+    },
     recaptcha: {
       type: Boolean,
       default: true
@@ -72,7 +85,8 @@ export default {
     form: {
       text: '',
       recaptcha: false
-    }
+    },
+    saveToLocalStorage: true
   }),
   computed: {
     isReply() {
@@ -99,6 +113,9 @@ export default {
             recaptcha: this.form.recaptcha || undefined
           }
         )
+        if (this.saveButton && this.saveToLocalStorage && this.$sentMessages) {
+          this.$sentMessages.save(response)
+        }
         this.$root.$loading.finish()
         this.$emit('sent', response)
         if (this.isReply) {
@@ -113,6 +130,7 @@ export default {
           )
         }
       } catch (e) {
+        console.log(e)
         this.form.recaptcha = false
         this.$root.$loading.finish()
         this.$emit('error', e.response)
