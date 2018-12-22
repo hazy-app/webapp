@@ -86,6 +86,7 @@ export const actions = {
       await dispatch('setAuthorization', {
         authorization: response.data
       })
+      this.$sentMessages.clear()
       if (window && window.localStorage.fcmToken) {
         await dispatch('setMyFcmToken', {
           fcmToken: window.localStorage.fcmToken
@@ -117,7 +118,8 @@ export const actions = {
     }
   },
   logout({ dispatch }) {
-    return dispatch('clearAuthorization')
+    dispatch('clearAuthorization')
+    this.$sentMessages.clear()
   },
   calcUserAgent({ commit }) {
     if (this.$ua.deviceType() === 'pc') {
