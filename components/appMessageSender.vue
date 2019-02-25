@@ -104,20 +104,25 @@ export default {
   methods: {
     async send() {
       this.$root.$loading.start()
-
       try {
-        const response = await this.$axios[this.isReply ? '$put' : '$post'](
-          this.apiUrl,
-          {
+        const requestConfig = {
+          method: this.isReply ? 'put' : 'post',
+          url: this.apiUrl,
+          headers: {},
+          data: {
             [this.isReply ? 'reply' : 'text']: this.form.text,
             recaptcha: this.form.recaptcha || undefined
           }
-        )
+        }
+        if (!this.isReply) {
+          requestConfig.headers.authorization = ':D'
+        }
+        const response = await this.$axios(requestConfig)
         if (this.saveButton && this.saveToLocalStorage && this.$sentMessages) {
-          this.$sentMessages.save(response)
+          this.$sentMessages.save(response.data)
         }
         this.$root.$loading.finish()
-        this.$emit('sent', response)
+        this.$emit('sent', response.data)
         if (this.isReply) {
           this.$alerts.toast(
             `Your reply has been set to that message!`,
