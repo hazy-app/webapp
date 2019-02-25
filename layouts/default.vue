@@ -19,9 +19,22 @@ h3,
 h4,
 h5 {
   font-family: 'Lobster', cursive;
+}
+h1 {
+  font-size: 4rem;
+}
+h2 {
   font-size: 3.5rem;
 }
-
+h3 {
+  font-size: 2.7rem;
+}
+h4 {
+  font-size: 2rem;
+}
+h5 {
+  font-size: 1.5rem;
+}
 .fv-main {
   overflow: unset !important;
 }
