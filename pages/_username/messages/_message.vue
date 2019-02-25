@@ -14,12 +14,26 @@
         sm>
         <div 
           class="fv-padding fv-text-center fv-margin-bottom">
-          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share this message to your friends! </p>
+          <p v-if="isMine"> <i class="fa fa-info-circle" /> You can share this message! </p>
           <p v-else-if="!isMine"> <i class="fa fa-info-circle" /> If you are not <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>, be careful for sharing this message to public places. </p>
           <div class="fv-margin-top">
             <fvButton 
               class="fv-primary fv-size-sm" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+            <span 
+              v-if="isMine" 
+              class="fv-padding-sm"> | </span>
+            <fvFormElement 
+              v-if="isMine" 
+              class="public-switch"
+              inline
+              single-line
+              label="Show on My Profile">
+              <fvSwitch
+                :value="message.public"
+                class="fv-default fv-size-sm"
+                @input="changePrivacy" />
+            </fvFormElement>
           </div>
         </div>
 
@@ -107,6 +121,23 @@ export default {
       )
       this.$root.$loading.finish()
     },
+    async changePrivacy(newValue) {
+      this.$root.$loading.start()
+      try {
+        const response = await this.$axios.$put(
+          `${process.env.BASE_URL}/users/${
+            this.$route.params.username
+          }/messages/${this.$route.params.message}`,
+          {
+            public: newValue
+          }
+        )
+        this.message.public = newValue
+      } catch (e) {
+        this.message.public = this.message.public
+      }
+      this.$root.$loading.finish()
+    },
     copyLink() {
       copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
@@ -133,3 +164,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.public-switch {
+  display: inline-flex;
+}
+</style>
