@@ -36,22 +36,24 @@
 
       <!-- If it is mine -->
       <appInnerContent 
-        v-else 
         class="fv-padding-sm"
         sm>
         <div 
           class="fv-padding fv-text-center fv-margin-bottom">
-          <p
-            v-if="messages.length === 0"
-            class="fv-text-center">
-            <i class="fa fa-circle-o" /> You dont have an any messages yet!
-          </p>
-          <p> <i class="fa fa-info-circle" /> Share this page to your friends to receive anonymous messages! </p>
-          <div class="fv-margin-top">
+          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share this page to your friends to receive anonymous messages! </p>
+          <div 
+            v-if="isMine" 
+            class="fv-margin-top">
             <fvButton 
               class="fv-primary fv-size-sm" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
           </div>
+          <h4 v-if="!isMine"> Public Messages: </h4>
+          <p
+            v-if="messages.length === 0"
+            class="fv-text-center">
+            <i class="fa fa-circle-o" /> There is no message to show :)
+          </p>
         </div>
 
         <div 
@@ -67,28 +69,26 @@
             <small class="fv-flex fv-padding-sm fv-padding-top">
               <div class="fv-grow" />
               <div 
+                v-if="message.public" 
+                class="fv-margin-start">
+                <i class="fa fa-eye" /> Public
+              </div>
+              <div 
                 :title="message.create_date | dateReadable" 
-                class="fv-margin-end fv-hidden-xs">
+                class="fv-margin-start">
                 <span class="fa fa-text-gray">
                   <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
                 </span>
               </div>
-              <div class="fv-margin-end">
-                <nuxt-link 
-                  :to="'/' + $route.params.username + '/messages/' + message.uuid" 
-                  class="fv-link fa-text-info">
-                  <i 
-                    :class="{'fa-envelope-o': !message.reply_date, 'fa-envelope-open-o': message.reply_date}" 
-                    class="fa" /> Open
-                </nuxt-link>
-              </div>
-              <div>
+              <!-- <div
+                v-if="isMine"
+                class="fv-margin-start fv-hidden-xs">
                 <a 
                   class="fv-link fv-text-danger" 
                   @click="remove(message)">
                   <i class="fa fa-trash" /> Delete
                 </a>
-              </div>
+              </div> -->
             </small>
           </div>
         </div>
@@ -250,22 +250,20 @@ export default {
         message: 'User not found!'
       }
     }
-    if (store.state.parsedToken.username === params.username) {
-      ret.page = query.page ? parseInt(query.page) : 1
-      try {
-        const response = await $axios.$get(
-          `${process.env.BASE_URL}/users/${
-            store.state.parsedToken.username
-          }/messages?per_page=10&page=${ret.page}`
-        )
-        ret.hasNext = response.hasNext
-        ret.totalPages = response.totalPages
-        ret.messages = response.result
-        ret.isMine = true
-      } catch (e) {
-        return redirect('/login')
-      }
+    ret.page = query.page ? parseInt(query.page) : 1
+    try {
+      const response = await $axios.$get(
+        `${process.env.BASE_URL}/users/${
+          params.username
+        }/messages?per_page=10&page=${ret.page}`
+      )
+      ret.hasNext = response.hasNext
+      ret.totalPages = response.totalPages
+      ret.messages = response.result
+    } catch (e) {
+      return redirect('/login')
     }
+    ret.isMine = store.state.parsedToken.username === params.username
     return ret
   }
 }
