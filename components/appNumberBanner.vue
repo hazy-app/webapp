@@ -27,7 +27,7 @@ export default {
   methods: {
     randomStr(len = 1) {
       let ret = ''
-      const availableChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '%', '$', '#']
+      const availableChars = ['@', '&', '%', '$', '#']
       const gen = () =>
         availableChars[Math.floor(Math.random() * availableChars.length)]
       for (let i = 0; i < len; i++) {
