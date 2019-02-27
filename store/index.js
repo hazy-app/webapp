@@ -47,7 +47,7 @@ export const actions = {
       if (token.indexOf(' ') !== -1) {
         token = token.split(' ')[1]
       }
-      return JSON.parse(
+      const parsed = JSON.parse(
         require('base-64').decode(
           token
             .split('.')[1]
@@ -55,6 +55,10 @@ export const actions = {
             .replace('_', '/')
         )
       )
+      if (!parsed.role) {
+        parsed.role = []
+      }
+      return parsed
     })(auth)
 
     commit('SET', {
