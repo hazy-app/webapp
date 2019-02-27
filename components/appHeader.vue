@@ -51,6 +51,15 @@
           class="fv-link">
           <i class="fa fa-sign-in"/> <span class="fv-hidden-xs"> Enter </span>
         </nuxt-link>
+        <span 
+          v-if="$attrs.resetpw" 
+          class="fv-margin-start" />
+        <nuxt-link 
+          v-if="$attrs.resetpw"
+          :to="'/' + $route.params.username + '/reset-password?action=copy'"
+          class="fv-link fv-text-danger">
+          <i class="fa fa-edit"/> <span class="fv-hidden-xs"> Reset PW </span>
+        </nuxt-link>
       </div>
       <div class="fv-grow fv-hidden-sm" />
     </div>
