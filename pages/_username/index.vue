@@ -8,7 +8,7 @@
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"
         :home="true"
-        :resetpw="$store.state.parsedToken.role.indexOf('admin') > -1">
+        :resetpw="$store.state.parsedToken.role && $store.state.parsedToken.role.indexOf('admin') > -1">
         @{{ $route.params.username }}
       </appHeader>
       <!-- If it is mine -->
