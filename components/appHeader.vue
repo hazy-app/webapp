@@ -75,7 +75,12 @@ export default {
     }
   },
   mounted() {
-    if (window && window.document && document.location.host !== 'hazyapp.com') {
+    if (
+      window &&
+      window.document &&
+      (document.location.host !== 'hazyapp.com' &&
+        document.location.host !== 'www.hazyapp.com')
+    ) {
       this.isHazyAppCom = false
       this.hazyAppLink = document.location.href
         .replace(document.location.host, 'hazyapp.com')
