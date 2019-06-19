@@ -1,42 +1,39 @@
 <template>
-  <div 
-    :style="{width: size, height: size}" 
-    class="hazy fv-border fv-shadow">
-    <img 
-      :src="'/hazy.svg'" 
-      alt="Hazy" >
-  </div>
+  <nuxt-link 
+    v-if="clickable" 
+    :to="profileLink"
+    class="profile-link fv-link">
+    @{{ username }}
+  </nuxt-link>
+  <span 
+    v-else 
+    class="profile-link fv-link non-clickable"> @{{ username }} </span>
 </template>
 
 <script>
 export default {
   props: {
-    size: {
+    username: {
       type: String,
-      default: '4rem'
+      default: 'anonymous'
+    },
+    clickable: {
+      type: Boolean,
+      default: false
     }
   },
-  data() {
-    return {
-      username: undefined
+  computed: {
+    profileLink() {
+      return `/${this.username}`
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.hazy {
-  display: inline-block;
-  background-color: #fff;
-  border-radius: 50%;
-  overflow: visible;
-  position: sticky;
-  top: 0.5rem;
-
-  & > img {
-    width: 130%;
-    margin-left: -15%;
-    margin-top: -25%;
+.profile-link {
+  &.on-clickable {
+    cursor: not-allowed;
   }
 }
 </style>
