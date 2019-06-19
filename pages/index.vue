@@ -43,7 +43,7 @@
               class="fv-button fv-primary"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
           </div>
         </div>
-        <div class="fv-padding-top fv-padding-bottom"/>
+        <!-- <div class="fv-padding-top fv-padding-bottom"/>
         <div class="fv-text-center fv-padding-start fv-padding-end fv-border fv-radius fv-shadow report-container">
           <span class="fv-inline-block">
             <div class="fv-padding">
@@ -57,7 +57,7 @@
               <p>Messages</p>
             </div>
           </span>
-        </div>
+        </div> -->
       </appInnerContent>
     </fvContent>
   </fvMain>
@@ -82,14 +82,14 @@ export default {
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
-    try {
-      ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
-    } catch (e) {
-      ret.report = {
-        total_messages: undefined,
-        total_users: undefined
-      }
-    }
+    // try {
+    //   ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
+    // } catch (e) {
+    //   ret.report = {
+    //     total_messages: undefined,
+    //     total_users: undefined
+    //   }
+    // }
     return ret
   }
 }
