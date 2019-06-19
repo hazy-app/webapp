@@ -4,7 +4,7 @@
       <!-- If it is not mine -->
       <appHeader>
         <template slot="title"> Hazy </template>
-        <template slot="description"> Sending anonymous message to <appAccountLink 
+        <template slot="description"> Sending message to <appAccountLink 
           :username="user.username" 
           clickable/> </template>
       </appHeader>
