@@ -2,36 +2,33 @@
   <fvMain>
     <fvContent>
       <!-- If it is not mine -->
-      <appHeader
-        v-if="!isMine"
-        :inbox="$store.state.parsedToken.username"
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true"
-        :resetpw="$store.state.parsedToken.role && $store.state.parsedToken.role.indexOf('admin') > -1">
-        @{{ $route.params.username }}
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Sending anonymous message to <appAccountLink 
+          :username="user.username" 
+          clickable/> </template>
       </appHeader>
       <!-- If it is mine -->
-      <appHeader
+      <!-- <appHeader
         v-else
         :login="!$store.state.parsedToken.username"
         :logout="$store.state.parsedToken.username"
         :home="true"
         :resetpw="$store.state.parsedToken.role && $store.state.parsedToken.role.indexOf('admin') > -1">
         @{{ $route.params.username }}
-      </appHeader>
+      </appHeader> -->
 
       <appInnerContent 
-        class="fv-padding-sm"
+        class="fv-padding-smz"
         sm>
-        <div class="fv-text-center profile-container">
-          <appAccountLink size="8rem" />
-        </div>
+        <br>
         <appMessageSender 
           :user="$route.params.username" 
-          class="fv-border fv-shadow fv-radius form"
           save-button
           @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
+          <!-- <fvButton> <i class="fa fa-send" /> Send Message to <appAccountLink 
+          :username="user.username" 
+          no-link/> </fvButton> -->
       </appInnerContent>
 
     </fvContent>
@@ -121,8 +118,5 @@ export default {
 <style lang="scss" scoped>
 .profile-container {
   margin-bottom: -4rem;
-}
-.form {
-  padding-top: 4rem;
 }
 </style>
