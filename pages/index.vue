@@ -1,10 +1,10 @@
 <template>
   <fvMain>
     <fvContent>
-      <appHeader
-        :inbox="$store.state.parsedToken.username"
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"> Hazy </appHeader>
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Send and Receive anonymous messages </template>
+      </appHeader>
       <appInnerContent 
         class="fv-padding-sm fv-text-center" 
         sm>
