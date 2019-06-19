@@ -29,7 +29,7 @@ const ret = {
       },
       {
         itemprop: 'image',
-        content: 'https://hazy.herokuapp.com/hazy.jpg'
+        content: 'https://hazyapp.com/hazy.jpg'
       },
       // Open Graph
       {
@@ -50,7 +50,7 @@ const ret = {
       },
       {
         property: 'og:image',
-        content: 'https://hazy.herokuapp.com/hazy.jpg'
+        content: 'https://hazyapp.com/hazy.jpg'
       },
       // twitter
       {
@@ -75,7 +75,7 @@ const ret = {
       },
       {
         property: 'twitter:image:src',
-        content: 'https://hazy.herokuapp.com/hazy_card.png'
+        content: 'https://hazyapp.com/hazy_card.png'
       },
       // facebook
       {
@@ -87,7 +87,7 @@ const ret = {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'https://hazy.herokuapp.com/favicon.ico'
+        href: 'https://hazyapp.com/favicon.ico'
       },
       {
         rel: 'stylesheet',
@@ -95,7 +95,7 @@ const ret = {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Lato'
+        href: 'https://fonts.googleapis.com/css?family=Quicksand'
       }
     ]
   },

@@ -9,18 +9,18 @@ body,
 #__layout {
   min-height: 100%;
   height: 100%;
-  line-height: 1.7;
+  line-height: 1.5;
   font-size: 14px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5 {
   font-family: 'Lobster', cursive;
-}
-h1 {
+} */
+/* h1 {
   font-size: 4rem;
 }
 h2 {
@@ -34,7 +34,7 @@ h4 {
 }
 h5 {
   font-size: 1.5rem;
-}
+} */
 .fv-main {
   overflow: unset !important;
 }
