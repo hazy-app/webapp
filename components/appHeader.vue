@@ -75,16 +75,16 @@ export default {
     }
   },
   mounted() {
-    if (
-      window &&
-      window.document &&
-      (document.location.host !== 'hazyapp.com' &&
-        document.location.host !== 'www.hazyapp.com')
-    ) {
-      this.isHazyAppCom = false
-      this.hazyAppLink = document.location.href
-        .replace(document.location.host, 'hazyapp.com')
-        .replace('http://', 'https://')
+    if (window && window.document) {
+      if (
+        document.location.host !== 'hazyapp.com' &&
+        document.location.host !== 'www.hazyapp.com'
+      ) {
+        this.isHazyAppCom = false
+        this.hazyAppLink = document.location.href
+          .replace(document.location.host, 'hazyapp.com')
+          .replace('http://', 'https://')
+      }
     }
   },
   methods: {
