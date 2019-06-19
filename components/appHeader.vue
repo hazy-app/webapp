@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header">
+  <!-- <div class="app-header">
     <a 
       v-if="!isHazyAppCom" 
       :href="hazyAppLink"
@@ -63,28 +63,39 @@
       </div>
       <div class="fv-grow fv-hidden-sm" />
     </div>
-  </div>
+  </div> -->
+  <fvHeader class="transparent header">
+    <!-- <fvButton> Another Button </fvButton> -->
+    <!-- <span class="fv-padding-start" /> -->
+    <appLogo class="logo"/>
+    <div class="vertical-line fv-border-start" />
+    <div class="fv-grow title">
+      <h2> <slot name="title"/> </h2>
+      <p class="fv-text-light"> <slot name="description"/> </p>
+    </div>
+    <span class="fv-padding-start" />
+    <fvButton
+      v-if="!!$store.state.parsedToken.username"
+      class="fv-primary"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> My Account </span> </fvButton>
+    <fvButton 
+      v-else 
+      class="fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Login / Register </span> </fvButton>
+    <span class="fv-padding-start" />
+    <fvButton> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access </span> </fvButton>
+  </fvHeader>
 </template>
 
 <script>
+import appLogo from '~/components/appLogo.vue'
+
 export default {
+  components: {
+    appLogo
+  },
   data() {
     return {
       isHazyAppCom: true,
       hazyAppLink: 'https://hazyapp.com'
-    }
-  },
-  mounted() {
-    if (window && window.document) {
-      if (
-        document.location.host !== 'hazyapp.com' &&
-        document.location.host !== 'www.hazyapp.com'
-      ) {
-        this.isHazyAppCom = false
-        this.hazyAppLink = document.location.href
-          .replace(document.location.host, 'hazyapp.com')
-          .replace('http://', 'https://')
-      }
     }
   },
   methods: {
@@ -97,14 +108,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-header {
-  line-height: 2.6rem;
-}
-.top-alert {
-  color: #fff;
-}
-.logo {
-  vertical-align: middle;
-  height: 2rem;
+.header {
+  & > /deep/ header {
+    padding: 0.4em 1em;
+  }
+  & .vertical-line {
+    margin: 0 10px 0 4px;
+    height: 2.5em;
+    width: 1px;
+  }
+  & .title {
+    line-height: 1.3;
+
+    & > p {
+      font-size: 0.9em;
+    }
+  }
 }
 </style>
