@@ -9,7 +9,7 @@ const baseConfig = {
   'header-bg-color': '#000',
   'sidebar-bg-color': '#000',
   'footer-bg-color': '#000',
-  padding: '1.3em',
+  padding: '1em',
   'transition-speed': '0.35s',
   'border-radius': '5px',
   'shadow-size': '6px'
