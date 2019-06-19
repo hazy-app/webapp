@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     fvValidate() {
-      return process.env.NODE_ENV === 'developmentz' ? true : !!this.value
+      return process.env.NODE_ENV === 'development' ? true : !!this.value
     }
   },
   watch: {
