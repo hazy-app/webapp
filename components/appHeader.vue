@@ -67,8 +67,8 @@
   <fvHeader class="transparent header">
     <!-- <fvButton> Another Button </fvButton> -->
     <!-- <span class="fv-padding-start" /> -->
-    <appLogo class="logo"/>
-    <div class="vertical-line fv-border-start" />
+    <appLogo class="logo fv-hidden-xs"/>
+    <div class="vertical-line fv-border-start fv-hidden-xs" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light"> <slot name="description"/> </p>
