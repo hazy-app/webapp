@@ -80,11 +80,7 @@ export default {
         size: window.innerWidth > 380 ? 'normal' : 'compact',
         theme: 'light',
         callback: response => {
-          alert('loadded')
           this.onVerify(response)
-        },
-        onload: () => {
-          alert('loadded')
         }
       })
       const renderingInterval = setInterval(() => {

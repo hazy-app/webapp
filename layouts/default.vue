@@ -41,4 +41,8 @@ h5 {
 .fv-content {
   display: block !important;
 }
+.app-menu {
+  min-width: 180px;
+  /* width: 180px; */
+}
 </style>

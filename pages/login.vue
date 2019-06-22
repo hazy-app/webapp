@@ -2,10 +2,14 @@
   <fvMain>
     <!-- <appSidebar/> -->
     <fvContent>
-      <appHeader :home="true"> Login </appHeader>
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Login </template>
+      </appHeader>
       <appInnerContent 
         class="fv-padding-sm" 
         xs>
+        <br>
         <fvForm 
           method="POST"
           class="fv-row fv-border fv-shadow fv-radius"

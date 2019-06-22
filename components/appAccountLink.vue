@@ -2,12 +2,12 @@
   <nuxt-link 
     v-if="clickable" 
     :to="profileLink"
-    class="profile-link fv-link">
+    class="profile-link">
     @{{ username }}
   </nuxt-link>
   <span 
     v-else 
-    class="profile-link fv-link non-clickable"> @{{ username }} </span>
+    class="profile-link non-clickable"> @{{ username }} </span>
 </template>
 
 <script>

@@ -1,10 +1,14 @@
 <template>
   <fvMain>
     <fvContent>
-      <appHeader :home="true"> Register </appHeader>
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Register </template>
+      </appHeader>
       <appInnerContent 
         class="fv-padding-sm" 
         xs>
+        <br>
         <fvForm 
           method="POST"
           class="fv-row fv-border fv-shadow fv-radius"
