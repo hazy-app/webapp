@@ -76,24 +76,52 @@
     <span class="fv-padding-start" />
     <fvButton
       v-if="!!$store.state.parsedToken.username"
-      class="fv-primary"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> My Account </span> </fvButton>
-    <fvButton 
+      class="fv-primary"
+      @click="accountMenu = true"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> <appAccountLink :username="$store.state.parsedToken.username" /> <i class="fa fa-chevron-down" /> </span> </fvButton>
+    <nuxt-link 
       v-else 
-      class="fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Login / Register </span> </fvButton>
+      to="/register"
+      class="fv-button fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Register / Login </span> </nuxt-link>
     <span class="fv-padding-start" />
-    <fvButton> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access </span> </fvButton>
+    <fvButton @click="quickAccessMenu = true"> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access <i class="fa fa-chevron-down" /> </span> </fvButton>
+    <fvMenu 
+      v-model="quickAccessMenu" 
+      class="app-menu">
+      <fvList 
+        parent 
+        autofocus>
+        <fvListItem> <i class="fa fa-home" /> Home </fvListItem>
+        <fvListItem> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
+        <fvListItem> <i class="fa fa-github" /> Server-Code Github </fvListItem>
+        <fvListItem> <i class="fa fa-github" /> UI-Code Github </fvListItem>
+      </fvList>
+    </fvMenu>
+    <fvMenu 
+      v-model="accountMenu" 
+      class="app-menu">
+      <fvList 
+        parent 
+        autofocus>
+        <fvListItem> <i class="fa fa-inbox" /> Inbox </fvListItem>
+        <fvListItem> <i class="fa fa-sign-out" /> Logout </fvListItem>
+      </fvList>
+    </fvMenu>
   </fvHeader>
 </template>
 
 <script>
 import appLogo from '~/components/appLogo.vue'
+import appAccountLink from '~/components/appAccountLink.vue'
 
 export default {
   components: {
-    appLogo
+    appLogo,
+    appAccountLink
   },
   data() {
     return {
+      quickAccessMenu: false,
+      accountMenu: false,
       isHazyAppCom: true,
       hazyAppLink: 'https://hazyapp.com'
     }
