@@ -5,13 +5,11 @@
         <template slot="title"> Hazy </template>
         <template slot="description"> Register </template>
       </appHeader>
-      <appInnerContent 
-        class="fv-padding-sm" 
-        xs>
+      <appInnerContent xs>
         <br>
         <fvForm 
           method="POST"
-          class="fv-row fv-border fv-shadow fv-radius"
+          class="fv-row"
           @submit="register">
           <fvFormElement 
             class="fv-col-12" 

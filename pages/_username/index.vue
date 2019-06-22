@@ -18,9 +18,7 @@
         @{{ $route.params.username }}
       </appHeader> -->
 
-      <appInnerContent 
-        class="fv-padding-smz"
-        sm>
+      <appInnerContent sm>
         <br>
         <appMessageSender 
           :user="$route.params.username" 
