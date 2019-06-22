@@ -45,6 +45,8 @@ export default ({ app, store, router }, inject) => {
     )
     if (check) {
       await store.dispatch('logout')
+      return true
     }
+    return false
   })
 }
