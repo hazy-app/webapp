@@ -2,21 +2,11 @@
   <fvMain>
     <fvContent>
       <!-- If it is not mine -->
-      <appHeader
-        v-if="!isMine"
-        :inbox="$store.state.parsedToken.username"
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true">
-        @{{ $route.params.username }} Messages
-      </appHeader>
-      <!-- If it is mine -->
-      <appHeader
-        v-else
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true">
-        My Messages
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Received message of <appAccountLink 
+          :username="user.username" 
+          clickable/> </template>
       </appHeader>
 
 
