@@ -38,6 +38,11 @@
           class="fv-text-center">
           <i class="fa fa-circle-o" /> There is no message to show :)
         </p>
+        <appMessage 
+          v-for="message in messages"
+          :key="'a' + message._id" 
+          :message="message"
+          class="fv-margin-bottom"/>
         <div 
           v-for="message in messages"
           :key="message._id" 
@@ -90,10 +95,12 @@
 <script>
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appMessage from '~/components/appMessage.vue'
 
 export default {
   components: {
-    appAccountLink
+    appAccountLink,
+    appMessage
   },
   data() {
     return {
@@ -142,7 +149,10 @@ export default {
       this.$refs.input.$el.style.direction = direction
     },
     copyLink() {
-      copy(window.document.location.href)
+      const url = `${document.location.protocol}//${document.location.host}/${
+        this.$route.params.username
+      }`
+      copy(url)
       this.$alerts.toast('Link copied to clipboard!')
     },
     async send() {
