@@ -90,10 +90,14 @@
       <fvList 
         parent 
         autofocus>
-        <fvListItem> <i class="fa fa-home" /> Home </fvListItem>
-        <fvListItem> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
-        <fvListItem> <i class="fa fa-github" /> Server-Code Github </fvListItem>
-        <fvListItem> <i class="fa fa-github" /> UI-Code Github </fvListItem>
+        <nuxt-link to="/"> <fvListItem> <i class="fa fa-home" /> Home </fvListItem> </nuxt-link>
+        <nuxt-link to="/sent-messages"> <fvListItem> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem> </nuxt-link>
+        <a 
+          target="blank" 
+          href="https://github.com/hazy-app/webapp"> <fvListItem> <i class="fa fa-github" /> Client Source-Code on Github </fvListItem> </a>
+        <a 
+          target="blank" 
+          href="https://github.com/hazy-app/api"> <fvListItem> <i class="fa fa-github" /> Backend Source-Code on Github </fvListItem> </a>
       </fvList>
     </fvMenu>
     <fvMenu 
@@ -102,8 +106,8 @@
       <fvList 
         parent 
         autofocus>
-        <fvListItem> <i class="fa fa-inbox" /> Inbox </fvListItem>
-        <fvListItem> <i class="fa fa-sign-out" /> Logout </fvListItem>
+        <nuxt-link :to="'/' + $store.state.parsedToken.username + '/messages'"> <fvListItem> <i class="fa fa-inbox" /> Inbox </fvListItem> </nuxt-link>
+        <fvListItem @click="logout"> <i class="fa fa-sign-out" /> Logout </fvListItem>
       </fvList>
     </fvMenu>
   </fvHeader>
@@ -121,15 +125,16 @@ export default {
   data() {
     return {
       quickAccessMenu: false,
-      accountMenu: false,
-      isHazyAppCom: true,
-      hazyAppLink: 'https://hazyapp.com'
+      accountMenu: false
     }
   },
   methods: {
     async logout() {
-      await this.$logout()
-      this.$router.push('/login')
+      const x = await this.$logout()
+      if (x) {
+        this.$router.push('/login')
+      }
+      this.accountMenu = false
     }
   }
 }
