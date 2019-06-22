@@ -106,6 +106,7 @@
       <fvList 
         parent 
         autofocus>
+        <nuxt-link :to="'/' + $store.state.parsedToken.username"> <fvListItem> <i class="fa fa-commenting-o" /> Receive Message </fvListItem> </nuxt-link>
         <nuxt-link :to="'/' + $store.state.parsedToken.username + '/messages'"> <fvListItem> <i class="fa fa-inbox" /> Inbox </fvListItem> </nuxt-link>
         <fvListItem @click="logout"> <i class="fa fa-sign-out" /> Logout </fvListItem>
       </fvList>
