@@ -90,14 +90,10 @@
       <fvList 
         parent 
         autofocus>
-        <nuxt-link to="/"> <fvListItem> <i class="fa fa-home" /> Home </fvListItem> </nuxt-link>
-        <nuxt-link to="/sent-messages"> <fvListItem> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem> </nuxt-link>
-        <a 
-          target="blank" 
-          href="https://github.com/hazy-app/webapp"> <fvListItem> <i class="fa fa-github" /> Client Source-Code on Github </fvListItem> </a>
-        <a 
-          target="blank" 
-          href="https://github.com/hazy-app/api"> <fvListItem> <i class="fa fa-github" /> Backend Source-Code on Github </fvListItem> </a>
+        <fvListItem @click="$router.push('/')"> <i class="fa fa-home" /> Home </fvListItem>
+        <fvListItem @click="$router.push('/sent-messages')"> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
+        <fvListItem @click="$router.go('https://github.com/hazy-app/webapp')"> <i class="fa fa-github" /> Client Source-Code on Github </fvListItem>
+        <fvListItem @click="$router.go('https://github.com/hazy-app/api')"> <i class="fa fa-github" /> API Source-Code on Github </fvListItem>
       </fvList>
     </fvMenu>
     <fvMenu 
@@ -106,8 +102,8 @@
       <fvList 
         parent 
         autofocus>
-        <nuxt-link :to="'/' + $store.state.parsedToken.username"> <fvListItem> <i class="fa fa-commenting-o" /> Receive Message </fvListItem> </nuxt-link>
-        <nuxt-link :to="'/' + $store.state.parsedToken.username + '/messages'"> <fvListItem> <i class="fa fa-inbox" /> Inbox </fvListItem> </nuxt-link>
+        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username)"> <i class="fa fa-commenting-o" /> Receive Message </fvListItem>
+        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username + '/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
         <fvListItem @click="logout"> <i class="fa fa-sign-out" /> Logout </fvListItem>
       </fvList>
     </fvMenu>
