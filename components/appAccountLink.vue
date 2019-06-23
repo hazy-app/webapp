@@ -32,8 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 .profile-link {
-  &.on-clickable {
-    cursor: not-allowed;
+  &:not(.non-clickable) {
+    font-weight: bold;
   }
 }
 </style>
