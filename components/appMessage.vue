@@ -2,17 +2,32 @@
   <div class="app-message fv-border fv-radius fv-shadow">
     <div class="fv-padding fv-flex header">
       <span 
-        v-if="message.public" 
-        class="fv-margin-end"
-        title="This message is public to everyone">
-        <i class="fa fa-eye" />
+        v-if="editButtons"
+        class="fv-margin-end">
+        <i class="fa fa-eye" />: <fvSwitch 
+          :value="message.public" 
+          class="fv-size-xs" 
+          @input="privacyChange"/>
       </span>
-      <span class="fv-hidden-xs">
-        <i class="fa fa-user-o" /> <appAccountLink />:
+      <span 
+        v-else
+        :title="'This message is ' + (message.public? 'public':'private') + '!'"
+        class="fv-margin-end">
+        <i 
+          :class="message.public ? 'fa-eye' : 'fa-eye-slash fv-text-light'" 
+          class="fa"/>
+      </span>
+      <span v-if="watchAs === 'sender'">
+        To <appAccountLink 
+          :username="message.receiver" 
+          clickable/>
+      </span>
+      <span v-else-if="watchAs === 'receiver'">
+        <appAccountLink />
       </span>
       <div class="fv-grow" />
       <span 
-        v-if="removeButton"
+        v-if="editButtons"
         class="fv-margin-end">
         <a 
           class="fv-link fv-text-danger"
@@ -23,6 +38,10 @@
       <span :title="message.create_date | dateReadable">
         <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
       </span>
+      <nuxt-link 
+        v-if="!editButtons && isMine" 
+        :to="'/' + message.receiver + '/messages/' + message.uuid" 
+        class="fv-margin-start fv-link"> <i class="fa fa-commenting-o" /> Open </nuxt-link>
     </div>
     <div class="fv-padding">
       <p :style="{'direction': $calcDirection(message.text)}">
@@ -32,8 +51,7 @@
     <div 
       v-if="replySection" 
       class="fv-border-top">
-      <!-- <div class="reply-hr"/> -->
-      <div v-if="replySender === true && !message.reply_date">
+      <div v-if="editButtons && !message.reply_date">
         <appMessageSender 
           :user="message.receiver" 
           :message="message.uuid" 
@@ -46,9 +64,6 @@
         v-else-if="message.reply_date"
         class="reply-body">
         <div class="fv-padding fv-flex header">
-          <span>
-            <i class="fa fa-user-o" /> <appAccountLink :username="message.receiver"/>:
-          </span>
           <div class="fv-grow" />
           <span :title="message.reply_date | dateReadable">
             <i class="fa fa-calendar" /> {{ message.reply_date | dateFromNow }}
@@ -63,14 +78,10 @@
       <div 
         v-else 
         class="fv-padding reply-body fv-flex">
-        <p>
-          <appAccountLink :username="message.receiver" /> didn't reply.
-          
+        <p class="fv-text-light">
+          <appAccountLink :username="message.receiver" /> didn't replied yet.
         </p>
         <span class="fv-grow" />
-        <a 
-          v-if="replySender === null" 
-          @click="reply"> <i class="fa fa-commenting-o" /> Reply </a>
       </div>
     </div>
 
@@ -122,7 +133,11 @@ export default {
       type: Object,
       default: () => ({})
     },
-    removeButton: {
+    editButtons: {
+      type: Boolean,
+      default: false
+    },
+    isMine: {
       type: Boolean,
       default: false
     },
@@ -130,9 +145,10 @@ export default {
       type: Boolean,
       default: true
     },
-    replySender: {
-      type: [Boolean, Object],
-      default: null
+    watchAs: {
+      type: String,
+      validator: v => ['receiver', 'sender'].indexOf(v) > -1,
+      default: 'receiver'
     }
   },
   methods: {
@@ -146,6 +162,9 @@ export default {
     },
     reply() {
       this.$emit('reply', this.message)
+    },
+    privacyChange() {
+      this.$emit('privacyChange', this.message)
     }
   }
 }
@@ -158,6 +177,12 @@ export default {
   & .header {
     // background: #f7f7f7;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+
+    & .fv-switch {
+      top: -0.35em;
+    }
   }
 
   // & .reply-body {
