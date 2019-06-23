@@ -18,10 +18,30 @@
         @{{ $route.params.username }}
       </appHeader> -->
 
-      <appInnerContent sm>
-        <br>
+      <appInnerContent 
+        sm 
+        class="fv-padding-sm">
+        <div 
+          class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
+          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+          <div 
+            v-if="isMine" 
+            class="fv-margin-top">
+            <fvButton 
+              class="fv-primary" 
+              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+          </div>
+          <div 
+            v-if="!isMine" 
+            class="fv-margin-top">
+            <nuxt-link 
+              :to="'/' + $route.params.username"
+              class="fv-button fv-primary fv-size-sm"> <i class="fa fa-send" /> Sending Message to <appAccountLink :username="$route.params.username" /> </nuxt-link>
+          </div>
+        </div>
         <appMessageSender 
-          :user="$route.params.username" 
+          :user="$route.params.username"
+          class="fv-border fv-radius fv-shadow" 
           save-button
           @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
           <!-- <fvButton> <i class="fa fa-send" /> Send Message to <appAccountLink 
@@ -82,6 +102,13 @@ export default {
         this.$root.$loading.finish()
         this.$alerts.toast(e.response.data.message, 'failed')
       }
+    },
+    copyLink() {
+      const url = `${document.location.protocol}//${document.location.host}/${
+        this.$route.params.username
+      }`
+      copy(url)
+      this.$alerts.toast('Link copied to clipboard!')
     }
   },
   head() {
