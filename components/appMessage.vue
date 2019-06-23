@@ -141,11 +141,11 @@ export default {
         'Are you sure you want to delete this message?'
       )
       if (check) {
-        this.$emit('remove')
+        this.$emit('remove', this.message)
       }
     },
     reply() {
-      this.$emit('reply')
+      this.$emit('reply', this.message)
     }
   }
 }
