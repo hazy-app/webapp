@@ -1,79 +1,50 @@
 <template>
   <fvMain>
     <fvContent>
-      <appHeader
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true">
-        Sent Messages
+      <appHeader>
+        <template slot="title"> Hazy </template>
+        <template slot="description"> Sent Messages </template>
       </appHeader>
 
       <appInnerContent 
-        class="fv-padding-sm"
-        sm>
+        sm 
+        class="fv-padding-sm">
         <div 
-          class="fv-padding fv-text-center fv-margin-bottom">
-          <p
-            v-if="messages.length === 0"
-            class="fv-text-center">
-            <i class="fa fa-circle-o" /> Local storage is empty!
-          </p>
-          <p
-            v-else
-            class="fv-text-center">
-            <i class="fa fa-info-circle" /> Feel free to clear list anytime you want.
-          </p>
+          class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
+          <p v-if="messages.length !== 0"> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. </p>
           <div class="fv-margin-top">
             <fvButton 
               v-if="messages.length !== 0"
-              class="fv-primary fv-size-sm" 
+              class="fv-primary" 
               @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
           </div>
         </div>
-
-        <div 
+        <p
+          v-if="messages.length === 0"
+          class="fv-text-center">
+          <i class="fa fa-circle-o" /> Local storage is empty!
+        </p>
+        <appMessage 
           v-for="message in messages"
-          :key="message._id" 
-          class="fv-margin-bottom fv-flex">
-          <div class="fv-border fv-shadow fv-radius fv-grow">
-            <p 
-              :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><nuxt-link 
-                :to="'/' + message.receiver + '/messages/' + message.uuid" 
-                class="fv-block">{{ message.text }}</nuxt-link></p>
-            <small class="fv-flex fv-padding-sm fv-padding-top">
-              <div class="fv-grow" />
-              <div 
-                :title="message.create_date | dateReadable" 
-                class="fv-margin-end fv-hidden-xs">
-                <span class="fa fa-text-gray">
-                  <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
-                </span>
-              </div>
-              <div class="fv-margin-end">
-                <nuxt-link 
-                  :to="'/' + message.receiver" 
-                  class="fv-link fa-text-info">
-                  <i class="fa fa-user-circle" /> @{{ message.receiver }}
-                </nuxt-link>
-              </div>
-              <div class="fv-margin-end">
-                <nuxt-link 
-                  :to="'/' + message.receiver + '/messages/' + message.uuid" 
-                  class="fv-link fa-text-info">
-                  <i class="fa fa-envelope-o" /> Open
-                </nuxt-link>
-              </div>
-            </small>
-          </div>
-        </div>
+          :key="'a' + message._id" 
+          :message="message"
+          :edit-button="false"
+          :reply-section="false"
+          is-mine
+          watch-as="sender"
+          class="fv-margin-bottom"/>
       </appInnerContent>
     </fvContent>
   </fvMain>
 </template>
 
 <script>
+import appMessage from '~/components/appMessage.vue'
+
 export default {
+  components: {
+    appMessage
+  },
   data() {
     return {
       messages: []
