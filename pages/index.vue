@@ -39,7 +39,7 @@
               class="fv-button fv-primary"> <i class="fa fa-sign-in" /> Register </nuxt-link>
             <nuxt-link 
               v-if="$store.state.parsedToken.username" 
-              :to="'/' + $store.state.parsedToken.username"
+              :to="'/' + $store.state.parsedToken.username + '/messages'"
               class="fv-button fv-primary"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
           </div>
         </div>
