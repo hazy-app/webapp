@@ -16,19 +16,13 @@
         <div 
           class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
           <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+          <p v-else> <i class="fa fa-info-circle" /> Public message of <appAccountLink :username="$route.params.username" />! </p>
           <div 
             v-if="isMine" 
             class="fv-margin-top">
             <fvButton 
               class="fv-primary" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-          </div>
-          <div 
-            v-if="!isMine" 
-            class="fv-margin-top">
-            <nuxt-link 
-              :to="'/' + $route.params.username"
-              class="fv-button fv-primary fv-size-sm"> <i class="fa fa-send" /> Send Message to @{{ $route.params.username }} </nuxt-link>
           </div>
         </div>
 
@@ -41,9 +35,10 @@
           v-for="message in messages"
           :key="'a' + message._id" 
           :message="message"
-          :remove-button="isMine"
+          :edit-button="false"
+          :is-mine="isMine"
           class="fv-margin-bottom"
-          @remove="remove"/>
+          @reply="gotoMessage"/>
         <div class="fv-text-center">
           <fvButton 
             v-if="hasNext && !loading" 
@@ -146,6 +141,9 @@ export default {
         this.$alerts.toast(e.response.data.message, 'failed')
       }
     },
+    async gotoMessage(message) {
+      this.$router.push(`/${message.receiver}/messages/${message.uuid}`)
+    },
     async loadMore() {
       this.loading = true
       this.page++
@@ -158,25 +156,6 @@ export default {
       this.hasNext = response.hasNext
 
       this.loading = false
-    },
-    async remove(message) {
-      this.$root.$loading.start()
-      try {
-        await this.$axios.$delete(
-          `${process.env.BASE_URL}/users/${
-            this.$store.state.parsedToken.username
-          }/messages/${message.uuid}`
-        )
-        const index = this.messages.findIndex(msg => msg._id === message._id)
-        this.messages.splice(index, 1)
-        this.$alerts.toast(
-          'Your message has been successfully deleted!',
-          'success'
-        )
-        this.$root.$loading.finish()
-      } catch (e) {
-        this.$root.$loading.finish()
-      }
     }
   },
   head() {
