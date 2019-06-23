@@ -4,7 +4,7 @@
       <!-- If it is not mine -->
       <appHeader>
         <template slot="title"> Hazy </template>
-        <template slot="description"> Received message of <appAccountLink 
+        <template slot="description"> Inbox of <appAccountLink 
           :username="user.username" 
           clickable/> </template>
       </appHeader>
@@ -16,12 +16,11 @@
         <div 
           class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
           <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <p v-if="!isMine"> <i class="fa fa-info-circle" /> You can send message to @{{ $route.params.username }} in just one step! </p>
           <div 
             v-if="isMine" 
             class="fv-margin-top">
             <fvButton 
-              class="fv-primary fv-size-sm" 
+              class="fv-primary" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
           </div>
           <div 
@@ -42,43 +41,9 @@
           v-for="message in messages"
           :key="'a' + message._id" 
           :message="message"
-          class="fv-margin-bottom"/>
-        <div 
-          v-for="message in messages"
-          :key="message._id" 
-          class="fv-margin-bottom fv-flex">
-          <div class="fv-border fv-shadow fv-radius fv-grow">
-            <p 
-              :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><nuxt-link 
-                :to="'/' + $route.params.username + '/messages/' + message.uuid" 
-                class="fv-block"><span class="fv-text-light">@anonymous:</span> {{ message.text }}</nuxt-link></p>
-            <small class="fv-flex fv-padding-sm fv-padding-top">
-              <div class="fv-grow" />
-              <div 
-                v-if="message.public" 
-                class="fv-margin-start">
-                <i class="fa fa-eye" /> Public
-              </div>
-              <div 
-                :title="message.create_date | dateReadable" 
-                class="fv-margin-start">
-                <span class="fa fa-text-gray">
-                  <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
-                </span>
-              </div>
-              <!-- <div
-                v-if="isMine"
-                class="fv-margin-start fv-hidden-xs">
-                <a 
-                  class="fv-link fv-text-danger" 
-                  @click="remove(message)">
-                  <i class="fa fa-trash" /> Delete
-                </a>
-              </div> -->
-            </small>
-          </div>
-        </div>
+          :remove-button="isMine"
+          class="fv-margin-bottom"
+          @remove="remove"/>
         <div class="fv-text-center">
           <fvButton 
             v-if="hasNext && !loading" 
@@ -195,27 +160,22 @@ export default {
       this.loading = false
     },
     async remove(message) {
-      const check = await this.$alerts.confirm(
-        'Are you sure you want to delete this message?'
-      )
-      if (check) {
-        this.$root.$loading.start()
-        try {
-          await this.$axios.$delete(
-            `${process.env.BASE_URL}/users/${
-              this.$store.state.parsedToken.username
-            }/messages/${message.uuid}`
-          )
-          const index = this.messages.findIndex(msg => msg._id === message._id)
-          this.messages.splice(index, 1)
-          this.$alerts.toast(
-            'Your message has been successfully deleted!',
-            'success'
-          )
-          this.$root.$loading.finish()
-        } catch (e) {
-          this.$root.$loading.finish()
-        }
+      this.$root.$loading.start()
+      try {
+        await this.$axios.$delete(
+          `${process.env.BASE_URL}/users/${
+            this.$store.state.parsedToken.username
+          }/messages/${message.uuid}`
+        )
+        const index = this.messages.findIndex(msg => msg._id === message._id)
+        this.messages.splice(index, 1)
+        this.$alerts.toast(
+          'Your message has been successfully deleted!',
+          'success'
+        )
+        this.$root.$loading.finish()
+      } catch (e) {
+        this.$root.$loading.finish()
       }
     }
   },
