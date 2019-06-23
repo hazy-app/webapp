@@ -102,7 +102,7 @@
       <fvList 
         parent 
         autofocus>
-        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username)"> <i class="fa fa-commenting-o" /> Receive Message </fvListItem>
+        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username)"> <i class="fa fa-user-o" /> Profile </fvListItem>
         <fvListItem @click="$router.push('/' + $store.state.parsedToken.username + '/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
         <fvListItem @click="logout"> <i class="fa fa-sign-out" /> Logout </fvListItem>
       </fvList>
