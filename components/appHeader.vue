@@ -73,17 +73,65 @@
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light"> <slot name="description"/> </p>
     </div>
-    <span class="fv-padding-start" />
+    <!-- <span class="fv-padding-start" />
     <fvButton
       v-if="!!$store.state.parsedToken.username"
       class="fv-primary"
-      @click="accountMenu = true"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> <appAccountLink :username="$store.state.parsedToken.username" /> <i class="fa fa-chevron-down" /> </span> </fvButton>
-    <nuxt-link 
-      v-else 
+      @click="accountMenu = true"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> <appAccountLink :username="$store.state.parsedToken.username" /> <i class="fa fa-chevron-down" /> </span> </fvButton> -->
+
+    <div class="fv-hidden-xs fv-hidden-sm">
+      <a 
+        :class="searchQuery !== null ? 'searching' : ''"
+        class="fv-button"
+        tabindex="0"
+        @click="enterSearch"> <i class="fa fa-search" /> <span 
+          v-if="searchQuery === null" 
+          ref="searchBox">{{ searchQuery !== null ? searchQuery : 'Search' }}</span><input 
+            v-else 
+            ref="searchBox" 
+            class="search-query" 
+            @blur="cancelSearch"> </a>
+      <nuxt-link 
+        v-if="!!$store.state.parsedToken.username" 
+        :to="'/'+$store.state.parsedToken.username+'/messages'"
+        active-class="link-active"
+        class="fv-button"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
+      <nuxt-link 
+        v-if="!!$store.state.parsedToken.username" 
+        :to="'/'+$store.state.parsedToken.username+'/polls'"
+        active-class="link-active"
+        class="fv-button" 
+        disabled> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+      <nuxt-link 
+        to="/sent-messages"
+        active-class="link-active"
+        class="fv-button"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
+      <nuxt-link 
+        to="https://github.com/hazy-app"
+        class="fv-button"> <i class="fa fa-github" /> Github </nuxt-link>
+      <nuxt-link 
+        v-if="!$store.state.parsedToken.username" 
+        active-class="link-active"
+        to="/register"
+        class="fv-button"> <i class="fa fa-user-plus" /> Register </nuxt-link>
+      <nuxt-link 
+        v-if="!$store.state.parsedToken.username" 
+        active-class="link-active"
+        to="/login"
+        class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+      <a 
+        v-if="!!$store.state.parsedToken.username" 
+        class="fv-button"
+        @click="logout"> <i class="fa fa-sign-out" /> Logout </a>
+    </div>
+    <div class="fv-hidden-md fv-hidden-lg fv-hidden-xl"/>
+
+    <!-- <nuxt-link 
+      v-if="!!$store.state.parsedToken.username" 
       to="/register"
-      class="fv-button fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Register / Login </span> </nuxt-link>
-    <span class="fv-padding-start" />
-    <fvButton @click="quickAccessMenu = true"> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access <i class="fa fa-chevron-down" /> </span> </fvButton>
+      class="fv-button fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Register / Login </span> </nuxt-link> -->
+    <!-- <span class="fv-padding-start" />
+    <fvButton @click="quickAccessMenu = true"> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access <i class="fa fa-chevron-down" /> </span> </fvButton> -->
     <fvMenu 
       v-model="quickAccessMenu" 
       class="app-menu">
@@ -122,7 +170,8 @@ export default {
   data() {
     return {
       quickAccessMenu: false,
-      accountMenu: false
+      accountMenu: false,
+      searchQuery: null
     }
   },
   methods: {
@@ -132,6 +181,16 @@ export default {
         this.$router.push('/login')
       }
       this.accountMenu = false
+    },
+    enterSearch() {
+      this.searchQuery = ''
+      this.$nextTick(() => {
+        this.$refs.searchBox.focus()
+      })
+      console.log('sasa')
+    },
+    cancelSearch() {
+      this.searchQuery = null
     }
   }
 }
@@ -152,6 +211,25 @@ export default {
 
     & > p {
       font-size: 0.9em;
+    }
+  }
+  & .searching {
+    background: #f5f5f5;
+  }
+  & .search-query {
+    border: none;
+    box-shadow: none;
+    width: 75px;
+    background: transparent;
+  }
+  & .fv-button {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 0.7em;
+
+    &.link-active {
+      border-radius: 0;
+      border-bottom: solid 2px #000 !important;
     }
   }
 }
