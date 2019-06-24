@@ -187,7 +187,6 @@ export default {
       this.$nextTick(() => {
         this.$refs.searchBox.focus()
       })
-      console.log('sasa')
     },
     cancelSearch() {
       this.searchQuery = null
