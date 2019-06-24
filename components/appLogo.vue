@@ -1,14 +1,14 @@
 <template>
   <img 
-    class="logoz"
+    class="logo"
     src="/hazy.svg" 
     alt="Hazy" >
 </template>
 
 
 <style lang="scss" scoped>
-.logoz {
+.logo {
   vertical-align: middle;
-  height: 4rem;
+  height: 3.4rem;
 }
 </style>
