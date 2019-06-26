@@ -10,7 +10,7 @@
         sm 
         class="fv-padding-sm">
         <div 
-          class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
+          class="fv-padding fv-text-center fv-margin-bottom fv-radius">
           <p v-if="messages.length !== 0"> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. </p>
           <div class="fv-margin-top">
             <fvButton 
