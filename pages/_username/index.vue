@@ -3,20 +3,12 @@
     <fvContent>
       <!-- If it is not mine -->
       <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Sending message to <appAccountLink 
+        <!-- <template slot="title"> Hazy </template> -->
+        <template slot="title"> Sending message to <appAccountLink 
           :username="user.username" 
           clickable/> </template>
       </appHeader>
-      <!-- If it is mine -->
-      <!-- <appHeader
-        v-else
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true"
-        :resetpw="$store.state.parsedToken.role && $store.state.parsedToken.role.indexOf('admin') > -1">
-        @{{ $route.params.username }}
-      </appHeader> -->
+
 
       <appInnerContent 
         sm 
