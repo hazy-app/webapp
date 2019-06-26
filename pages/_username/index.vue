@@ -3,21 +3,25 @@
     <fvContent>
       <!-- If it is not mine -->
       <appHeader>
-        <!-- <template slot="title"> Hazy </template> -->
-        <template slot="title"> Sending message to <appAccountLink 
+        <template slot="title"> <appAccountLink 
           :username="user.username" 
           clickable/> </template>
+        <template slot="description"> Sending Message to <appAccountLink 
+          :username="user.username" 
+          clickable/>
+        </template>
       </appHeader>
 
 
       <appInnerContent 
         sm 
         class="fv-padding-sm">
+        <div class="fv-padding-sm" />
         <div 
-          class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
-          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <div 
-            v-if="isMine" 
+          v-if="isMine"
+          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+          <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+          <div  
             class="fv-margin-top">
             <fvButton 
               class="fv-primary" 
@@ -29,9 +33,6 @@
           class="fv-border fv-radius fv-shadow" 
           save-button
           @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
-          <!-- <fvButton> <i class="fa fa-send" /> Send Message to <appAccountLink 
-          :username="user.username" 
-          no-link/> </fvButton> -->
       </appInnerContent>
 
     </fvContent>

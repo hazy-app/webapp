@@ -9,18 +9,7 @@
       <appInnerContent 
         class="fv-padding-sm" 
         sm>
-        <div 
-          class="fv-padding fv-text-center fv-margin-bottom">
-          <p v-if="isMine"> <i class="fa fa-info-circle" /> You can share this message! </p>
-          <p v-else> <i class="fa fa-info-circle" /> If you are not <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>, be careful for sharing this message to public places. </p>
-          <div 
-            v-if="isMine" 
-            class="fv-margin-top">
-            <fvButton 
-              class="fv-primary" 
-              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-          </div>
-        </div>
+        <div class="fv-padding-sm" />
 
         <div class="fv-margin-top">
           <appMessage 
@@ -28,7 +17,7 @@
             :edit-buttons="isMine"
             :is-mine="isMine"
             @remove="remove"
-            @privacyChange="privacyChange"/>
+            @privacyChange="privacyChange" />
         </div>
       </appInnerContent>
     </fvContent>
