@@ -31,13 +31,6 @@
               class="fv-primary" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
           </div>
-          <div 
-            v-if="!isMine" 
-            class="fv-margin-top">
-            <nuxt-link 
-              :to="'/' + $route.params.username"
-              class="fv-button fv-primary fv-size-sm"> <i class="fa fa-send" /> Sending Message to <appAccountLink :username="$route.params.username" /> </nuxt-link>
-          </div>
         </div>
         <appMessageSender 
           :user="$route.params.username"
