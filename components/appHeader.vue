@@ -81,16 +81,21 @@
 
     <div class="fv-hidden-xs fv-hidden-sm">
       <a 
-        :class="searchQuery !== null ? 'searching' : ''"
+        :class="{'searching': searchQuery !== null, 'link-active': $route.name === 'search-query' }"
         class="fv-button"
         tabindex="0"
         @click="enterSearch"> <i class="fa fa-search" /> <span 
           v-if="searchQuery === null" 
           ref="searchBox">{{ searchQuery !== null ? searchQuery : 'Search' }}</span><input 
             v-else 
-            ref="searchBox" 
+            ref="searchBox"
+            v-model="searchQuery"
+            placeholder="Enter search string" 
             class="search-query" 
-            @blur="cancelSearch"> </a>
+            minlength="3"
+            size="19"
+            @blur="cancelSearch"
+            @keyup.enter="startSearch"> </a>
       <nuxt-link 
         v-if="!!$store.state.parsedToken.username" 
         :to="'/'+$store.state.parsedToken.username+'/messages'"
@@ -106,9 +111,10 @@
         to="/sent-messages"
         active-class="link-active"
         class="fv-button"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
-      <nuxt-link 
-        to="https://github.com/hazy-app"
-        class="fv-button"> <i class="fa fa-github" /> Github </nuxt-link>
+      <a 
+        href="https://github.com/hazy-app"
+        target="_blank"
+        class="fv-button"> <i class="fa fa-github" /> Github </a>
       <nuxt-link 
         v-if="!$store.state.parsedToken.username" 
         active-class="link-active"
@@ -190,6 +196,9 @@ export default {
     },
     cancelSearch() {
       this.searchQuery = null
+    },
+    startSearch() {
+      this.$router.push(`/search/${this.searchQuery}`)
     }
   }
 }
@@ -218,7 +227,6 @@ export default {
   & .search-query {
     border: none;
     box-shadow: none;
-    width: 75px;
     background: transparent;
   }
   & .fv-button {
