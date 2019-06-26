@@ -2,7 +2,7 @@
   <nuxt/>
 </template>
 
-<style>
+<style lang="scss">
 html,
 body,
 #__nuxt,
@@ -20,21 +20,22 @@ h4,
 h5 {
   font-family: 'Lobster', cursive;
 } */
-/* h1 {
-  font-size: 4rem;
+h1 {
+  font-size: 2.5em;
 }
 h2 {
-  font-size: 3.5rem;
+  font-size: 1.8em;
 }
 h3 {
-  font-size: 2.7rem;
+  font-size: 1.6em;
 }
 h4 {
-  font-size: 2rem;
+  font-size: 1.2em;
 }
 h5 {
-  font-size: 1.5rem;
-} */
+  font-size: 1em;
+}
+
 .fv-main {
   overflow: unset !important;
 }
