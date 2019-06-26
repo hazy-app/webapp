@@ -8,7 +8,7 @@
       <appInnerContent 
         sm 
         class="fv-padding-sm">
-        <br>
+        <div class="fv-padding" />
         <p
           v-if="users.length === 0"
           class="fv-text-center">
