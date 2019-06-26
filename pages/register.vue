@@ -8,7 +8,7 @@
       <appInnerContent 
         xs 
         class="fv-padding-sm">
-        <br>
+        <div class="fv-padding-sm" />
         <fvForm 
           method="POST"
           class="fv-border fv-radius fv-shadow fv-row" 
