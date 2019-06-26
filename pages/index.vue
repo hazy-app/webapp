@@ -3,11 +3,10 @@
     <fvContent>
       <appHeader>
         <template slot="title"> Hazy </template>
-        <template slot="description"> Send and Receive anonymous messages </template>
       </appHeader>
       <appInnerContent 
         class="fv-padding-sm fv-text-center" 
-        sm>
+        xs>
         <div class="fv-text-center logo-container">
           <img 
             class="logo-container__logo"
@@ -18,29 +17,29 @@
             <p> Send and Receive anonymous messages </p>
           </div>
           <br>
-          <div class="logo-container__buttons">
+          <div class="logo-container__buttons fv-row">
             <a 
               href="https://github.com/hazy-app"
-              class="fv-button"
+              class="fv-button fv-col"
               target="_blank"> <i class="fa fa-github" /> Github </a>
             <nuxt-link 
               to="/sent-messages"
-              class="fv-button"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
+              class="fv-button fv-col"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
             <nuxt-link 
               v-if="!$store.state.parsedToken.username" 
               to="/login"
-              class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+              class="fv-button fv-col"> <i class="fa fa-sign-in" /> Login </nuxt-link>
             <fvButton 
               v-if="$store.state.parsedToken.username"
               @click="$logout"> <i class="fa fa-sign-out" /> Logout </fvButton>
             <nuxt-link 
               v-if="!$store.state.parsedToken.username"
               to="/register"
-              class="fv-button fv-primary"> <i class="fa fa-sign-in" /> Register </nuxt-link>
+              class="fv-button fv-primary fv-col"> <i class="fa fa-user-plus" /> Register </nuxt-link>
             <nuxt-link 
               v-if="$store.state.parsedToken.username" 
               :to="'/' + $store.state.parsedToken.username + '/messages'"
-              class="fv-button fv-primary"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
+              class="fv-button fv-primary fv-col"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
           </div>
         </div>
         <!-- <div class="fv-padding-top fv-padding-bottom"/>
@@ -77,21 +76,27 @@ export default {
   },
   head() {
     return {
-      title: 'Hazy'
+      title: 'Hazy',
+      meta: [
+        {
+          property: 'twitter:description',
+          content: 'Send and Receive anonymous messages'
+        }
+      ]
     }
-  },
-  async asyncData({ params, query, store, $axios, redirect }) {
-    const ret = {}
-    // try {
-    //   ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
-    // } catch (e) {
-    //   ret.report = {
-    //     total_messages: undefined,
-    //     total_users: undefined
-    //   }
-    // }
-    return ret
   }
+  // async asyncData({ params, query, store, $axios, redirect }) {
+  //   const ret = {}
+  //   try {
+  //     ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
+  //   } catch (e) {
+  //     ret.report = {
+  //       total_messages: undefined,
+  //       total_users: undefined
+  //     }
+  //   }
+  //   return ret
+  // }
 }
 </script>
 
@@ -113,7 +118,7 @@ export default {
 }
 
 .report-container {
-  max-width: 400px;
+  max-width: calc(100% - 1.5em);
   margin: 0 auto;
 }
 </style>
