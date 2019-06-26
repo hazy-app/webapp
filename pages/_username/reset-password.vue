@@ -5,6 +5,7 @@
       <appInnerContent 
         class="fv-padding-sm" 
         xs>
+        <div class="fv-padding-sm" />
         <fvForm 
           method="POST"
           class="fv-row fv-border fv-shadow fv-radius"
