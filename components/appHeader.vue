@@ -8,23 +8,24 @@
       <p class="fv-text-light"> <slot name="description"/> </p>
     </div>
 
+    <a 
+      :class="{'searching': searchQuery !== null, 'link-active': $route.name === 'search-query' }"
+      class="fv-button"
+      tabindex="0"
+      @click="enterSearch"> <i class="fa fa-search" /> <span 
+        v-if="searchQuery === null" 
+        ref="searchBox"
+        class="fv-hidden-sm fv-hidden-xs"> Search </span><input 
+          v-else 
+          ref="searchBox"
+          v-model="searchQuery"
+          placeholder="Enter search string" 
+          class="search-query" 
+          minlength="3"
+          size="19"
+          @blur="cancelSearch"
+          @keyup.enter="startSearch"> </a>
     <div class="fv-hidden-xs fv-hidden-sm">
-      <a 
-        :class="{'searching': searchQuery !== null, 'link-active': $route.name === 'search-query' }"
-        class="fv-button"
-        tabindex="0"
-        @click="enterSearch"> <i class="fa fa-search" /> <span 
-          v-if="searchQuery === null" 
-          ref="searchBox">{{ searchQuery !== null ? searchQuery : 'Search' }}</span><input 
-            v-else 
-            ref="searchBox"
-            v-model="searchQuery"
-            placeholder="Enter search string" 
-            class="search-query" 
-            minlength="3"
-            size="19"
-            @blur="cancelSearch"
-            @keyup.enter="startSearch"> </a>
       <nuxt-link 
         v-if="!!$store.state.parsedToken.username" 
         :to="'/'+$store.state.parsedToken.username+'/messages'"
@@ -68,7 +69,6 @@
       <fvList 
         parent 
         autofocus>
-        <fvListItem @click="$router.push('/search')"> <i class="fa fa-search" /> Search </fvListItem>
         <fvListItem 
           v-if="!!$store.state.parsedToken.username" 
           @click="$router.push('/'+$store.state.parsedToken.username+'/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
