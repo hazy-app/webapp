@@ -19,10 +19,10 @@
           v-else 
           ref="searchBox"
           v-model="searchQuery"
-          placeholder="Enter search string" 
+          placeholder="Start typing" 
           class="search-query" 
           minlength="3"
-          size="19"
+          size="5"
           @blur="cancelSearch"
           @keyup.enter="startSearch"> </a>
     <div class="fv-hidden-xs fv-hidden-sm">
@@ -154,6 +154,8 @@ export default {
   }
   & .searching {
     background: #f5f5f5;
+    @media screen {
+    }
   }
   & .search-query {
     border: none;
@@ -164,9 +166,11 @@ export default {
     border: none !important;
     box-shadow: none !important;
     padding: 0 0.7em;
+    margin: 0 1px;
 
     &.link-active {
-      border-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
       border-bottom: solid 2px #000 !important;
     }
   }
