@@ -14,7 +14,7 @@
         class="fv-padding-sm"
         sm>
         <div 
-          class="fv-padding fv-text-center fv-margin-bottom fv-borderz fv-shadowz fv-radius">
+          class="fv-padding fv-text-center fv-margin-bottom fv-radius">
           <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
           <p v-else> <i class="fa fa-info-circle" /> Public message of <appAccountLink :username="$route.params.username" />! </p>
           <div 
