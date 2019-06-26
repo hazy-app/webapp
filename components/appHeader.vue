@@ -20,10 +20,10 @@
           v-else 
           ref="searchBox"
           v-model="searchQuery"
+          :size="searchQuery.length < 5 ? 5 : searchQuery.length" 
           placeholder="Start typing" 
-          class="search-query" 
+          class="search-query"
           minlength="3"
-          size="5"
           @blur="cancelSearch"
           @keyup.enter="startSearch"> </a>
     <div class="fv-hidden-xs fv-hidden-sm">
@@ -66,7 +66,7 @@
     </div>
     <fvMenu 
       v-model="menu"
-      class="menu">
+      class="app-menu">
       <fvList 
         parent 
         autofocus>
