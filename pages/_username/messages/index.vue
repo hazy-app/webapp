@@ -3,10 +3,17 @@
     <fvContent>
       <!-- If it is not mine -->
       <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Inbox of <appAccountLink 
-          :username="user.username" 
-          clickable/> </template>
+        <template 
+          v-if="isMine" 
+          slot="title"> Inbox </template>
+        <template 
+          v-if="!isMine" 
+          slot="title"> Inbox of <appAccountLink 
+            :username="user.username" 
+            clickable/> </template>
+        <template 
+          v-if="!isMine" 
+          slot="description"> We show only public messages to you! </template>
       </appHeader>
 
 
@@ -16,7 +23,6 @@
         <div 
           class="fv-padding fv-text-center fv-margin-bottom fv-radius">
           <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <p v-else> <i class="fa fa-info-circle" /> Public message of <appAccountLink :username="$route.params.username" />! </p>
           <div 
             v-if="isMine" 
             class="fv-margin-top">
