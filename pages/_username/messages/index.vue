@@ -20,26 +20,24 @@
       <appInnerContent 
         class="fv-padding-sm"
         sm>
-        <div 
-          class="fv-padding fv-text-center fv-margin-bottom fv-radius">
-          <p v-if="isMine"> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <div 
-            v-if="isMine" 
-            class="fv-margin-top">
+        <div class="fv-padding-sm" />
+        <div
+          v-if="isMine" 
+          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+          <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+          <div class="fv-margin-top">
             <fvButton 
               class="fv-primary" 
               @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
           </div>
         </div>
 
-        <p
-          v-if="messages.length === 0"
-          class="fv-text-center">
-          <i class="fa fa-circle-o" /> There is no message to show :)
-        </p>
+        <appNothingToShow 
+          v-if="messages.length === 0" 
+        />
         <appMessage 
           v-for="message in messages"
-          :key="'a' + message._id" 
+          :key="'msg' + message._id" 
           :message="message"
           :edit-button="false"
           :is-mine="isMine"
@@ -62,11 +60,13 @@
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appMessage from '~/components/appMessage.vue'
+import appNothingToShow from '~/components/appNothingToShow.vue'
 
 export default {
   components: {
     appAccountLink,
-    appMessage
+    appMessage,
+    appNothingToShow
   },
   data() {
     return {
