@@ -1,83 +1,12 @@
 <template>
-  <!-- <div class="app-header">
-    <a 
-      v-if="!isHazyAppCom" 
-      :href="hazyAppLink"
-      class="fv-block fv-bg-danger fv-text-center fv-padding-start fv-padding-end top-alert">
-      You are using old version of <b>Hazy</b>, switch to the new version by clicking here!
-    </a>
-    <div class="fv-flex">
-      <div class="fv-grow fv-hidden-sm" />
-      <div class="fv-col-md-8 fv-col-lg-6 fv-flex">
-        <div class="fv-grow fv-dir-start">
-          <h1 class="fv-font-xl">
-            <img 
-              class="logo"
-              src="/hazy.svg" 
-              alt="Hazy" >
-            <slot />
-          </h1>
-        </div>
-        <span 
-          v-if="$attrs.home" 
-          class="fv-margin-start" />
-        <nuxt-link 
-          v-if="$attrs.home"
-          to="/"
-          class="fv-link">
-          <i class="fa fa-home"/> <span class="fv-hidden-xs"> Home </span>
-        </nuxt-link>
-        <span 
-          v-if="$attrs.inbox" 
-          class="fv-margin-start" />
-        <nuxt-link 
-          v-if="$attrs.inbox"
-          :to="'/' + $store.state.parsedToken.username"
-          class="fv-link">
-          <i class="fa fa-inbox"/> <span class="fv-hidden-xs"> Inbox </span>
-        </nuxt-link>
-        <span 
-          v-if="$attrs.logout || $attrs.login || $attrs.profile" 
-          class="fv-margin-start" />
-        <a 
-          v-if="$attrs.logout"
-          class="fv-link"
-          @click="logout">
-          <i class="fa fa-sign-out"/> <span class="fv-hidden-xs"> Logout </span>
-        </a>
-        <nuxt-link 
-          v-if="$attrs.login"
-          to="/login"
-          class="fv-link">
-          <i class="fa fa-sign-in"/> <span class="fv-hidden-xs"> Enter </span>
-        </nuxt-link>
-        <span 
-          v-if="$attrs.resetpw" 
-          class="fv-margin-start" />
-        <nuxt-link 
-          v-if="$attrs.resetpw"
-          :to="'/' + $route.params.username + '/reset-password?action=copy'"
-          class="fv-link fv-text-danger">
-          <i class="fa fa-edit"/> <span class="fv-hidden-xs"> Reset PW </span>
-        </nuxt-link>
-      </div>
-      <div class="fv-grow fv-hidden-sm" />
-    </div>
-  </div> -->
   <fvHeader class="transparent header">
-    <!-- <fvButton> Another Button </fvButton> -->
-    <!-- <span class="fv-padding-start" /> -->
-    <appLogo class="logo fv-hidden-xs"/>
-    <div class="vertical-line fv-border-start fv-hidden-xs" />
+
+    <appLogo class="logo"/>
+    <div class="vertical-line fv-border-start" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light"> <slot name="description"/> </p>
     </div>
-    <!-- <span class="fv-padding-start" />
-    <fvButton
-      v-if="!!$store.state.parsedToken.username"
-      class="fv-primary"
-      @click="accountMenu = true"> <i class="fa fa-user" /> <span class="fv-hidden-sm fv-hidden-xs"> <appAccountLink :username="$store.state.parsedToken.username" /> <i class="fa fa-chevron-down" /> </span> </fvButton> -->
 
     <div class="fv-hidden-xs fv-hidden-sm">
       <a 
@@ -130,35 +59,34 @@
         class="fv-button"
         @click="logout"> <i class="fa fa-sign-out" /> Logout </a>
     </div>
-    <div class="fv-hidden-md fv-hidden-lg fv-hidden-xl"/>
-
-    <!-- <nuxt-link 
-      v-if="!!$store.state.parsedToken.username" 
-      to="/register"
-      class="fv-button fv-primary"> <i class="fa fa-sign-in" /> <span class="fv-hidden-sm fv-hidden-xs"> Register / Login </span> </nuxt-link> -->
-    <!-- <span class="fv-padding-start" />
-    <fvButton @click="quickAccessMenu = true"> <i class="fa fa-ellipsis-v" /> <span class="fv-hidden-sm fv-hidden-xs"> Quick Access <i class="fa fa-chevron-down" /> </span> </fvButton> -->
+    <div class="fv-hidden-md fv-hidden-lg fv-hidden-xl">
+      <fvButton @click="menu = !menu"> <i class="fa fa-bars" /> </fvButton>
+    </div>
     <fvMenu 
-      v-model="quickAccessMenu" 
-      class="app-menu">
+      v-model="menu"
+      class="menu">
       <fvList 
         parent 
         autofocus>
-        <fvListItem @click="$router.push('/')"> <i class="fa fa-home" /> Home </fvListItem>
+        <fvListItem @click="$router.push('/search')"> <i class="fa fa-search" /> Search </fvListItem>
+        <fvListItem 
+          v-if="!!$store.state.parsedToken.username" 
+          @click="$router.push('/'+$store.state.parsedToken.username+'/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
+        <fvListItem 
+          v-if="!!$store.state.parsedToken.username" 
+          disabled
+          @click="$router.push('/'+$store.state.parsedToken.username+'/polls')"> <i class="fa fa-check-circle-o" /> Polls </fvListItem>
         <fvListItem @click="$router.push('/sent-messages')"> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
-        <fvListItem @click="$router.go('https://github.com/hazy-app/webapp')"> <i class="fa fa-github" /> Client Source-Code on Github </fvListItem>
-        <fvListItem @click="$router.go('https://github.com/hazy-app/api')"> <i class="fa fa-github" /> API Source-Code on Github </fvListItem>
-      </fvList>
-    </fvMenu>
-    <fvMenu 
-      v-model="accountMenu" 
-      class="app-menu">
-      <fvList 
-        parent 
-        autofocus>
-        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username)"> <i class="fa fa-user-o" /> Profile </fvListItem>
-        <fvListItem @click="$router.push('/' + $store.state.parsedToken.username + '/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
-        <fvListItem @click="logout"> <i class="fa fa-sign-out" /> Logout </fvListItem>
+        <fvListItem @click="goToUrl('https://github.com/hazy-app/api')"> <i class="fa fa-github" /> Github </fvListItem>
+        <fvListItem 
+          v-if="!$store.state.parsedToken.username" 
+          @click="$router.push('/register')"> <i class="fa fa-user-plus" /> Register </fvListItem>
+        <fvListItem 
+          v-if="!$store.state.parsedToken.username" 
+          @click="$router.push('/login')"> <i class="fa fa-sign-in" /> Login </fvListItem>
+        <fvListItem 
+          v-if="!!$store.state.parsedToken.username" 
+          @click="menu = false; logout()"> <i class="fa fa-sign-out" /> Logout </fvListItem>
       </fvList>
     </fvMenu>
   </fvHeader>
@@ -175,8 +103,7 @@ export default {
   },
   data() {
     return {
-      quickAccessMenu: false,
-      accountMenu: false,
+      menu: false,
       searchQuery: null
     }
   },
@@ -199,6 +126,10 @@ export default {
     },
     startSearch() {
       this.$router.push(`/search/${this.searchQuery}`)
+    },
+    goToUrl(url) {
+      const win = window.open(url, '_blank')
+      win.focus()
     }
   }
 }
