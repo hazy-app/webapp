@@ -2,7 +2,8 @@
   <fvMain>
     <fvContent>
       <appHeader>
-        <template slot="title"> Search result for <i>"{{ $route.params.query }}"</i> </template>
+        <template slot="title"> <i>"{{ $route.params.query }}"</i> </template>
+        <template slot="description"> Search result </template>
       </appHeader>
 
       <appInnerContent 
