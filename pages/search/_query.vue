@@ -9,12 +9,10 @@
       <appInnerContent 
         sm 
         class="fv-padding-sm">
-        <div class="fv-padding" />
-        <p
-          v-if="users.length === 0"
-          class="fv-text-center">
-          <i class="fa fa-circle-o" /> There is nothing to show :)
-        </p>
+        <div class="fv-padding-sm" />
+        <appNothingToShow 
+          v-if="users.length === 0" 
+        />
         <appUserCard 
           v-for="user in users" 
           :user="user" 
@@ -30,11 +28,13 @@
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appUserCard from '~/components/appUserCard.vue'
+import appNothingToShow from '~/components/appNothingToShow.vue'
 
 export default {
   components: {
     appAccountLink,
-    appUserCard
+    appUserCard,
+    appNothingToShow
   },
   data() {
     return {
