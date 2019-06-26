@@ -32,7 +32,7 @@
         <a 
           class="fv-link fv-text-danger"
           @click="remove">
-          <i class="fa fa-trash" /> Remove
+          <i class="fa fa-trash" /> <span class="fv-hidden-xs"> Remove </span>
         </a>
       </span>
       <span :title="message.create_date | dateReadable">
@@ -64,6 +64,9 @@
         v-else-if="message.reply_date"
         class="reply-body">
         <div class="fv-padding fv-flex header">
+          <span>
+            <appAccountLink :username="message.receiver" />
+          </span>
           <div class="fv-grow" />
           <span :title="message.reply_date | dateReadable">
             <i class="fa fa-calendar" /> {{ message.reply_date | dateFromNow }}
@@ -175,7 +178,6 @@ export default {
   overflow: hidden;
 
   & .header {
-    // background: #f7f7f7;
     user-select: none;
     display: flex;
     flex-direction: row;
