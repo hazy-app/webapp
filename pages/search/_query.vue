@@ -1,10 +1,8 @@
 <template>
   <fvMain>
     <fvContent>
-      <!-- If it is not mine -->
       <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Search result for <i>{{ $route.params.query }}</i> </template>
+        <template slot="title"> Search result for <i>"{{ $route.params.query }}"</i> </template>
       </appHeader>
 
       <appInnerContent 
