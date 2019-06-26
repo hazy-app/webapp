@@ -9,24 +9,24 @@
       <appInnerContent 
         sm 
         class="fv-padding-sm">
+        <div class="fv-padding-sm" />
         <div 
-          class="fv-padding fv-text-center fv-margin-bottom fv-radius">
-          <p v-if="messages.length !== 0"> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. </p>
-          <div class="fv-margin-top">
+          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+          <p> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
+          <div 
+            v-if="messages.length !== 0" 
+            class="fv-margin-top">
             <fvButton 
-              v-if="messages.length !== 0"
               class="fv-primary" 
               @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
           </div>
         </div>
-        <p
-          v-if="messages.length === 0"
-          class="fv-text-center">
-          <i class="fa fa-circle-o" /> Local storage is empty!
-        </p>
+        <appNothingToShow 
+          v-if="messages.length === 0" 
+        />
         <appMessage 
           v-for="message in messages"
-          :key="'a' + message._id" 
+          :key="'msg' + message._id" 
           :message="message"
           :edit-button="false"
           :reply-section="false"
@@ -40,10 +40,12 @@
 
 <script>
 import appMessage from '~/components/appMessage.vue'
+import appNothingToShow from '~/components/appNothingToShow.vue'
 
 export default {
   components: {
-    appMessage
+    appMessage,
+    appNothingToShow
   },
   data() {
     return {
