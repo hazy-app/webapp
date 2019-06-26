@@ -13,7 +13,7 @@
             src="/hazy.svg" 
             alt="Hazy" >
           <div class="logo-container__text">
-            <h2> Hazy </h2>
+            <h1> Hazy </h1>
             <p> Send and Receive anonymous messages </p>
           </div>
           <br>
