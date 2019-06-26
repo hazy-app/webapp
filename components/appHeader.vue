@@ -1,7 +1,8 @@
 <template>
   <fvHeader class="transparent header">
-
-    <appLogo class="logo"/>
+    <nuxt-link to="/">
+      <appLogo class="logo"/>
+    </nuxt-link>
     <div class="vertical-line fv-border-start" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
