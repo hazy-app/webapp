@@ -85,7 +85,10 @@ export default {
       } catch (e) {
         this.form.recaptcha = false
         this.$root.$loading.finish()
-        this.$alerts.toast(e.response.data.message, 'failed')
+        this.$alerts.toast(
+          (((e || {}).response || {}).data || {}).message || 'Unhandled Error!',
+          'failed'
+        )
       }
     },
     copyLink() {

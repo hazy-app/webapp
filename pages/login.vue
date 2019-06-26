@@ -97,7 +97,7 @@ export default {
           recaptcha: this.form.recaptcha
         })
         const redirect = decodeURIComponent(
-          this.$route.query.redirect || `/${this.form.username}`
+          this.$route.query.redirect || `/${this.form.username}/messages`
         )
         this.$root.$loading.finish()
         this.$alerts.toast('Welcome to Hazy!', 'success')
@@ -109,7 +109,10 @@ export default {
           this.form.password = ''
           this.password_hint = await this.loadPasswordHint()
         }
-        this.$alerts.toast(e.response.data.message, 'failed')
+        this.$alerts.toast(
+          (((e || {}).response || {}).data || {}).message || 'Unhandled Error!',
+          'failed'
+        )
       }
     }
   },
