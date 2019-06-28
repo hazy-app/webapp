@@ -2,7 +2,7 @@
   <div class="fv-text-center app-nothing-to-show fv-border fv-shadow fv-radius fv-padding">
     <i class="fa fa-frown-o" /> 
     <div> Nothing to show! </div>
-    <p class="fv-text-light"> This isn't 404 error, just there is no related items yet. </p>
+    <p class="fv-text-light"> This isn't 404 error, just there is no items yet. </p>
   </div>
 </template>
 
