@@ -9,7 +9,7 @@
         <template 
           v-if="!isMine" 
           slot="title"> Inbox of <appAccountLink 
-            :username="user.username" 
+            :username="$route.params.username" 
             clickable/> </template>
         <template 
           v-if="!isMine" 
@@ -75,7 +75,6 @@ export default {
       hasNext: true,
       loading: false,
       messages: [],
-      user: {},
       form: {
         text: '',
         recaptcha: false
@@ -121,32 +120,6 @@ export default {
       copy(url)
       this.$alerts.toast('Link copied to clipboard!')
     },
-    async send() {
-      this.$root.$loading.start()
-      try {
-        const response = await this.$axios.$post(
-          `${process.env.BASE_URL}/users/${
-            this.$route.params.username
-          }/messages`,
-          {
-            text: this.form.text,
-            recaptcha: this.form.recaptcha
-          }
-        )
-        this.$root.$loading.finish()
-        this.$alerts.toast(
-          `Your message has been sent to ${
-            this.$route.params.username
-          } successfully!`,
-          'success'
-        )
-        this.$router.push('/')
-      } catch (e) {
-        this.form.recaptcha = false
-        this.$root.$loading.finish()
-        this.$alerts.toast(e.response.data.message, 'failed')
-      }
-    },
     async gotoMessage(message) {
       this.$router.push(`/${message.receiver}/messages/${message.uuid}`)
     },
@@ -179,16 +152,6 @@ export default {
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
-    try {
-      ret.user = await $axios.$get(
-        `${process.env.BASE_URL}/users/${params.username}`
-      )
-    } catch (e) {
-      throw {
-        statusCode: 404,
-        message: 'User not found!'
-      }
-    }
     ret.page = query.page ? parseInt(query.page) : 1
     try {
       const response = await $axios.$get(
