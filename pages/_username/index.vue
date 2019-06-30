@@ -4,10 +4,10 @@
       <!-- If it is not mine -->
       <appHeader>
         <template slot="title"> <appAccountLink 
-          :username="user.username" 
+          :username="$route.params.username" 
           clickable/> </template>
         <template slot="description"> Sending Message to <appAccountLink 
-          :username="user.username" 
+          :username="$route.params.username" 
           clickable/>
         </template>
       </appHeader>
@@ -106,23 +106,13 @@ export default {
       meta: [
         {
           property: 'twitter:description',
-          content: `Send anonymous message to @${this.user.username}`
+          content: `Send anonymous message to @${this.$route.params.username}`
         }
       ]
     }
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
-    try {
-      ret.user = await $axios.$get(
-        `${process.env.BASE_URL}/users/${params.username}`
-      )
-    } catch (e) {
-      throw {
-        statusCode: 404,
-        message: 'User not found!'
-      }
-    }
     ret.isMine = store.state.parsedToken.username === params.username
     return ret
   }
