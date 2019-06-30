@@ -12,8 +12,8 @@
         <div class="fv-padding-sm" />
 
         <div class="fv-margin-top">
-          <appMessage 
-            :message="message"
+          <appPoll 
+            :poll="poll"
             :edit-buttons="isMine"
             :is-mine="isMine"
             @remove="remove"
@@ -26,18 +26,18 @@
 
 <script>
 import copy from 'clipboard-copy'
-import appMessage from '~/components/appMessage.vue'
+import appPoll from '~/components/appPoll.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 
 export default {
   components: {
-    appMessage,
+    appPoll,
     appAccountLink
   },
   data() {
     return {
       isMine: false,
-      message: {}
+      poll: {}
     }
   },
   head() {
@@ -46,9 +46,7 @@ export default {
       meta: [
         {
           property: 'twitter:description',
-          content: `Look at anonymous message sent for @${
-            this.$route.params.username
-          }!`
+          content: `Look at created poll by @${this.$route.params.username}!`
         }
       ]
     }
@@ -80,22 +78,24 @@ export default {
       }
       this.$root.$loading.finish()
     },
-    async remove(message) {
+    async remove(poll) {
       this.$root.$loading.start()
       try {
         await this.$axios.$delete(
           `${process.env.BASE_URL}/users/${
             this.$store.state.parsedToken.username
-          }/messages/${message.uuid}`
+          }/polls/${poll.uuid}`
         )
-        const index = this.messages.findIndex(msg => msg._id === message._id)
-        this.messages.splice(index, 1)
+        const index = this.polls.findIndex(pll => pll._id === poll._id)
+        this.polls.splice(index, 1)
         this.$alerts.toast(
-          'Your message has been successfully deleted!',
+          'Your poll has been successfully deleted!',
           'success'
         )
         this.$root.$loading.finish()
+        this.$router.push(`/users/${this.$route.params.username}/polls`)
       } catch (e) {
+        console.log(e)
         this.$root.$loading.finish()
       }
     },
@@ -107,10 +107,8 @@ export default {
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
     try {
-      ret.message = await $axios.$get(
-        `${process.env.BASE_URL}/users/${params.username}/messages/${
-          params.message
-        }`
+      ret.poll = await $axios.$get(
+        `${process.env.BASE_URL}/users/${params.username}/polls/${params.poll}`
       )
       if (store.state.parsedToken.username === params.username) {
         ret.isMine = true
@@ -118,7 +116,7 @@ export default {
     } catch (e) {
       throw {
         statusCode: 404,
-        message: 'Message not found!'
+        message: 'Poll not found!'
       }
     }
     return ret
