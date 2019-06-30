@@ -43,9 +43,14 @@
         </div>
         <div class="fv-flex choice">
           <div class="fv-grow" />
-          <fvButton 
-            class="fv-size-smz" 
-            @click.prevent="addChoice"> <i class="fa fa-plus" /> </fvButton>
+          <fvButton @click.prevent="addChoice"> <i class="fa fa-plus" /> </fvButton>
+        </div>
+      </fvFormElement>
+      <fvFormElement class="fv-col-12">
+        <div class="fv-text-center">
+          <no-ssr>
+            <appRecaptcha v-model="recaptcha" />
+          </no-ssr>
         </div>
       </fvFormElement>
       <div class="fv-col-12 fv-text-light">
@@ -71,6 +76,10 @@ export default {
     appAccountLink
   },
   props: {
+    user: {
+      type: String,
+      default: undefined
+    },
     choices: {
       type: Array,
       default: () => []
@@ -80,10 +89,12 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      recaptcha: undefined
+    }
+  },
   methods: {
-    submit() {
-      this.$emit('submit')
-    },
     setInputDirection(str) {
       const direction = this.$calcDirection(str)
       this.$refs.input.$el.style.direction = direction
@@ -103,6 +114,28 @@ export default {
       const choices = [...this.choices]
       choices[index] = newValue
       this.$emit('update:choices', choices)
+    },
+    async submit() {
+      this.$root.$loading.start()
+      try {
+        const response = await this.$axios.$post(
+          `${process.env.BASE_URL}/users/${this.user}/polls`,
+          {
+            choices: this.choices,
+            title: this.title,
+            recaptcha: this.recaptcha
+          }
+        )
+        this.$root.$loading.finish()
+        this.$emit('created', response.data)
+        this.$alerts.toast(`Your poll has been created!`, 'success')
+      } catch (e) {
+        console.log(e)
+        this.form.recaptcha = false
+        this.$root.$loading.finish()
+        this.$emit('error', e.response)
+        this.$alerts.toast(e.response.data.message, 'failed')
+      }
     }
   }
 }
