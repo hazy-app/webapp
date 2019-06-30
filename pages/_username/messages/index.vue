@@ -39,7 +39,7 @@
           v-for="message in messages"
           :key="'msg' + message._id" 
           :message="message"
-          :edit-button="false"
+          :edit-buttons="false"
           :is-mine="isMine"
           class="fv-margin-bottom"
           @reply="gotoMessage"/>
