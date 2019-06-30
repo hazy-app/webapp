@@ -29,11 +29,10 @@
         <appNothingToShow 
           v-if="polls.length === 0" 
         />
-        <appMessage 
+        <appPoll 
           v-for="poll in polls"
           :key="'poll' + poll._id" 
-          :message="message"
-          :edit-button="false"
+          :poll="poll"
           :is-mine="isMine"
           class="fv-margin-bottom"
           @reply="gotoMessage"/>
@@ -53,13 +52,13 @@
 <script>
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
-import appMessage from '~/components/appMessage.vue'
+import appPoll from '~/components/appPoll.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
 
 export default {
   components: {
     appAccountLink,
-    appMessage,
+    appPoll,
     appNothingToShow
   },
   data() {
