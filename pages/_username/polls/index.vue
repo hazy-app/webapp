@@ -1,0 +1,146 @@
+<template>
+  <fvMain>
+    <fvContent>
+      <appHeader>
+        <template 
+          v-if="isMine" 
+          slot="title"> Polls </template>
+        <template 
+          slot="description"> Created polls by <appAccountLink 
+            :username="user.username" 
+            clickable/> </template>
+      </appHeader>
+
+      <appInnerContent 
+        class="fv-padding-sm"
+        sm>
+        <div class="fv-padding-sm" />
+        <div
+          v-if="isMine" 
+          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+          <p> <i class="fa fa-info-circle" /> Share your created polls to your friends and let them to answer your question anonymously! </p>
+          <div class="fv-margin-top">
+            <nuxt-link 
+              :to="'/' + $store.state.parsedToken.username + '/polls/new'" 
+              class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
+          </div>
+        </div>
+
+        <appNothingToShow 
+          v-if="polls.length === 0" 
+        />
+        <appMessage 
+          v-for="poll in polls"
+          :key="'poll' + poll._id" 
+          :message="message"
+          :edit-button="false"
+          :is-mine="isMine"
+          class="fv-margin-bottom"
+          @reply="gotoMessage"/>
+        <div class="fv-text-center">
+          <fvButton 
+            v-if="hasNext && !loading" 
+            @click="loadMore">
+            <i class="fa fa-ellipsis-h" /> Load More
+          </fvButton>
+          <fvLoading v-if="loading" />
+        </div>
+      </appInnerContent>
+    </fvContent>
+  </fvMain>
+</template>
+
+<script>
+import copy from 'clipboard-copy'
+import appAccountLink from '~/components/appAccountLink.vue'
+import appMessage from '~/components/appMessage.vue'
+import appNothingToShow from '~/components/appNothingToShow.vue'
+
+export default {
+  components: {
+    appAccountLink,
+    appMessage,
+    appNothingToShow
+  },
+  data() {
+    return {
+      isMine: false,
+      page: 1,
+      hasNext: true,
+      loading: false,
+      polls: [],
+      user: {}
+    }
+  },
+  methods: {
+    setInputDirection(str) {
+      const direction = this.$calcDirection(str)
+      this.$refs.input.$el.style.direction = direction
+    },
+    async gotoPoll(poll) {
+      this.$router.push(`/${poll.user}/polls/${poll.uuid}`)
+    },
+    async loadMore() {
+      this.loading = true
+      this.page++
+      const response = await this.$axios.$get(
+        `${process.env.BASE_URL}/users/${
+          this.$store.state.parsedToken.username
+        }/polls?per_page=10&page=${this.page}`
+      )
+      this.polls = this.polls.concat(response.result)
+      this.hasNext = response.hasNext
+
+      this.loading = false
+    }
+  },
+  head() {
+    return {
+      title: 'Hazy',
+      meta: [
+        {
+          property: 'twitter:description',
+          content: `Look at created polls by @${this.$route.params.username}!`
+        }
+      ]
+    }
+  },
+  async asyncData({ params, query, store, $axios, redirect }) {
+    const ret = {}
+    try {
+      ret.user = await $axios.$get(
+        `${process.env.BASE_URL}/users/${params.username}`
+      )
+    } catch (e) {
+      throw {
+        statusCode: 404,
+        message: 'User not found!'
+      }
+    }
+    ret.page = query.page ? parseInt(query.page) : 1
+    try {
+      const response = await $axios.$get(
+        `${process.env.BASE_URL}/users/${
+          params.username
+        }/polls?per_page=10&page=${ret.page}`
+      )
+      ret.hasNext = response.hasNext
+      ret.totalPages = response.totalPages
+      ret.polls = response.result
+    } catch (e) {
+      return redirect('/login')
+    }
+    ret.isMine = store.state.parsedToken.username === params.username
+    return ret
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.profile-container {
+  margin-bottom: -4rem;
+}
+.form {
+  padding-top: 4rem;
+}
+</style>
