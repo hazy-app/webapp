@@ -87,40 +87,6 @@
         <span class="fv-grow" />
       </div>
     </div>
-
-    
-    <!-- <appMessageSender 
-      v-if="isMine && !message.reply"
-      :user="$route.params.username" 
-      :message="message.uuid" 
-      :recaptcha="false"
-      message-label="Reply to message"
-      button-text="Reply"
-      button-icon="fa fa-reply"
-      @sent="reload"/> -->
-    <!-- 
-    <div 
-      v-if="!isMine && !message.reply">
-      <p class="fv-padding-sm fv-text-light">
-         </p>
-    </div> 
-
-    <div 
-      v-else>
-      <p 
-        :style="{'direction': $calcDirection(message.reply)}" 
-        class="fv-padding-sm fv-font-lg message-text"><span class="fv-text-light">@{{ $route.params.username }}:</span> {{ message.reply }}</p>
-      <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
-        <div class="fv-grow" />
-        <div 
-          :title="message.reply_date | dateReadable">
-          <span class="fa fa-text-gray">
-            <i class="fa fa-calendar" /> {{ message.reply_date | dateFromNow }}
-          </span>
-        </div>
-      </small>
-    </div> 
-  </div> -->
   </div>
 </template>
 
@@ -185,17 +151,6 @@ export default {
     & .fv-switch {
       top: -0.35em;
     }
-  }
-
-  // & .reply-body {
-  //   background: rgba(0, 0, 0, 0.01);
-  // }
-
-  & .reply-hr {
-    max-width: 60%;
-    margin: 0 20%;
-    height: 1px;
-    border-top: dotted 2px #e0e0e0;
   }
 }
 </style>
