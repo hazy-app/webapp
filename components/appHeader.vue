@@ -36,8 +36,7 @@
         v-if="!!$store.state.parsedToken.username" 
         :to="'/'+$store.state.parsedToken.username+'/polls'"
         active-class="link-active"
-        class="fv-button" 
-        disabled> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+        class="fv-button"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
       <nuxt-link 
         to="/sent-messages"
         active-class="link-active"
@@ -75,7 +74,6 @@
           @click="$router.push('/'+$store.state.parsedToken.username+'/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
         <fvListItem 
           v-if="!!$store.state.parsedToken.username" 
-          disabled
           @click="$router.push('/'+$store.state.parsedToken.username+'/polls')"> <i class="fa fa-check-circle-o" /> Polls </fvListItem>
         <fvListItem @click="$router.push('/sent-messages')"> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
         <fvListItem @click="goToUrl('https://github.com/hazy-app/api')"> <i class="fa fa-github" /> Github </fvListItem>
