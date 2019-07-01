@@ -86,14 +86,12 @@ export default {
             this.$store.state.parsedToken.username
           }/polls/${poll.uuid}`
         )
-        const index = this.polls.findIndex(pll => pll._id === poll._id)
-        this.polls.splice(index, 1)
         this.$alerts.toast(
           'Your poll has been successfully deleted!',
           'success'
         )
         this.$root.$loading.finish()
-        this.$router.push(`/users/${this.$route.params.username}/polls`)
+        this.$router.push(`/${this.$route.params.username}/polls`)
       } catch (e) {
         console.log(e)
         this.$root.$loading.finish()
