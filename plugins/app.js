@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import timeago from 'timeago.js'
+import Fingerprint from 'fingerprintjs2'
 import Modela from 'modela'
 
 import appAlerts from '~/components/appAlerts.vue'
@@ -48,5 +49,33 @@ export default ({ app, store, router }, inject) => {
       return true
     }
     return false
+  })
+
+  inject('getFingerprint', async () => {
+    //https://stackoverflow.com/a/7616484
+    function hashCode(str) {
+      return str
+        .split('')
+        .reduce(
+          (prevHash, currVal) =>
+            ((prevHash << 5) - prevHash + currVal.charCodeAt(0)) | 0,
+          0
+        )
+    }
+    return new Promise((resolve, reject) => {
+      const timeout = window.requestIdleCallback
+        ? window.requestIdleCallback
+        : action => setTimeout(action, 1000)
+      timeout(() => {
+        Fingerprint.getPromise({
+          excludes: { language: true, userAgent: true, enumerateDevices: true }
+        })
+          .then(data => {
+            // console.log(JSON.stringify(data, '', 2))
+            resolve(hashCode(JSON.stringify(data)))
+          })
+          .catch(reject)
+      })
+    })
   })
 }
