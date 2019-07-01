@@ -88,8 +88,6 @@ export default {
             this.$store.state.parsedToken.username
           }/messages/${message.uuid}`
         )
-        const index = this.messages.findIndex(msg => msg._id === message._id)
-        this.messages.splice(index, 1)
         this.$alerts.toast(
           'Your message has been successfully deleted!',
           'success'
