@@ -34,8 +34,8 @@
           :key="'poll' + poll._id" 
           :poll="poll"
           :is-mine="isMine"
-          class="fv-margin-bottom"
-          @reply="gotoMessage"/>
+          watch-as="creator"
+          class="fv-margin-bottom" />
         <div class="fv-text-center">
           <fvButton 
             v-if="hasNext && !loading" 
@@ -75,9 +75,6 @@ export default {
     setInputDirection(str) {
       const direction = this.$calcDirection(str)
       this.$refs.input.$el.style.direction = direction
-    },
-    async gotoPoll(poll) {
-      this.$router.push(`/${poll.user}/polls/${poll.uuid}`)
     },
     async loadMore() {
       this.loading = true

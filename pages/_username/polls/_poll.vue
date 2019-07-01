@@ -16,8 +16,8 @@
             :poll="poll"
             :edit-buttons="isMine"
             :is-mine="isMine"
-            @remove="remove"
-            @privacyChange="privacyChange" />
+            watch-as="user"
+            @remove="remove" />
         </div>
       </appInnerContent>
     </fvContent>
