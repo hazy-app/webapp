@@ -29,7 +29,23 @@
         {{ poll.title }}
       </p>
     </div>
-    <div class="fv-padding fv-border-top choices">
+    <div 
+      v-if="watchAs === 'creator'" 
+      class="fv-padding fv-border-top choices">
+      <fvFormElement 
+        label="Choices" 
+        inline>
+        <div 
+          v-for="(choice, index) in poll.choices"
+          :key="'choice' + index" 
+          class="fv-flex choice">
+          <span v-text="choice" />
+        </div>
+      </fvFormElement>
+    </div>
+    <div 
+      v-else-if="watchAs === 'user'" 
+      class="fv-padding fv-border-top choices">
       <fvFormElement 
         label="Choices" 
         inline>
@@ -74,8 +90,8 @@ export default {
     },
     watchAs: {
       type: String,
-      validator: v => ['receiver', 'sender'].indexOf(v) > -1,
-      default: 'receiver'
+      validator: v => ['creator', 'user'].indexOf(v) > -1,
+      default: 'creator'
     }
   },
   data() {
@@ -83,10 +99,18 @@ export default {
       selectedChoice: undefined
     }
   },
+  computed: {
+    totalVotes() {
+      return this.poll.answers.reduce(
+        (total, item) => (total = total + item),
+        0
+      )
+    }
+  },
   methods: {
     async remove() {
       const check = await this.$alerts.confirm(
-        'Are you sure you want to delete this message?'
+        'Are you sure you want to delete this poll?'
       )
       if (check) {
         console.log(this.poll)
