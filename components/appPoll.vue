@@ -84,10 +84,6 @@ export default {
       type: Boolean,
       default: false
     },
-    replySection: {
-      type: Boolean,
-      default: true
-    },
     watchAs: {
       type: String,
       validator: v => ['creator', 'user'].indexOf(v) > -1,
@@ -107,6 +103,10 @@ export default {
       )
     }
   },
+  async mounted() {
+    const fingerprint = await this.$getFingerprint()
+    console.log(fingerprint)
+  },
   methods: {
     async remove() {
       const check = await this.$alerts.confirm(
@@ -116,9 +116,6 @@ export default {
         console.log(this.poll)
         this.$emit('remove', this.poll)
       }
-    },
-    reply() {
-      this.$emit('reply', this.message)
     },
     privacyChange() {
       this.$emit('privacyChange', this.poll)
