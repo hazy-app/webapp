@@ -139,7 +139,10 @@ export default {
         this.form.recaptcha = false
         this.$root.$loading.finish()
         this.$emit('error', e.response)
-        this.$alerts.toast(e.response.data.message, 'failed')
+        this.$alerts.toast(
+          (((e || {}).response || {}).data || {}).message || 'Unhandled Error!',
+          'failed'
+        )
       }
     },
     setInputDirection(str) {
