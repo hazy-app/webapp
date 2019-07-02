@@ -1,27 +1,17 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader>
-        <template slot="title"> <i>"{{ $route.params.query }}"</i> </template>
-        <template slot="description"> Search result </template>
-      </appHeader>
-
-      <appInnerContent 
-        sm 
-        class="fv-padding-sm">
-        <div class="fv-padding-sm" />
-        <appNothingToShow 
-          v-if="users.length === 0" 
-        />
-        <appUserCard 
-          v-for="user in users" 
-          :user="user" 
-          :key="user.username"
-          class="fv-margin-bottom" />
-      </appInnerContent>
-
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    sm 
+    class="fv-padding-sm">
+    <div class="fv-padding-sm" />
+    <appNothingToShow 
+      v-if="users.length === 0" 
+    />
+    <appUserCard 
+      v-for="user in users" 
+      :user="user" 
+      :key="user.username"
+      class="fv-margin-bottom" />
+  </appInnerContent>
 </template>
 
 <script>
@@ -61,6 +51,10 @@ export default {
     } catch (e) {
       ret.users = []
     }
+    store.commit('ui/setHeader', {
+      title: 'Search',
+      description: `Search result for '${params}'`
+    })
     return ret
   }
 }

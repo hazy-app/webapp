@@ -1,51 +1,40 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <!-- If it is not mine -->
-      <appHeader>
-        <template slot="title"> <appAccountLink 
-          :username="$route.params.username" 
-          clickable/> </template>
-        <template slot="description"> Sending Message to <appAccountLink 
-          :username="$route.params.username" 
-          clickable/>
-        </template>
-      </appHeader>
-
-
-      <appInnerContent 
-        sm 
-        class="fv-padding-sm">
-        <div class="fv-padding-sm" />
-        <div 
-          v-if="isMine"
-          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-          <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <div  
-            class="fv-margin-top">
-            <fvButton 
-              class="fv-primary" 
-              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-          </div>
-        </div>
-        <appMessageSender 
-          :user="$route.params.username"
-          class="fv-border fv-radius fv-shadow" 
-          save-button
-          @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
-      </appInnerContent>
-
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    sm 
+    class="fv-padding-sm">
+    <div class="fv-padding-sm" />
+    <div 
+      v-if="isMine"
+      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+      <div  
+        class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+      </div>
+    </div>
+    <appAccountAccessLinks 
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" 
+      mention />
+    <appMessageSender 
+      :user="$route.params.username"
+      class="fv-border fv-radius fv-shadow" 
+      save-button
+      @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
+  </appInnerContent>
 </template>
 
 <script>
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
-    appAccountLink
+    appAccountLink,
+    appAccountAccessLinks
   },
   data() {
     return {
@@ -114,6 +103,10 @@ export default {
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
     ret.isMine = store.state.parsedToken.username === params.username
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `Send anounymous message to @${params.username}`
+    })
     return ret
   }
 }

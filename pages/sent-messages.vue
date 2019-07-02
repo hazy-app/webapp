@@ -1,41 +1,32 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Sent Messages </template>
-      </appHeader>
-
-      <appInnerContent 
-        sm 
-        class="fv-padding-sm">
-        <div class="fv-padding-sm" />
-        <div 
-          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-          <p> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
-          <div 
-            v-if="messages.length !== 0" 
-            class="fv-margin-top">
-            <fvButton 
-              class="fv-primary" 
-              @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
-          </div>
-        </div>
-        <appNothingToShow 
-          v-if="messages.length === 0" 
-        />
-        <appMessage 
-          v-for="message in messages"
-          :key="'msg' + message._id" 
-          :message="message"
-          :edit-button="false"
-          :reply-section="false"
-          is-mine
-          watch-as="sender"
-          class="fv-margin-bottom"/>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    sm 
+    class="fv-padding-sm">
+    <div class="fv-padding-sm" />
+    <div 
+      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      <p> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
+      <div 
+        v-if="messages.length !== 0" 
+        class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
+      </div>
+    </div>
+    <appNothingToShow 
+      v-if="messages.length === 0" 
+    />
+    <appMessage 
+      v-for="message in messages"
+      :key="'msg' + message._id" 
+      :message="message"
+      :edit-button="false"
+      :reply-section="false"
+      is-mine
+      watch-as="sender"
+      class="fv-margin-bottom"/>
+  </appInnerContent>
 </template>
 
 <script>
@@ -73,6 +64,12 @@ export default {
         this.$root.$loading.finish()
       }
     }
+  },
+  asyncData({ store }) {
+    store.commit('ui/setHeader', {
+      title: 'Hazy',
+      description: 'Your sent messages (from local storage)'
+    })
   }
 }
 </script>

@@ -1,6 +1,15 @@
 <template>
   <div class="app-message fv-border fv-radius fv-shadow">
     <div class="fv-padding fv-flex header">
+      <span v-if="watchAs === 'sender'">
+        To <appAccountLink 
+          :username="message.receiver" 
+          clickable/>
+      </span>
+      <span v-else-if="watchAs === 'receiver'">
+        <appAccountLink />
+      </span>
+      <div class="fv-grow" />
       <span 
         v-if="editButtons"
         class="fv-margin-end">
@@ -17,15 +26,6 @@
           :class="message.public ? 'fa-eye' : 'fa-eye-slash fv-text-light'" 
           class="fa"/>
       </span>
-      <span v-if="watchAs === 'sender'">
-        To <appAccountLink 
-          :username="message.receiver" 
-          clickable/>
-      </span>
-      <span v-else-if="watchAs === 'receiver'">
-        <appAccountLink />
-      </span>
-      <div class="fv-grow" />
       <span 
         v-if="editButtons"
         class="fv-margin-end">

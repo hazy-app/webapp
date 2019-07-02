@@ -1,52 +1,40 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader>
-        <template slot="title"> Polls </template>
-        <template 
-          slot="description"> Created polls by <appAccountLink 
-            :username="user.username" 
-            clickable/> </template>
-      </appHeader>
+  <appInnerContent 
+    class="fv-padding-sm"
+    sm>
+    <div class="fv-padding-sm" />
+    <div
+      v-if="isMine" 
+      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      <p> <i class="fa fa-info-circle" /> Share your created polls to your friends and let them to answer your question anonymously! </p>
+      <div class="fv-margin-top">
+        <nuxt-link 
+          :to="'/' + $store.state.parsedToken.username + '/polls/new'" 
+          class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
+      </div>
+    </div>
 
-      <appInnerContent 
-        class="fv-padding-sm"
-        sm>
-        <div class="fv-padding-sm" />
-        <div
-          v-if="isMine" 
-          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-          <p> <i class="fa fa-info-circle" /> Share your created polls to your friends and let them to answer your question anonymously! </p>
-          <div class="fv-margin-top">
-            <nuxt-link 
-              :to="'/' + $store.state.parsedToken.username + '/polls/new'" 
-              class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
-          </div>
-        </div>
-
-        <appNothingToShow 
-          v-if="polls.length === 0" 
-        />
-        <appPoll 
-          v-for="poll in polls"
-          :key="'poll' + poll._id" 
-          :poll="poll"
-          :edit-buttons="false"
-          :open-button="true"
-          :vote-form="false"
-          :watch-as="isMine ? 'creator' : 'user'"
-          class="fv-margin-bottom" />
-        <div class="fv-text-center">
-          <fvButton 
-            v-if="hasNext && !loading" 
-            @click="loadMore">
-            <i class="fa fa-ellipsis-h" /> Load More
-          </fvButton>
-          <fvLoading v-if="loading" />
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+    <appNothingToShow 
+      v-if="polls.length === 0" 
+    />
+    <appPoll 
+      v-for="poll in polls"
+      :key="'poll' + poll._id" 
+      :poll="poll"
+      :edit-buttons="false"
+      :open-button="true"
+      :vote-form="false"
+      :watch-as="isMine ? 'creator' : 'user'"
+      class="fv-margin-bottom" />
+    <div class="fv-text-center">
+      <fvButton 
+        v-if="hasNext && !loading" 
+        @click="loadMore">
+        <i class="fa fa-ellipsis-h" /> Load More
+      </fvButton>
+      <fvLoading v-if="loading" />
+    </div>
+  </appInnerContent>
 </template>
 
 <script>
@@ -127,6 +115,10 @@ export default {
       return redirect('/login')
     }
     ret.isMine = store.state.parsedToken.username === params.username
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `List of created polls by @${params.username}`
+    })
     return ret
   }
 }

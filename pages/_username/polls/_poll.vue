@@ -1,39 +1,30 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Message for <appAccountLink :username="$route.params.username" /> </template>
-      </appHeader>
-
-      <appInnerContent 
-        class="fv-padding-sm" 
-        sm>
-        <div class="fv-padding-sm" />
-        <div 
-          v-if="isMine"
-          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-          <p> <i class="fa fa-info-circle" /> Share your poll link to your friends to receive anonymous votes! </p>
-          <div  
-            class="fv-margin-top">
-            <fvButton 
-              class="fv-primary" 
-              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-          </div>
-        </div>
-        <div class="fv-margin-top">
-          <appPoll 
-            :poll="poll"
-            :edit-buttons="isMine"
-            :watch-as="isMine ? 'creator' : 'user'"
-            :open-button="false"
-            :vote-form="!isMine"
-            @remove="remove"
-            @vote="vote" />
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    class="fv-padding-sm" 
+    sm>
+    <div class="fv-padding-sm" />
+    <div 
+      v-if="isMine"
+      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      <p> <i class="fa fa-info-circle" /> Share your poll link to your friends to receive anonymous votes! </p>
+      <div  
+        class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+      </div>
+    </div>
+    <div class="fv-margin-top">
+      <appPoll 
+        :poll="poll"
+        :edit-buttons="isMine"
+        :watch-as="isMine ? 'creator' : 'user'"
+        :open-button="false"
+        :vote-form="!isMine"
+        @remove="remove"
+        @vote="vote" />
+    </div>
+  </appInnerContent>
 </template>
 
 <script>
@@ -144,6 +135,10 @@ export default {
         message: 'Poll not found!'
       }
     }
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `Vote to created poll by @${params.username}`
+    })
     return ret
   }
 }

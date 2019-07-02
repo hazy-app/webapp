@@ -1,58 +1,38 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <!-- If it is not mine -->
-      <appHeader>
-        <template 
-          v-if="isMine" 
-          slot="title"> Inbox </template>
-        <template 
-          v-if="!isMine" 
-          slot="title"> Inbox of <appAccountLink 
-            :username="$route.params.username" 
-            clickable/> </template>
-        <template 
-          v-if="!isMine" 
-          slot="description"> We show only public messages to you! </template>
-      </appHeader>
+  <appInnerContent 
+    class="fv-padding-sm"
+    sm>
+    <div class="fv-padding-sm" />
+    <div
+      v-if="isMine" 
+      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
+      <div class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+      </div>
+    </div>
 
-
-      <appInnerContent 
-        class="fv-padding-sm"
-        sm>
-        <div class="fv-padding-sm" />
-        <div
-          v-if="isMine" 
-          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-          <p> <i class="fa fa-info-circle" /> Share your profile link to your friends to receive anonymous messages! </p>
-          <div class="fv-margin-top">
-            <fvButton 
-              class="fv-primary" 
-              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-          </div>
-        </div>
-
-        <appNothingToShow 
-          v-if="messages.length === 0" 
-        />
-        <appMessage 
-          v-for="message in messages"
-          :key="'msg' + message._id" 
-          :message="message"
-          :edit-buttons="false"
-          :open-button="true"
-          class="fv-margin-bottom" />
-        <div class="fv-text-center">
-          <fvButton 
-            v-if="hasNext && !loading" 
-            @click="loadMore">
-            <i class="fa fa-ellipsis-h" /> Load More
-          </fvButton>
-          <fvLoading v-if="loading" />
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+    <appNothingToShow 
+      v-if="messages.length === 0" 
+    />
+    <appMessage 
+      v-for="message in messages"
+      :key="'msg' + message._id" 
+      :message="message"
+      :edit-buttons="false"
+      :open-button="true"
+      class="fv-margin-bottom" />
+    <div class="fv-text-center">
+      <fvButton 
+        v-if="hasNext && !loading" 
+        @click="loadMore">
+        <i class="fa fa-ellipsis-h" /> Load More
+      </fvButton>
+      <fvLoading v-if="loading" />
+    </div>
+  </appInnerContent>
 </template>
 
 <script>
@@ -165,6 +145,10 @@ export default {
       return redirect('/login')
     }
     ret.isMine = store.state.parsedToken.username === params.username
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `List of received messages of @${params.username}`
+    })
     return ret
   }
 }

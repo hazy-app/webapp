@@ -1,27 +1,18 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader>
-        <template slot="title"> Hazy </template>
-        <template slot="description"> Message for <appAccountLink :username="$route.params.username" /> </template>
-      </appHeader>
+  <appInnerContent 
+    class="fv-padding-sm" 
+    sm>
+    <div class="fv-padding-sm" />
 
-      <appInnerContent 
-        class="fv-padding-sm" 
-        sm>
-        <div class="fv-padding-sm" />
-
-        <div class="fv-margin-top">
-          <appMessage 
-            :message="message"
-            :edit-buttons="isMine"
-            :open-button="false"
-            @remove="remove"
-            @privacyChange="privacyChange" />
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+    <div class="fv-margin-top">
+      <appMessage 
+        :message="message"
+        :edit-buttons="isMine"
+        :open-button="false"
+        @remove="remove"
+        @privacyChange="privacyChange" />
+    </div>
+  </appInnerContent>
 </template>
 
 <script>
@@ -120,6 +111,10 @@ export default {
         message: 'Message not found!'
       }
     }
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `Received message for @${params.username}`
+    })
     return ret
   }
 }
