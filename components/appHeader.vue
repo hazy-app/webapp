@@ -66,27 +66,58 @@
     <fvMenu 
       v-model="menu"
       class="app-menu">
-      <fvList 
-        parent 
-        autofocus>
-        <fvListItem 
+      <div class="fv-row">
+        <div 
           v-if="!!$store.state.parsedToken.username" 
-          @click="$router.push('/'+$store.state.parsedToken.username+'/messages')"> <i class="fa fa-inbox" /> Inbox </fvListItem>
-        <fvListItem 
+          class="fv-col">
+          <nuxt-link 
+            
+            :to="'/'+$store.state.parsedToken.username+'/messages'" 
+            class="fv-button fv-block"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
+        </div>
+        <div 
           v-if="!!$store.state.parsedToken.username" 
-          @click="$router.push('/'+$store.state.parsedToken.username+'/polls')"> <i class="fa fa-check-circle-o" /> Polls </fvListItem>
-        <fvListItem @click="$router.push('/sent-messages')"> <i class="fa fa-commenting-o" /> Sent Messages </fvListItem>
-        <fvListItem @click="goToUrl('https://github.com/hazy-app/api')"> <i class="fa fa-github" /> Github </fvListItem>
-        <fvListItem 
+          class="fv-col">
+          <nuxt-link 
+            
+            :to="'/'+$store.state.parsedToken.username+'/polls'" 
+            class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+        </div>
+        <div class="fv-col">
+          <nuxt-link 
+            to="/sent-messages" 
+            class="fv-button fv-block"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
+        </div>
+        <div class="fv-col">
+          <a 
+            href="https://github.com/hazy-app/api" 
+            target="_blank"
+            class="fv-button fv-block"> <i class="fa fa-github" /> Github </a>
+        </div>
+        <div 
           v-if="!$store.state.parsedToken.username" 
-          @click="$router.push('/register')"> <i class="fa fa-user-plus" /> Register </fvListItem>
-        <fvListItem 
+          class="fv-col">
+          <nuxt-link 
+            
+            to="/register" 
+            class="fv-button fv-block"> <i class="fa fa-user-plus" /> Register </nuxt-link>
+        </div>
+        <div 
           v-if="!$store.state.parsedToken.username" 
-          @click="$router.push('/login')"> <i class="fa fa-sign-in" /> Login </fvListItem>
-        <fvListItem 
+          class="fv-col">
+          <nuxt-link 
+            
+            to="/login" 
+            class="fv-button fv-block"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+        </div>
+        <div 
           v-if="!!$store.state.parsedToken.username" 
-          @click="menu = false; logout()"> <i class="fa fa-sign-out" /> Logout </fvListItem>
-      </fvList>
+          class="fv-col">
+          <a 
+            click="menu = false; logout();"
+            class="fv-button fv-block"> <i class="fa fa-sign-out" /> Logout </a>
+        </div>
+      </div>
     </fvMenu>
   </fvHeader>
 </template>
@@ -125,10 +156,6 @@ export default {
     },
     startSearch() {
       this.$router.push(`/search/${this.searchQuery}`)
-    },
-    goToUrl(url) {
-      const win = window.open(url, '_blank')
-      win.focus()
     }
   }
 }
