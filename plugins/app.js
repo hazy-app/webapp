@@ -65,7 +65,7 @@ export default ({ app, store, router }, inject) => {
     return new Promise((resolve, reject) => {
       const timeout = window.requestIdleCallback
         ? window.requestIdleCallback
-        : action => setTimeout(action, 1000)
+        : action => setTimeout(action, 500)
       timeout(() => {
         Fingerprint.getPromise({
           excludes: { language: true, userAgent: true, enumerateDevices: true }
