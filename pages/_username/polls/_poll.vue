@@ -15,9 +15,11 @@
           <appPoll 
             :poll="poll"
             :edit-buttons="isMine"
-            :is-mine="isMine"
-            watch-as="user"
-            @remove="remove" />
+            :watch-as="isMine ? 'creator' : 'user'"
+            :open-button="false"
+            :vote-form="!isMine"
+            @remove="remove"
+            @vote="vote" />
         </div>
       </appInnerContent>
     </fvContent>
@@ -51,30 +53,44 @@ export default {
       ]
     }
   },
+  mounted() {
+    if (this.isMine) {
+      window.addEventListener('focus', this.sync)
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('focus', this.sync)
+  },
   methods: {
-    async reload() {
-      this.$root.$loading.start()
-      this.message = await this.$axios.$get(
-        `${process.env.BASE_URL}/users/${
-          this.$route.params.username
-        }/messages/${this.$route.params.message}`
+    async sync() {
+      this.poll = await this.$axios.$get(
+        `${process.env.BASE_URL}/users/${this.$route.params.username}/polls/${
+          this.$route.params.poll
+        }`
       )
-      this.$root.$loading.finish()
     },
-    async privacyChange(message) {
+    async vote(data) {
       this.$root.$loading.start()
       try {
-        const response = await this.$axios.$put(
-          `${process.env.BASE_URL}/users/${
+        const response = await this.$axios({
+          method: 'patch',
+          url: `${process.env.BASE_URL}/users/${
             this.$route.params.username
-          }/messages/${message.uuid}`,
-          {
-            public: message.public
+          }/polls/${data.uuid}`,
+          headers: {
+            'x-browser-fingerprint': data.fingerprint
+          },
+          data: {
+            choice: data.choice,
+            recaptcha: data.recaptcha
           }
-        )
-        this.message.public = message.public
+        })
+        this.$alerts.toast('Your vote has been successfully added!', 'success')
       } catch (e) {
-        this.message.public = !message.public
+        this.$alerts.toast(
+          (((e || {}).response || {}).data || {}).message || 'Unhandled Error!',
+          'failed'
+        )
       }
       this.$root.$loading.finish()
     },

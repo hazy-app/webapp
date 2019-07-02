@@ -15,7 +15,7 @@
           <appMessage 
             :message="message"
             :edit-buttons="isMine"
-            :is-mine="isMine"
+            :open-button="false"
             @remove="remove"
             @privacyChange="privacyChange" />
         </div>
