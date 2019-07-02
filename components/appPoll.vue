@@ -20,7 +20,7 @@
         <i class="fa fa-calendar" /> {{ poll.create_date | dateFromNow }}
       </span>
       <nuxt-link 
-        v-if="!editButtons && isMine" 
+        v-if="openButton" 
         :to="'/' + poll.creator + '/polls/' + poll.uuid" 
         class="fv-margin-start fv-link"> <i class="fa fa-commenting-o" /> Open </nuxt-link>
     </div>
@@ -29,26 +29,12 @@
         {{ poll.title }}
       </p>
     </div>
-    <div 
-      v-if="watchAs === 'creator'" 
-      class="fv-padding fv-border-top choices">
-      <fvFormElement 
-        label="Choices" 
-        inline>
-        <div 
-          v-for="(choice, index) in poll.choices"
-          :key="'choice' + index" 
-          class="fv-flex choice">
-          <span v-text="choice" />
-        </div>
-      </fvFormElement>
-    </div>
-    <div 
-      v-else-if="watchAs === 'user'" 
-      class="fv-padding fv-border-top choices">
-      <fvFormElement 
-        label="Choices" 
-        inline>
+    <fvForm 
+      v-if="voteForm" 
+      class="fv-padding fv-border-top choices"
+      method="POST"
+      @submit="vote">
+      <fvFormElement inline>
         <div 
           v-for="(choice, index) in poll.choices"
           :key="'choice' + index" 
@@ -60,6 +46,48 @@
             tabindex="-1"> {{ choice }} </fvCheck>
         </div>
       </fvFormElement>
+      <fvFormElement class="fv-col-12">
+        <div class="fv-text-center">
+          <no-ssr>
+            <appRecaptcha v-model="recaptcha" />
+          </no-ssr>
+        </div>
+      </fvFormElement>
+      <div class="fv-flex">
+        <fvButton 
+          type="submit" 
+          class="fv-primary fv-grow">
+          <i class="fa fa-check" /> Submit
+        </fvButton>
+      </div>
+    </fvForm>
+    <div 
+      v-else
+      class="fv-padding fv-border-top choices">
+      <div 
+        v-if="totalVotes > 0" 
+        class="choices-chart fv-border fv-shadow fv-radius">
+        <div 
+          v-for="(choice, index) in poll.choices"
+          :key="'choice' + index"
+          :style="{width: votesPercetange[index] + '%'}"
+          :title="choice" 
+          class="choice">
+          <b 
+            :style="{'direction': $calcDirection(choice)}" 
+            v-text="choice"/> {{ parseFloat(votesPercetange[index]).toFixed(1) }}%
+        </div>
+      </div>
+      <div 
+        v-else 
+        class="choices-chart fv-border fv-shadow fv-radius">
+        <div 
+          class="choice" 
+          style="width: 100%"> There is no vote yet! </div>
+      </div>
+      <p 
+        v-if="totalVotes > 0" 
+        class="fv-margin-top"> <label class="fv-text-light"> Total votes: </label> {{ totalVotes }} </p>
     </div>
   </div>
 </template>
@@ -76,11 +104,15 @@ export default {
       type: Object,
       default: () => ({})
     },
+    openButton: {
+      type: Boolean,
+      default: false
+    },
     editButtons: {
       type: Boolean,
       default: false
     },
-    isMine: {
+    voteForm: {
       type: Boolean,
       default: false
     },
@@ -92,7 +124,9 @@ export default {
   },
   data() {
     return {
-      selectedChoice: undefined
+      selectedChoice: undefined,
+      userFingerprint: undefined,
+      recaptcha: false
     }
   },
   computed: {
@@ -101,11 +135,12 @@ export default {
         (total, item) => (total = total + item),
         0
       )
+    },
+    votesPercetange() {
+      const totalVotes = this.totalVotes
+      totalVotes
+      return this.poll.answers.map(vote => (vote * 100) / totalVotes)
     }
-  },
-  async mounted() {
-    const fingerprint = await this.$getFingerprint()
-    console.log(fingerprint)
   },
   methods: {
     async remove() {
@@ -113,12 +148,17 @@ export default {
         'Are you sure you want to delete this poll?'
       )
       if (check) {
-        console.log(this.poll)
         this.$emit('remove', this.poll)
       }
     },
-    privacyChange() {
-      this.$emit('privacyChange', this.poll)
+    async vote() {
+      const fingerprint = await this.$getFingerprint()
+      this.$emit('vote', {
+        choice: this.selectedChoice,
+        fingerprint,
+        recaptcha: this.recaptcha,
+        uuid: this.poll.uuid
+      })
     }
   }
 }
@@ -140,6 +180,41 @@ export default {
   & .choices {
     & .choice {
       align-items: center;
+    }
+  }
+
+  & .choices-chart {
+    height: 3em;
+    overflow: hidden;
+    line-height: 1.3;
+    display: flex;
+    font-size: 0.88em;
+
+    & .choice {
+      background: #f1f1f1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      width: 0;
+      border-left: solid 1px #e0e0e0;
+      overflow: hidden;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      &:nth-child(odd) {
+        background: #f9f9f9;
+      }
+
+      & b {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+      }
     }
   }
 }
