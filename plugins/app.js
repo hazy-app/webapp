@@ -61,7 +61,6 @@ export default ({ app, store, router }, inject) => {
           excludes: { language: true, userAgent: true, enumerateDevices: true }
         })
           .then(data => {
-            // console.log(JSON.stringify(data, '', 2))
             resolve(sha256(JSON.stringify(data)))
           })
           .catch(reject)
