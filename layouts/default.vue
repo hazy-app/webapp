@@ -43,7 +43,7 @@ h5 {
   display: block !important;
 }
 .app-menu {
-  min-width: 180px;
-  /* width: 180px; */
+  min-width: 200px;
+  width: 200px;
 }
 </style>
