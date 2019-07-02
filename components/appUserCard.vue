@@ -15,6 +15,23 @@
         </span>
       </div>
     </div>
+    <div class="fv-border-top fv-row">
+      <div class="fv-col">
+        <nuxt-link 
+          :to="'/' + user.username" 
+          class="fv-button fv-block"> <i class="fa fa-send" /> Send Anounymous Message </nuxt-link>
+      </div>
+      <div class="fv-col">
+        <nuxt-link 
+          :to="'/' + user.username + '/messages'" 
+          class="fv-button fv-block"> <i class="fa fa-inbox" /> Messages </nuxt-link>
+      </div>
+      <div class="fv-col">
+        <nuxt-link 
+          :to="'/' + user.username + '/polls'" 
+          class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+      </div>
+    </div>
   </div>
 </template>
 
