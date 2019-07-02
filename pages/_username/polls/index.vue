@@ -2,9 +2,7 @@
   <fvMain>
     <fvContent>
       <appHeader>
-        <template 
-          v-if="isMine" 
-          slot="title"> Polls </template>
+        <template slot="title"> Polls </template>
         <template 
           slot="description"> Created polls by <appAccountLink 
             :username="user.username" 
@@ -33,8 +31,10 @@
           v-for="poll in polls"
           :key="'poll' + poll._id" 
           :poll="poll"
-          :is-mine="isMine"
-          watch-as="creator"
+          :edit-buttons="false"
+          :open-button="true"
+          :vote-form="false"
+          :watch-as="isMine ? 'creator' : 'user'"
           class="fv-margin-bottom" />
         <div class="fv-text-center">
           <fvButton 
