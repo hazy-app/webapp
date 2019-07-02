@@ -1,10 +1,14 @@
 <template>
-  <a 
-    v-if="clickable" 
-    class="profile-link"
-    @click="profileMenu = !profileMenu">
-    @{{ username }}
+  <span>
+    <a 
+      :class="{'non-clickable': !clickable}"
+      :tabindex="clickable ? 0 : -1"
+      class="profile-link"
+      @click="onClick">
+      @{{ username }}
+    </a>
     <fvMenu 
+      v-if="isMounted"
       v-model="profileMenu" 
       class="app-menu">
       <div class="fv-border-bottom fv-padding-sm fv-text-center fv-text-light fv-font-lg">
@@ -29,10 +33,7 @@
         </div>
       </div>
     </fvMenu>
-  </a>
-  <span 
-    v-else 
-    class="profile-link non-clickable"> @{{ username }} </span>
+  </span>
 </template>
 
 <script>
@@ -49,12 +50,18 @@ export default {
   },
   data() {
     return {
-      profileMenu: false
+      profileMenu: false,
+      isMounted: false
     }
   },
-  computed: {
-    profileLink() {
-      return `/${this.username}`
+  mounted() {
+    this.isMounted = true
+  },
+  methods: {
+    onClick() {
+      if (this.clickable) {
+        this.profileMenu = !this.profileMenu
+      }
     }
   }
 }
