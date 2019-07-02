@@ -3,7 +3,11 @@
     class="fv-padding-sm" 
     sm>
     <div class="fv-padding-sm" />
-    <div class="fv-margin-top">
+    <appAccountAccessLinks 
+      v-if="!isMine"
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
+    <div>
       <appPollCreator 
         :user="$route.params.username"
         :title.sync="poll.title" 
@@ -16,11 +20,13 @@
 <script>
 import appPollCreator from '~/components/appPollCreator.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
     appPollCreator,
-    appAccountLink
+    appAccountLink,
+    appAccountAccessLinks
   },
   data() {
     return {

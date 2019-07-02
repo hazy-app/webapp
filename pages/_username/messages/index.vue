@@ -13,6 +13,10 @@
           @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
       </div>
     </div>
+    <appAccountAccessLinks 
+      v-if="!isMine"
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
 
     <appNothingToShow 
       v-if="messages.length === 0" 
@@ -40,12 +44,14 @@ import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appMessage from '~/components/appMessage.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
     appAccountLink,
     appMessage,
-    appNothingToShow
+    appNothingToShow,
+    appAccountAccessLinks
   },
   data() {
     return {

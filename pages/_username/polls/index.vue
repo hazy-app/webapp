@@ -13,6 +13,10 @@
           class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
       </div>
     </div>
+    <appAccountAccessLinks 
+      v-if="!isMine"
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
 
     <appNothingToShow 
       v-if="polls.length === 0" 
@@ -42,12 +46,14 @@ import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appPoll from '~/components/appPoll.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
     appAccountLink,
     appPoll,
-    appNothingToShow
+    appNothingToShow,
+    appAccountAccessLinks
   },
   data() {
     return {

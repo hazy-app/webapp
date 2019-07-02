@@ -15,9 +15,9 @@
       </div>
     </div>
     <appAccountAccessLinks 
+      v-if="!isMine"
       :username="$route.params.username" 
-      class="fv-border fv-shadow fv-radius fv-margin-bottom" 
-      mention />
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
     <appMessageSender 
       :user="$route.params.username"
       class="fv-border fv-radius fv-shadow" 

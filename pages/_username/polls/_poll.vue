@@ -14,16 +14,18 @@
           @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
       </div>
     </div>
-    <div class="fv-margin-top">
-      <appPoll 
-        :poll="poll"
-        :edit-buttons="isMine"
-        :watch-as="isMine ? 'creator' : 'user'"
-        :open-button="false"
-        :vote-form="!isMine"
-        @remove="remove"
-        @vote="vote" />
-    </div>
+    <appAccountAccessLinks 
+      v-if="!isMine"
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
+    <appPoll 
+      :poll="poll"
+      :edit-buttons="isMine"
+      :watch-as="isMine ? 'creator' : 'user'"
+      :open-button="false"
+      :vote-form="!isMine"
+      @remove="remove"
+      @vote="vote" />
   </appInnerContent>
 </template>
 
@@ -31,11 +33,13 @@
 import copy from 'clipboard-copy'
 import appPoll from '~/components/appPoll.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
     appPoll,
-    appAccountLink
+    appAccountLink,
+    appAccountAccessLinks
   },
   data() {
     return {

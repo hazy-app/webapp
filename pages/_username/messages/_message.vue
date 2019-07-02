@@ -3,15 +3,17 @@
     class="fv-padding-sm" 
     sm>
     <div class="fv-padding-sm" />
+    <appAccountAccessLinks 
+      v-if="!isMine"
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
 
-    <div class="fv-margin-top">
-      <appMessage 
-        :message="message"
-        :edit-buttons="isMine"
-        :open-button="false"
-        @remove="remove"
-        @privacyChange="privacyChange" />
-    </div>
+    <appMessage 
+      :message="message"
+      :edit-buttons="isMine"
+      :open-button="false"
+      @remove="remove"
+      @privacyChange="privacyChange" />
   </appInnerContent>
 </template>
 
@@ -19,11 +21,13 @@
 import copy from 'clipboard-copy'
 import appMessage from '~/components/appMessage.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
     appMessage,
-    appAccountLink
+    appAccountLink,
+    appAccountAccessLinks
   },
   data() {
     return {
