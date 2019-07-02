@@ -1,10 +1,35 @@
 <template>
-  <nuxt-link 
+  <a 
     v-if="clickable" 
-    :to="profileLink"
-    class="profile-link">
+    class="profile-link"
+    @click="profileMenu = !profileMenu">
     @{{ username }}
-  </nuxt-link>
+    <fvMenu 
+      v-model="profileMenu" 
+      class="app-menu">
+      <div class="fv-border-bottom fv-padding-sm fv-text-center fv-text-light fv-font-lg">
+        <h2> <i class="fa fa-user-circle-o" /> </h2>
+        <p> @{{ username }} </p>
+      </div>
+      <div class="fv-row">
+        <div class="fv-col">
+          <nuxt-link 
+            :to="'/' + username" 
+            class="fv-button fv-block"> <i class="fa fa-send" /> Send Message </nuxt-link>
+        </div>
+        <div class="fv-col">
+          <nuxt-link 
+            :to="'/' + username + '/messages'" 
+            class="fv-button fv-block"> <i class="fa fa-inbox" /> Messages </nuxt-link>
+        </div>
+        <div class="fv-col">
+          <nuxt-link 
+            :to="'/' + username + '/polls'" 
+            class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+        </div>
+      </div>
+    </fvMenu>
+  </a>
   <span 
     v-else 
     class="profile-link non-clickable"> @{{ username }} </span>
@@ -20,6 +45,11 @@ export default {
     clickable: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      profileMenu: false
     }
   },
   computed: {
