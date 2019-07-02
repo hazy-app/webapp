@@ -40,9 +40,8 @@
           :key="'msg' + message._id" 
           :message="message"
           :edit-buttons="false"
-          :is-mine="isMine"
-          class="fv-margin-bottom"
-          @reply="gotoMessage"/>
+          :open-button="true"
+          class="fv-margin-bottom" />
         <div class="fv-text-center">
           <fvButton 
             v-if="hasNext && !loading" 
