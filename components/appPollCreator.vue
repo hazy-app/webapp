@@ -55,9 +55,9 @@
           </no-ssr>
         </div>
       </fvFormElement>
-      <div class="fv-col-12 fv-text-light">
+      <!-- <div class="fv-col-12 fv-text-light">
         <p> <i class="fa fa-info-circle" /> You can deactive this poll anytime you want! </p>
-      </div>
+      </div> -->
       <div class="fv-flex fv-col-12">
         <fvButton 
           type="submit" 
