@@ -10,7 +10,17 @@
         class="fv-padding-sm" 
         sm>
         <div class="fv-padding-sm" />
-
+        <div 
+          v-if="isMine"
+          class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+          <p> <i class="fa fa-info-circle" /> Share your poll link to your friends to receive anonymous votes! </p>
+          <div  
+            class="fv-margin-top">
+            <fvButton 
+              class="fv-primary" 
+              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+          </div>
+        </div>
         <div class="fv-margin-top">
           <appPoll 
             :poll="poll"
@@ -85,6 +95,7 @@ export default {
             recaptcha: data.recaptcha
           }
         })
+        await this.sync()
         this.$alerts.toast('Your vote has been successfully added!', 'success')
       } catch (e) {
         this.$alerts.toast(
