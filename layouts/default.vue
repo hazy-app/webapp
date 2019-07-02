@@ -16,20 +16,7 @@
       class="app-menu app-user-profile-popup" 
       @input="$store.commit('ui/closeUserPopup')"
       @click.native="$store.commit('ui/closeUserPopup')">
-      <div class="fv-border-bottom fv-padding-sm fv-text-center fv-text-light fv-font-lg">
-        <h2> <i 
-          :class="$store.state.ui.userPopupData === 'anonymous' ? 'fa-user-secret' : 'fa-user'" 
-          class="fa" /> </h2>
-        <p> @{{ $store.state.ui.userPopupData }} </p>
-      </div>
-      <appAccountAccessLinks 
-        v-if="$store.state.ui.userPopupData !== 'anonymous'" 
-        :username="$store.state.ui.userPopupData" />
-      <div 
-        v-else 
-        class="fv-padding">
-        We don't have any data from this person.
-      </div>
+      <appAccountAccessLinks :username="$store.state.ui.userPopupData" />
     </fvMenu>
   </div>
 </template>
