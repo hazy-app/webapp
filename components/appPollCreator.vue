@@ -43,7 +43,9 @@
         </div>
         <div class="fv-flex choice">
           <div class="fv-grow" />
-          <fvButton @click.prevent="addChoice"> <i class="fa fa-plus" /> </fvButton>
+          <fvButton 
+            :disabled="choices.length > 8" 
+            @click.prevent="addChoice"> <i class="fa fa-plus" /> </fvButton>
         </div>
       </fvFormElement>
       <fvFormElement class="fv-col-12">
