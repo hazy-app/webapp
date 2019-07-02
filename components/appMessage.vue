@@ -39,7 +39,7 @@
         <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
       </span>
       <nuxt-link 
-        v-if="!editButtons && isMine" 
+        v-if="openButton" 
         :to="'/' + message.receiver + '/messages/' + message.uuid" 
         class="fv-margin-start fv-link"> <i class="fa fa-commenting-o" /> Open </nuxt-link>
     </div>
@@ -106,7 +106,7 @@ export default {
       type: Boolean,
       default: false
     },
-    isMine: {
+    openButton: {
       type: Boolean,
       default: false
     },
