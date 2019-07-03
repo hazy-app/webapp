@@ -1,7 +1,5 @@
 <template>
-  <appInnerContent 
-    sm 
-    class="fv-padding-sm">
+  <appInnerContent class="fv-padding-sm">
     <div class="fv-padding-sm" />
     <appNothingToShow 
       v-if="users.length === 0" 
