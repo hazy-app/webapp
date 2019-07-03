@@ -3,6 +3,9 @@
     class="fv-padding-sm"
     sm>
     <div class="fv-padding-sm" />
+    <appAccountAccessLinks 
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
     <div
       v-if="isMine" 
       class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
@@ -13,11 +16,6 @@
           class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
       </div>
     </div>
-    <appAccountAccessLinks 
-      v-if="!isMine"
-      :username="$route.params.username" 
-      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
-
     <appNothingToShow 
       v-if="polls.length === 0" 
     />

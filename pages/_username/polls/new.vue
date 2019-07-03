@@ -4,7 +4,6 @@
     sm>
     <div class="fv-padding-sm" />
     <appAccountAccessLinks 
-      v-if="!isMine"
       :username="$route.params.username" 
       class="fv-border fv-shadow fv-radius fv-margin-bottom" />
     <div>

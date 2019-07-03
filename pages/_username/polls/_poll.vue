@@ -3,6 +3,9 @@
     class="fv-padding-sm" 
     sm>
     <div class="fv-padding-sm" />
+    <appAccountAccessLinks 
+      :username="$route.params.username" 
+      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
     <div 
       v-if="isMine"
       class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
@@ -14,10 +17,6 @@
           @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
       </div>
     </div>
-    <appAccountAccessLinks 
-      v-if="!isMine"
-      :username="$route.params.username" 
-      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
     <appPoll 
       :poll="poll"
       :edit-buttons="isMine"

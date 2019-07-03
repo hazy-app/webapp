@@ -18,14 +18,24 @@
       @click.native="$store.commit('ui/closeUserPopup')">
       <appAccountAccessLinks :username="$store.state.ui.userPopupData" />
     </fvMenu>
+    <fvMenu 
+      :value="$store.state.ui.loggedInUserPopup"
+      class="app-menu"
+      @input="$store.commit('ui/closeLoggedInUserPopup')"
+      @click.native="$store.commit('ui/closeLoggedInUserPopup')">
+      <appAccountActionsLinks :username="$store.state.parsedToken.username || undefined" />
+    </fvMenu>
   </div>
 </template>
 
 <script>
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appAccountActionsLinks from '@/components/appAccountActionsLinks.vue'
+
 export default {
   components: {
-    appAccountAccessLinks
+    appAccountAccessLinks,
+    appAccountActionsLinks
   }
 }
 </script>
@@ -74,5 +84,13 @@ h5 {
 .app-menu {
   min-width: 200px;
   width: 200px;
+}
+
+.fv-button {
+  &.link-active {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: solid 2px #000 !important;
+  }
 }
 </style>
