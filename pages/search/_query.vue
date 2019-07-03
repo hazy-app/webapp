@@ -57,6 +57,9 @@ export default {
     } catch (e) {
       ret.users = []
     }
+    if (ret.users.length === 1) {
+      return redirect(`/${ret.users[0].username}`)
+    }
     store.commit('ui/setHeader', {
       title: 'Search',
       description: `Search result for '${params.query}'`
