@@ -13,33 +13,33 @@
         class="fv-col" >
         <nuxt-link 
           :to="'/' + username + '/messages'" 
-          class="fv-button fv-block"> <i class="fa fa-user-circle" /> View Profile </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="user" /> View Profile </nuxt-link>
       </div>
       <div class="fv-col" >
         <nuxt-link 
           :to="'/sent-messages'" 
-          class="fv-button fv-block"> <i class="fa fa-user-secret" /> Sent Messages </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="lock" /> Sent Messages </nuxt-link>
       </div>
       <div 
         v-if="username === 'anonymous'" 
         class="fv-col">
         <nuxt-link 
           to="/register" 
-          class="fv-button fv-block"> <i class="fa fa-user-plus" /> Register </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="user-plus" /> Register </nuxt-link>
       </div>
       <div 
         v-if="username === 'anonymous'" 
         class="fv-col">
         <nuxt-link 
           to="/login" 
-          class="fv-button fv-block"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="log-in" /> Login </nuxt-link>
       </div>
       <div 
         v-if="username !== 'anonymous'" 
         class="fv-col">
         <a 
           class="fv-button fv-block"
-          @click="logout"> <i class="fa fa-sign-out" /> Logout </a>
+          @click="logout"> <appIcon icon="log-out" /> Logout </a>
       </div>
     </div>
   </div>
@@ -47,10 +47,12 @@
 
 <script>
 import appAvatar from '@/components/appAvatar.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appAvatar
+    appAvatar,
+    appIcon
   },
   props: {
     username: {

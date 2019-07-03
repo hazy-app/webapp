@@ -18,13 +18,13 @@
       :clickable="false" 
       class="fv-button"
       @click.native="$store.commit('ui/openLoggedInUserPopup')">
-      <i class="fa fa-angle-down" />
+      <appIcon icon="chevron-down" />
     </appAccountLink>
     <!-- </a> -->
     <a 
       href="https://github.com/hazy-app"
       target="_blank"
-      class="fv-button fv-hidden-xs fv-hidden-sm"> <i class="fa fa-github" /> Github </a>
+      class="fv-button fv-hidden-xs fv-hidden-sm"> <appIcon icon="github" /> Github </a>
   </fvHeader>
 </template>
 
@@ -34,6 +34,7 @@ import appAccountLink from '~/components/appAccountLink.vue'
 import appAvatar from '~/components/appAvatar.vue'
 import appAccountActionsLinks from '~/components/appAccountActionsLinks.vue'
 import appSearchButton from '~/components/appSearchButton.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
@@ -41,7 +42,8 @@ export default {
     appAccountLink,
     appAvatar,
     appAccountActionsLinks,
-    appSearchButton
+    appSearchButton,
+    appIcon
   }
 }
 </script>

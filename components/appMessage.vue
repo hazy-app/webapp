@@ -13,7 +13,7 @@
       <span 
         v-if="editButtons"
         class="fv-margin-end">
-        <i class="fa fa-globe" />: <fvSwitch 
+        <appIcon icon="globe" />: <fvSwitch 
           :value="message.public" 
           class="fv-size-xs" 
           @input="privacyChange"/>
@@ -22,7 +22,7 @@
         v-else-if="message.public"
         :title="'This message is public!'"
         class="fv-margin-end">
-        <i class="fa fa-globe"/> Public
+        <appIcon icon="globe" /> <span class="fv-hidden-xs"> Public </span>
       </span>
       <span 
         v-if="editButtons"
@@ -30,16 +30,16 @@
         <a 
           class="fv-link fv-text-danger"
           @click="remove">
-          <i class="fa fa-trash" /> <span class="fv-hidden-xs"> Remove </span>
+          <appIcon icon="trash" /> <span class="fv-hidden-xs"> Remove </span>
         </a>
       </span>
       <span :title="message.create_date | dateReadable">
-        <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
+        <appIcon icon="calendar" /> {{ message.create_date | dateFromNow }}
       </span>
       <nuxt-link 
         v-if="openButton" 
         :to="'/' + message.receiver + '/messages/' + message.uuid" 
-        class="fv-margin-start fv-link"> <i class="fa fa-commenting-o" /> Open </nuxt-link>
+        class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
     </div>
     <div class="fv-padding">
       <p :style="{'direction': $calcDirection(message.text)}">
@@ -55,8 +55,7 @@
           :message="message.uuid" 
           :recaptcha="false"
           message-label="Reply to message"
-          button-text="Reply"
-          button-icon="fa fa-reply"/>
+          button-text="Reply" />
       </div>
       <div 
         v-else-if="message.reply_date"
@@ -67,7 +66,7 @@
           </span>
           <div class="fv-grow" />
           <span :title="message.reply_date | dateReadable">
-            <i class="fa fa-calendar" /> {{ message.reply_date | dateFromNow }}
+            <appIcon icon="calendar" /> {{ message.reply_date | dateFromNow }}
           </span>
         </div>
         <div class="fv-padding">
@@ -79,9 +78,9 @@
       <div 
         v-else 
         class="fv-padding reply-body fv-flex">
-        <p class="fv-text-light">
+        <div class="fv-text-light">
           <appAccountLink :username="message.receiver" /> didn't replied yet.
-        </p>
+        </div>
         <span class="fv-grow" />
       </div>
     </div>
@@ -89,11 +88,13 @@
 </template>
 
 <script>
-import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountLink from '@/components/appAccountLink.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appAccountLink
+    appAccountLink,
+    appIcon
   },
   props: {
     message: {
@@ -145,6 +146,7 @@ export default {
     user-select: none;
     display: flex;
     flex-direction: row;
+    // font-weight: bold;
 
     & .fv-switch {
       top: -0.35em;

@@ -33,9 +33,9 @@
       </div>
     </fvFormElement>
     <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
-      <p v-if="saveButton"> <i class="fa fa-info-circle" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
-      <p v-if="typeof message === 'undefined'"> <i class="fa fa-info-circle" /> @{{ user }} never understand who you are! </p>
-      <p v-if="!$store.state.parsedToken.username"> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
+      <p v-if="saveButton"> <appIcon icon="info" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
+      <p v-if="typeof message === 'undefined'"> <appIcon icon="info" /> @{{ user }} never understand who you are! </p>
+      <p v-if="!$store.state.parsedToken.username"> <appIcon icon="info" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 
         to="/register"> Click here </nuxt-link> to register! </p>
     </div>
@@ -43,14 +43,19 @@
       <fvButton 
         type="submit" 
         class="fv-primary fv-grow">
-        <i :class="buttonIcon" /> {{ buttonText }}
+        <appIcon icon="send" /> {{ buttonText }}
       </fvButton>
     </div>
   </fvForm>
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   props: {
     user: {
       type: String,
@@ -67,10 +72,6 @@ export default {
     buttonText: {
       type: String,
       default: 'Send'
-    },
-    buttonIcon: {
-      type: String,
-      default: 'fa fa-send'
     },
     saveButton: {
       type: Boolean,

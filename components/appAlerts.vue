@@ -5,9 +5,9 @@
       :timeout="toastTimeout"
       class="app-toast fv-no-wrap"
       @input="$emit('toastClose', false)">
-      <i 
+      <!-- <i 
         :class="{'fa-check-circle': toastType === 'success', 'fa-exclamation-circle': toastType === 'error', 'fa-commenting-o': toastType === 'message'}" 
-        class="fa fv-font-lg" />
+        class="fa fv-font-lg" /> -->
       <span> {{ toastContent }} </span>
     </fvToast>
     <fvDialog 

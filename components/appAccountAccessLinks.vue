@@ -15,19 +15,19 @@
         <nuxt-link 
           :to="'/' + username" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <i class="fa fa-send" /> Send Message </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="send" /> Send Message </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/messages'" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <i class="fa fa-inbox" /> Messages </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="inbox" /> Messages </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/polls'" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="check-square" /> Polls </nuxt-link>
       </div>
     </div>
     <div 
@@ -40,10 +40,12 @@
 
 <script>
 import appAvatar from '@/components/appAvatar.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appAvatar
+    appAvatar,
+    appIcon
   },
   props: {
     username: {

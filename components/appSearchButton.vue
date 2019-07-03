@@ -3,7 +3,7 @@
     :class="{'searching': searchQuery !== null }"
     class="fv-button search-btn"
     tabindex="0"
-    @click="enterSearch"> <i class="fa fa-search" /> <span 
+    @click="enterSearch"> <appIcon icon="search" /> <span 
       v-if="searchQuery === null" 
       ref="searchBox"
       class="fv-hidden-sm fv-hidden-xs"> Search </span><input 
@@ -18,7 +18,12 @@
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   data() {
     return {
       searchQuery: null
