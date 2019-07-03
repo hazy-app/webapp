@@ -31,7 +31,8 @@
     "modela": "^0.4.0",
     "nuxt": "^2.2.0",
     "nuxt-user-agent": "^1.0.2",
-    "timeago.js": "^4.0.0-beta.1"
+    "timeago.js": "^4.0.0-beta.1",
+    "vue-svg-loader": "^0.12.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
