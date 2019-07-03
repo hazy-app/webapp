@@ -6,17 +6,21 @@
     <div class="vertical-line fv-border-start" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
-      <p class="fv-text-light"> <slot name="description"/> </p>
+      <p class="fv-text-light fv-hidden-xs"> <slot name="description"/> </p>
     </div>
 
     <appSearchButton />
-    <a 
+    <!-- <a
       class="fv-button" 
-      @click="$store.commit('ui/openLoggedInUserPopup')">
-      <appAccountLink 
-        :username="$store.state.parsedToken.username || undefined" 
-        :clickable="false"/> <i class="fa fa-angle-down" />
-    </a>
+      > -->
+    <appAccountLink
+      :username="$store.state.parsedToken.username || undefined"
+      :clickable="false" 
+      class="fv-button"
+      @click.native="$store.commit('ui/openLoggedInUserPopup')">
+      <i class="fa fa-angle-down" />
+    </appAccountLink>
+    <!-- </a> -->
     <a 
       href="https://github.com/hazy-app"
       target="_blank"
