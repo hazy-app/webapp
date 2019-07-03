@@ -46,25 +46,27 @@ export default {
 .header {
   background: transparent;
 
-  & > /deep/ header {
+  & /deep/ header {
     padding: 0.4em 1em;
-  }
-  & .vertical-line {
-    margin: 0 10px 0 4px;
-    height: 2.5em;
-    width: 1px;
-  }
-  & .title {
-    line-height: 1.3;
 
-    & > p {
-      font-size: 0.9em;
+    & .vertical-line {
+      margin: 0 10px 0 4px;
+      height: 2.5em;
+      width: 1px;
     }
-  }
-  & .fv-button {
-    // padding: 0 0.7em;
-    margin: 0 0 0 4px;
-    min-width: 40px;
+
+    & .title {
+      line-height: 1.3;
+
+      & > p {
+        font-size: 0.9em;
+      }
+    }
+
+    & .fv-button {
+      margin: 0 0 0 4px;
+      min-width: 40px;
+    }
   }
 }
 </style>
