@@ -91,11 +91,7 @@ const ret = {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Lobster'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Quicksand'
+        href: 'https://fonts.googleapis.com/css?family=Exo:300&display=swap'
       }
     ]
   },

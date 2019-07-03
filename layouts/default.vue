@@ -50,23 +50,16 @@ body,
   height: 100%;
   line-height: 1.5;
   font-size: 14px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Exo', sans-serif;
 }
-/* h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family: 'Lobster', cursive;
-  } */
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
 }
 h2 {
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 1.6em;
+  font-size: 1.3em;
 }
 h4 {
   font-size: 1.2em;
