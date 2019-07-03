@@ -20,13 +20,13 @@
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/messages'" 
-          active-class="link-active"
+          exact-active-class="link-active"
           class="fv-button fv-block"> <i class="fa fa-inbox" /> Messages </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/polls'" 
-          active-class="link-active"
+          exact-active-class="link-active"
           class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
       </div>
     </div>
