@@ -204,7 +204,7 @@ export default {
   }
 
   & .choices-chart {
-    height: 3em;
+    height: 3.6em;
     overflow: hidden;
     line-height: 1.3;
     display: flex;
