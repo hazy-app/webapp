@@ -6,17 +6,24 @@
     <appNothingToShow 
       v-if="users.length === 0" 
     />
-    <appUserCard 
-      v-for="user in users" 
-      :user="user" 
-      :key="user.username"
-      class="fv-margin-bottom" />
-  </appInnerContent>
+    <div class="fv-row fv-no-padding">
+      <div 
+        v-for="user in users" 
+        :key="user.username" 
+        class="fv-col">
+        <appAccountAccessLinks 
+        
+          :username="user.username" 
+        
+          class="fv-border fv-shadow fv-radius" />
+      </div>
+  </div></appInnerContent>
 </template>
 
 <script>
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '~/components/appAccountAccessLinks.vue'
 import appUserCard from '~/components/appUserCard.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
 
@@ -24,7 +31,8 @@ export default {
   components: {
     appAccountLink,
     appUserCard,
-    appNothingToShow
+    appNothingToShow,
+    appAccountAccessLinks
   },
   data() {
     return {
@@ -53,7 +61,7 @@ export default {
     }
     store.commit('ui/setHeader', {
       title: 'Search',
-      description: `Search result for '${params}'`
+      description: `Search result for '${params.query}'`
     })
     return ret
   }
