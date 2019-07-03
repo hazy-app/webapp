@@ -15,7 +15,7 @@
       @click="$store.commit('ui/openLoggedInUserPopup')">
       <appAccountLink 
         :username="$store.state.parsedToken.username || undefined" 
-        :clickable="false"/>
+        :clickable="false"/> <i class="fa fa-angle-down" />
     </a>
     <a 
       href="https://github.com/hazy-app"
