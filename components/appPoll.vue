@@ -55,7 +55,6 @@
           <div class="fv-padding">
             <p> <label class="fv-text-light"> Votes: </label> <span> {{ poll.answers[infoPopupItem] }}</span> </p>
             <p> <label class="fv-text-light"> Votes(%): </label> <span> {{ parseFloat(votesPercetange[infoPopupItem]).toFixed(2) }}%</span> </p>
-            <p> <label class="fv-text-light"> Total Votes: </label> <span> {{ totalVotes }}</span> </p>
           </div>
         </fvMenu>
       </div>
