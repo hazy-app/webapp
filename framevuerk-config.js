@@ -11,7 +11,7 @@ const baseConfig = {
   'footer-bg-color': '#000',
   padding: '0.8em',
   'transition-speed': '0.35s',
-  'border-radius': '5px',
+  'border-radius': '15px',
   'shadow-size': '6px'
 }
 
