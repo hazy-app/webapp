@@ -50,7 +50,7 @@ body,
   height: 100%;
   line-height: 1.5;
   font-size: 14px;
-  font-family: 'Exo', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 h1 {
   font-size: 2em;

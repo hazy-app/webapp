@@ -91,7 +91,7 @@ const ret = {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Exo:300&display=swap'
+        href: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap'
       }
     ]
   },
