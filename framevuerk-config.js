@@ -10,7 +10,7 @@ module.exports = {
   'header-bg-color': '#000',
   'sidebar-bg-color': '#000',
   'footer-bg-color': '#000',
-  padding: '0.8em',
+  padding: '1em',
   'transition-speed': '0.35s',
   'border-radius': '0',
   'shadow-size': '0'
