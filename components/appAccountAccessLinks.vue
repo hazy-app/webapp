@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="fv-border-bottom fv-padding-sm fv-text-center fv-text-light fv-font-lg">
-      <h2> <i 
-        :class="username === 'anonymous' ? 'fa-user-secret' : 'fa-user'" 
-        class="fa" /> </h2>
+      <appAvatar 
+        :username="username" 
+        size="48px"/>
       <p> @{{ username }} </p>
     </div>
     <div 
@@ -37,7 +37,12 @@
 </template>
 
 <script>
+import appAvatar from '@/components/appAvatar.vue'
+
 export default {
+  components: {
+    appAvatar
+  },
   props: {
     username: {
       type: String,
