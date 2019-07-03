@@ -88,9 +88,12 @@ h5 {
 
 .fv-button {
   &.link-active {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-bottom: solid 2px #000 !important;
+    border-color: #000;
+    color: #000;
+
+    &:hover {
+      background-color: #fff;
+    }
   }
 }
 </style>
