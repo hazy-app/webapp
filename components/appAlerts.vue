@@ -14,6 +14,7 @@
       :value="confirmVisible"
       class="fv-col-xs-10 fv-col-sm-8 fv-col-md-6 fv-col-xl-4 fv-no-padding"
       @input="$emit('confirmClose', false)">
+      <label class="fv-padding fv-control-label"> Confirm </label>
       <p class="fv-padding"> {{ confirmContent }} </p>
       <div class="fv-padding fv-flex fv-grow">
         <div class="fv-grow"/>
