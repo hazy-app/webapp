@@ -13,18 +13,16 @@
       <span 
         v-if="editButtons"
         class="fv-margin-end">
-        <i class="fa fa-eye" />: <fvSwitch 
+        <i class="fa fa-globe" />: <fvSwitch 
           :value="message.public" 
           class="fv-size-xs" 
           @input="privacyChange"/>
       </span>
       <span 
-        v-else
-        :title="'This message is ' + (message.public? 'public':'private') + '!'"
+        v-else-if="message.public"
+        :title="'This message is public!'"
         class="fv-margin-end">
-        <i 
-          :class="message.public ? 'fa-eye' : 'fa-eye-slash fv-text-light'" 
-          class="fa"/>
+        <i class="fa fa-globe"/> Public
       </span>
       <span 
         v-if="editButtons"

@@ -1,30 +1,32 @@
 <template>
-  <div>
-    <div class="fv-border-bottom fv-padding-sm fv-text-center fv-text-light fv-font-lg">
+  <div class="app-account-access-links">
+    <div class="fv-border-bottom fv-padding fv-text-center fv-font-lg">
       <appAvatar 
         :username="username" 
         size="48px"/>
-      <p> @{{ username }} </p>
+      <b class="fv-block"> {{ username }} </b>
     </div>
     <div 
       v-if="username !== 'anonymous'" 
       class="fv-row">
-      <div class="fv-col">
+      <div 
+        v-if="!isMine" 
+        class="fv-col">
         <nuxt-link 
           :to="'/' + username" 
-          exact-active-class="fv-disabled"
+          exact-active-class="link-active"
           class="fv-button fv-block"> <i class="fa fa-send" /> Send Message </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/messages'" 
-          exact-active-class="fv-disabled"
-          class="fv-button fv-block"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
+          active-class="link-active"
+          class="fv-button fv-block"> <i class="fa fa-inbox" /> Messages </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/polls'" 
-          exact-active-class="fv-disabled"
+          active-class="link-active"
           class="fv-button fv-block"> <i class="fa fa-check-circle-o" /> Polls </nuxt-link>
       </div>
     </div>
@@ -47,6 +49,14 @@ export default {
     username: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    isMine() {
+      return (
+        this.$store.state.parsedToken.username &&
+        this.username === this.$store.state.parsedToken.username
+      )
     }
   }
 }

@@ -2,9 +2,7 @@
   <div class="app-message fv-border fv-radius fv-shadow">
     <div class="fv-padding fv-flex header">
       <span>
-        <appAccountLink 
-          :username="poll.creator" 
-          clickable/>
+        <appAccountLink :username="poll.creator"/>
       </span>
       <div class="fv-grow" />
       <span 

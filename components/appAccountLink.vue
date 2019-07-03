@@ -6,7 +6,7 @@
     @click="onClick">
     <appAvatar 
       :username="username" 
-      size="32px" /> <span v-if="showUsername"> @{{ username }} </span>
+      size="18px" /> <span class="fv-hidden-xs fv-hidden-sm"> {{ username }} </span>
   </a>
 </template>
 
@@ -24,16 +24,14 @@ export default {
     },
     clickable: {
       type: Boolean,
-      default: false
-    },
-    showUsername: {
-      type: Boolean,
       default: true
     }
   },
   methods: {
     onClick() {
-      this.$store.commit('ui/openUserPopup', this.username)
+      if (this.clickable) {
+        this.$store.commit('ui/openUserPopup', this.username)
+      }
     }
   }
 }

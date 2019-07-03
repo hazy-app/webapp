@@ -1,10 +1,10 @@
 <template>
   <fvAvatar 
-    :name="username" 
-    :size="size"
+    :name="username"
+    :size="size" 
     :style="{ backgroundColor: bgColor }"
     :class="{ anonymous: username === 'anonymous'}"
-    :src="username === 'anonymous' ? '/hazy.svg' : ''" />
+    class="app-avatar square" />
 
 </template>
 
@@ -25,7 +25,7 @@ export default {
       if (this.username !== 'anonymous') {
         return this.calcColor(this.username)
       }
-      return '#fff'
+      return '#eee'
     }
   },
   methods: {
@@ -41,7 +41,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.anonymous /deep/ .text {
-  display: none;
+.app-avatar {
+  & /deep/ .text {
+    font-weight: normal;
+  }
+
+  &.anonymous {
+    & /deep/ .text {
+      display: none;
+    }
+  }
 }
 </style>
