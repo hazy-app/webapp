@@ -57,6 +57,7 @@
         class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
       <a 
         v-if="!!$store.state.parsedToken.username" 
+        :title="'Signed in as ' + $store.state.parsedToken.username"
         class="fv-button"
         @click="logout"> <i class="fa fa-sign-out" /> Logout </a>
     </div>
@@ -125,11 +126,13 @@
 <script>
 import appLogo from '~/components/appLogo.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
+import appAvatar from '~/components/appAvatar.vue'
 
 export default {
   components: {
     appLogo,
-    appAccountLink
+    appAccountLink,
+    appAvatar
   },
   data() {
     return {
