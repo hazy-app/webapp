@@ -5,3 +5,4 @@ spec:
   port: 3003
   domains:
     - name: hazyapp.com
+    - name: www.hazyapp.com
