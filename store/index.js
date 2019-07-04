@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/messaging'
+import { decode as base64Decode } from 'base-64'
 
 export const state = () => {
   return {
@@ -48,7 +49,7 @@ export const actions = {
         token = token.split(' ')[1]
       }
       const parsed = JSON.parse(
-        require('base-64').decode(
+        base64Decode(
           token
             .split('.')[1]
             .replace('-', '+')
