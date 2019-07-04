@@ -55,8 +55,8 @@
         </div>
       </fvFormElement>
       <div class="fv-col-12 fv-text-light">
-        <p> <i class="fa fa-info-circle" /> We never save your information when you sending messages! </p>
-        <p> <i class="fa fa-info-circle" /> You already have an account? <nuxt-link 
+        <p> <appIcon icon="info" /> We never save your information when you sending messages! </p>
+        <p> <appIcon icon="info" /> You already have an account? <nuxt-link 
           class="fv-link" 
           to="/login">Click here</nuxt-link> to login! </p>
       </div>
@@ -64,7 +64,7 @@
         <fvButton 
           type="submit" 
           class="fv-primary fv-grow">
-          <i class="fa fa-check" /> Register
+          <appIcon icon="check" /> Register
         </fvButton>
       </div>
     </fvForm>
@@ -72,7 +72,12 @@
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   data() {
     return {
       form: {

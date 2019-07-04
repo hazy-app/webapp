@@ -9,11 +9,11 @@
     <div
       v-if="isMine" 
       class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-      <p> <i class="fa fa-info-circle" /> Share your created polls to your friends and let them to answer your question anonymously! </p>
+      <p> <appIcon icon="info" /> Share your created polls to your friends and let them to answer your question anonymously! </p>
       <div class="fv-margin-top">
         <nuxt-link 
           :to="'/' + $store.state.parsedToken.username + '/polls/new'" 
-          class="fv-button fv-primary"> <i class="fa fa-plus" /> Create New Poll </nuxt-link>
+          class="fv-button fv-primary"> <appIcon icon="plus-circle" /> Create New Poll </nuxt-link>
       </div>
     </div>
     <appNothingToShow 
@@ -32,7 +32,7 @@
       <fvButton 
         v-if="hasNext && !loading" 
         @click="loadMore">
-        <i class="fa fa-ellipsis-h" /> Load More
+        <appIcon icon="more-horizontal" /> Load More
       </fvButton>
       <fvLoading v-if="loading" />
     </div>
@@ -45,13 +45,15 @@ import appAccountLink from '~/components/appAccountLink.vue'
 import appPoll from '~/components/appPoll.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appAccountLink,
     appPoll,
     appNothingToShow,
-    appAccountAccessLinks
+    appAccountAccessLinks,
+    appIcon
   },
   data() {
     return {

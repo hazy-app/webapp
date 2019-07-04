@@ -36,11 +36,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.profile-link {
-  &:not(.non-clickable) {
-    font-weight: bold;
-  }
-}
-</style>

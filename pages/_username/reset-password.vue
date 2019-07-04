@@ -39,7 +39,7 @@
         <fvButton 
           type="submit" 
           class="fv-primary fv-grow">
-          <i class="fa fa-check" /> Submit
+          <appIcon icon="check" /> Submit
         </fvButton>
       </div>
     </fvForm>
@@ -48,7 +48,12 @@
 
 <script>
 import copy from 'clipboard-copy'
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   data() {
     return {
       form: {

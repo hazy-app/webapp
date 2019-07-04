@@ -1,5 +1,7 @@
 <template>
-  <appInnerContent class="fv-padding-sm">
+  <appInnerContent 
+    class="fv-padding-sm" 
+    sm>
     <div class="fv-padding-sm" />
     <appNothingToShow 
       v-if="users.length === 0" 
@@ -8,7 +10,7 @@
       <div 
         v-for="user in users" 
         :key="user.username" 
-        class="fv-col">
+        class="fv-col-md-6 fv-col-xl-4">
         <appAccountAccessLinks 
         
           :username="user.username" 

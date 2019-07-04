@@ -146,10 +146,9 @@ export default {
     user-select: none;
     display: flex;
     flex-direction: row;
-    // font-weight: bold;
 
     & .fv-switch {
-      top: -0.35em;
+      top: -0.2em;
     }
   }
 }

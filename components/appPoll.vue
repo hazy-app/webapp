@@ -11,16 +11,16 @@
         <a 
           class="fv-link fv-text-danger"
           @click="remove">
-          <i class="fa fa-trash" /> <span class="fv-hidden-xs"> Remove </span>
+          <appIcon icon="trash" /> <span class="fv-hidden-xs"> Remove </span>
         </a>
       </span>
       <span :title="poll.create_date | dateReadable">
-        <i class="fa fa-calendar" /> {{ poll.create_date | dateFromNow }}
+        <appIcon icon="calendar" /> {{ poll.create_date | dateFromNow }}
       </span>
       <nuxt-link 
         v-if="openButton" 
         :to="'/' + poll.creator + '/polls/' + poll.uuid" 
-        class="fv-margin-start fv-link"> <i class="fa fa-commenting-o" /> Open </nuxt-link>
+        class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
     </div>
     <div class="fv-padding">
       <p :style="{'direction': $calcDirection(poll.title)}">
@@ -94,7 +94,7 @@
         <fvButton 
           type="submit" 
           class="fv-primary fv-grow">
-          <i class="fa fa-check" /> Submit
+          <appIcon icon="check" /> Submit
         </fvButton>
       </div>
     </fvForm>
@@ -103,10 +103,12 @@
 
 <script>
 import appAccountLink from '~/components/appAccountLink.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appAccountLink
+    appAccountLink,
+    appIcon
   },
   props: {
     poll: {

@@ -28,7 +28,7 @@
           required />
       </fvFormElement>
       <div class="fv-col-12 fv-text-light">
-        <p v-if="password_hint"> <i class="fa fa-key" /> Your password hint was "{{ password_hint }}"! </p>
+        <p v-if="password_hint"> <appIcon icon="key" /> Your password hint was "{{ password_hint }}"! </p>
       </div>
       <fvFormElement
         class="fv-col-12">
@@ -39,8 +39,8 @@
         </div>
       </fvFormElement>
       <div class="fv-col-12 fv-text-light">
-        <p> <i class="fa fa-info-circle" /> We never save your information when you sending messages! </p>
-        <p> <i class="fa fa-info-circle" /> You don't have an account? <nuxt-link 
+        <p> <appIcon icon="info" /> We never save your information when you sending messages! </p>
+        <p> <appIcon icon="info" /> You don't have an account? <nuxt-link 
           class="fv-link" 
           to="/register">Click here</nuxt-link> to register! </p>
       </div>
@@ -48,7 +48,7 @@
         <fvButton 
           type="submit" 
           class="fv-primary fv-grow">
-          <i class="fa fa-sign-in" /> Login
+          <appIcon icon="log-in" /> Login
         </fvButton>
       </div>
     </fvForm>
@@ -56,7 +56,12 @@
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   data() {
     return {
       form: {

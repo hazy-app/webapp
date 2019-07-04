@@ -9,12 +9,12 @@
     <div 
       v-if="isMine"
       class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-      <p> <i class="fa fa-info-circle" /> Share your poll link to your friends to receive anonymous votes! </p>
+      <p> <appIcon icon="info" /> Share your poll link to your friends to receive anonymous votes! </p>
       <div  
         class="fv-margin-top">
         <fvButton 
           class="fv-primary" 
-          @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
+          @click="copyLink"> <appIcon icon="copy" /> Copy Link </fvButton>
       </div>
     </div>
     <appPoll 
@@ -33,12 +33,14 @@ import copy from 'clipboard-copy'
 import appPoll from '~/components/appPoll.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appPoll,
     appAccountLink,
-    appAccountAccessLinks
+    appAccountAccessLinks,
+    appIcon
   },
   data() {
     return {

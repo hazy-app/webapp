@@ -48,7 +48,7 @@ body,
 #app-layout-wrapper {
   min-height: 100%;
   height: 100%;
-  line-height: 1.7;
+  line-height: 1.9;
   font-size: 15px;
   font-family: 'Source Sans Pro', sans-serif;
 }

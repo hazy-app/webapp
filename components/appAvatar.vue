@@ -4,7 +4,7 @@
     :size="size" 
     :style="{ backgroundColor: bgColor }"
     :class="{ anonymous: username === 'anonymous'}"
-    class="app-avatar" />
+    class="app-avatar square" />
 
 </template>
 
@@ -31,10 +31,13 @@ export default {
   methods: {
     calcColor(str) {
       const ascii = str.charCodeAt(0) % 256
-      const section = str.charCodeAt(str.length - 2) % 3
-      const arr = new Array(3).fill(187)
+      const ascii2 = str.charCodeAt(1) % 256
+      const section = str.charCodeAt(str.length - 1) % 3
+      const section2 = str.charCodeAt(str.length - 2) % 3
+      const arr = new Array(3).fill(197)
       arr[section] = ascii
-      return `rgba(${arr.join(',')}, 0.2)`
+      arr[section2] = ascii2
+      return `rgba(${arr.join(',')}, 0.5)`
     }
   }
 }

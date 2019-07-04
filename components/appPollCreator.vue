@@ -38,14 +38,14 @@
             <fvButton 
               :disabled="index < 2" 
               class="fv-text-danger"
-              @click.prevent="removeChoice(index)"> <i class="fa fa-trash" /> </fvButton>
+              @click.prevent="removeChoice(index)"> <appIcon icon="trash" /> </fvButton>
           </span>
         </div>
         <div class="fv-flex choice">
           <div class="fv-grow" />
           <fvButton 
             :disabled="choices.length > 8" 
-            @click.prevent="addChoice"> <i class="fa fa-plus" /> </fvButton>
+            @click.prevent="addChoice"> <appIcon icon="plus-circle" /> </fvButton>
         </div>
       </fvFormElement>
       <fvFormElement class="fv-col-12">
@@ -56,13 +56,13 @@
         </div>
       </fvFormElement>
       <!-- <div class="fv-col-12 fv-text-light">
-        <p> <i class="fa fa-info-circle" /> You can deactive this poll anytime you want! </p>
+        <p> <appIcon icon="info" /> You can deactive this poll anytime you want! </p>
       </div> -->
       <div class="fv-flex fv-col-12">
         <fvButton 
           type="submit" 
           class="fv-primary fv-grow">
-          <i class="fa fa-check" /> Create
+          <appIcon icon="check" /> Create
         </fvButton>
       </div>
 
@@ -72,10 +72,12 @@
 
 <script>
 import appAccountLink from '~/components/appAccountLink.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appAccountLink
+    appAccountLink,
+    appIcon
   },
   props: {
     user: {

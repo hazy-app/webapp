@@ -16,25 +16,25 @@
         <a 
           href="https://github.com/hazy-app"
           class="fv-button fv-col"
-          target="_blank"> <i class="fa fa-github" /> Github </a>
+          target="_blank"> <appIcon icon="github" /> Github </a>
         <nuxt-link 
           to="/sent-messages"
-          class="fv-button fv-col"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
+          class="fv-button fv-col"> <appIcon icon="lock" /> Sent Messages </nuxt-link>
         <nuxt-link 
           v-if="!$store.state.parsedToken.username" 
           to="/login"
-          class="fv-button fv-col"> <i class="fa fa-sign-in" /> Login </nuxt-link>
+          class="fv-button fv-col"> <appIcon icon="log-in" /> Login </nuxt-link>
         <fvButton 
           v-if="$store.state.parsedToken.username"
-          @click="$logout"> <i class="fa fa-sign-out" /> Logout </fvButton>
+          @click="$logout"> <appIcon icon="log-out" /> Logout </fvButton>
         <nuxt-link 
           v-if="!$store.state.parsedToken.username"
           to="/register"
-          class="fv-button fv-primary fv-col"> <i class="fa fa-user-plus" /> Register </nuxt-link>
+          class="fv-button fv-primary fv-col"> <appIcon icon="user-plus" /> Register </nuxt-link>
         <nuxt-link 
           v-if="$store.state.parsedToken.username" 
           :to="'/' + $store.state.parsedToken.username + '/messages'"
-          class="fv-button fv-primary fv-col"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
+          class="fv-button fv-primary fv-col"> <appIcon icon="inbox" /> Inbox </nuxt-link>
       </div>
     </div>
   </appInnerContent>
@@ -42,10 +42,12 @@
 
 <script>
 import appNumberBanner from '~/components/appNumberBanner.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appNumberBanner
+    appNumberBanner,
+    appIcon
   },
   data() {
     return {

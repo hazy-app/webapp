@@ -5,13 +5,13 @@
     <div class="fv-padding-sm" />
     <div 
       class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
-      <p> <i class="fa fa-info-circle" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
+      <p> <appIcon icon="info" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
       <div 
         v-if="messages.length !== 0" 
         class="fv-margin-top">
         <fvButton 
           class="fv-primary" 
-          @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
+          @click="clear"> <appIcon icon="trash" /> Clear </fvButton>
       </div>
     </div>
     <appNothingToShow 
@@ -32,11 +32,13 @@
 <script>
 import appMessage from '~/components/appMessage.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appMessage,
-    appNothingToShow
+    appNothingToShow,
+    appIcon
   },
   data() {
     return {

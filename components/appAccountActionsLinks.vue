@@ -3,7 +3,7 @@
     <div class="fv-border-bottom fv-padding fv-text-center fv-font-lg">
       <appAvatar 
         :username="username" 
-        size="54px"/>
+        size="64px"/>
       <b class="fv-block"> {{ username }} </b>
     </div>
     <div 

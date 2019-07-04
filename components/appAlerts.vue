@@ -5,29 +5,35 @@
       :timeout="toastTimeout"
       class="app-toast fv-no-wrap"
       @input="$emit('toastClose', false)">
-      <!-- <i 
-        :class="{'fa-check-circle': toastType === 'success', 'fa-exclamation-circle': toastType === 'error', 'fa-commenting-o': toastType === 'message'}" 
-        class="fa fv-font-lg" /> -->
+      <appIcon 
+        v-if="toastType === 'success'" 
+        icon="check-circle" />
+      <appIcon 
+        v-else-if="toastType === 'error'" 
+        icon="x-circle" />
+      <appIcon 
+        v-else-if="toastType === 'message'" 
+        icon="info" />
       <span> {{ toastContent }} </span>
     </fvToast>
     <fvDialog 
       :value="confirmVisible"
       class="fv-col-xs-10 fv-col-sm-8 fv-col-md-6 fv-col-xl-4 fv-no-padding"
       @input="$emit('confirmClose', false)">
-      <label class="fv-padding fv-control-label"> Confirm </label>
+      <label class="fv-padding fv-control-label">  <appIcon icon="help-circle" /> Confirm </label>
       <p class="fv-padding"> {{ confirmContent }} </p>
       <div class="fv-padding fv-flex fv-grow">
         <div class="fv-grow"/>
         <fvButton 
           class="fv-default" 
           @click="$emit('confirmClose', false)">
-          <i class="fa fa-ban"/> {{ confirmCancel }}
+          <appIcon icon="x-circle" /> {{ confirmCancel }}
         </fvButton>
         <span class="fv-padding-start" />
         <fvButton 
           class="fv-primary" 
           @click="$emit('confirmClose', true)">
-          <i class="fa fa-check"/> {{ confirmOk }}
+          <appIcon icon="check" /> {{ confirmOk }}
         </fvButton>
       </div>
     </fvDialog>
@@ -35,7 +41,12 @@
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   props: {
     value: {
       type: [String, Number],
