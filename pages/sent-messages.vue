@@ -23,6 +23,7 @@
       :message="message"
       :edit-button="false"
       :reply-section="false"
+      open-button
       is-mine
       watch-as="sender"
       class="fv-margin-bottom"/>
