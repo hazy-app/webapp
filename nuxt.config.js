@@ -113,7 +113,8 @@ const ret = {
   manifest: {
     lang: 'en',
     /* Do not change this id. it's static and is not current app id */
-    gcm_sender_id: '103953800507'
+    gcm_sender_id: '103953800507',
+    theme_color: '#000'
   },
 
   /*
