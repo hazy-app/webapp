@@ -16,7 +16,7 @@
           :to="'/' + username" 
           :class="{'fv-disabled': isMine}"
           exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="send" /> Send Message </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="send" /> Anonymous Chat </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
