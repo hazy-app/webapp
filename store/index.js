@@ -92,6 +92,9 @@ export const actions = {
       })
       this.$sentMessages.clear()
       if (window && window.localStorage.fcmToken) {
+        if ('Notification' in window) {
+          await Notification.requestPermission()
+        }
         await dispatch('setMyFcmToken', {
           fcmToken: window.localStorage.fcmToken
         })

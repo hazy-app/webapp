@@ -2,10 +2,6 @@ import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 
 export default async ({ store, app: { $alerts, $eventBus } }) => {
-  if ('Notification' in window) {
-    await Notification.requestPermission()
-  }
-
   // Firebase init
   var config = {
     apiKey: process.env.FIREBASE_API_KEY,
