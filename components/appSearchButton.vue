@@ -65,7 +65,8 @@ export default {
     border: none;
     box-shadow: none;
     background: transparent;
-    max-width: 80px;
+    min-width: 90px;
+    max-width: 90px;
   }
 }
 </style>
