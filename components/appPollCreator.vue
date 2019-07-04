@@ -38,7 +38,7 @@
             <fvButton 
               :disabled="index < 2" 
               class="fv-text-danger"
-              @click.prevent="removeChoice(index)"> <appIcon icon="trash" /> </fvButton>
+              @click.prevent="removeChoice(index)"> <appIcon icon="minus-circle" /> </fvButton>
           </span>
         </div>
         <div class="fv-flex choice">
