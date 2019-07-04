@@ -3,18 +3,20 @@
     :class="{'searching': searchQuery !== null }"
     class="fv-button search-btn"
     tabindex="0"
-    @click="enterSearch"> <appIcon icon="search" /> <span 
-      v-if="searchQuery === null" 
-      ref="searchBox"
-      class="fv-hidden-sm fv-hidden-xs"> Search </span><input 
-        v-else 
+    @click="enterSearch"> <appIcon 
+      icon="search" /> <span 
+        v-if="searchQuery === null" 
         ref="searchBox"
-        v-model="searchQuery"
-        placeholder="Start typing" 
-        class="search-query"
-        minlength="3"
-        @blur="cancelSearch"
-        @keyup.enter="startSearch"> </a>
+        class="fv-hidden-sm fv-hidden-xs"> Search </span><input 
+          v-else 
+          ref="searchBox"
+          v-model="searchQuery"
+          placeholder="Start typing" 
+          class="search-query"
+          minlength="3"
+          type="search"
+          @blur="cancelSearch"
+          @keyup.enter="startSearch"> </a>
 </template>
 
 <script>
@@ -40,6 +42,12 @@ export default {
       this.searchQuery = null
     },
     startSearch() {
+      if (this.searchQuery.length < 3) {
+        return this.$alerts.toast(
+          'Enter 3 or more than 3 characters to search!',
+          'failed'
+        )
+      }
       this.$router.push(`/search/${this.searchQuery}`)
     }
   }
