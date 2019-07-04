@@ -22,13 +22,13 @@
         <nuxt-link 
           :to="'/' + username + '/messages'" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="inbox" /> {{ !isMine ? 'Public ' : '' }} Messages </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="inbox" /> {{ !isMine ? 'Public Messages' : 'Inbox' }}  </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/polls'" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="check-square" /> {{ !isMine ? 'Public ' : '' }} Polls </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="check-square" /> Polls </nuxt-link>
       </div>
     </div>
     <div 
