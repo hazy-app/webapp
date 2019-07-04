@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import timeago from 'timeago.js'
 import Fingerprint from 'fingerprintjs2'
-import Modela from 'modela'
 import sha256 from 'js-sha256'
 import appAlerts from '~/components/appAlerts.vue'
 import appHeader from '~/components/appHeader.vue'
@@ -26,10 +25,6 @@ Vue.filter('dateReadable', date => {
 })
 
 export default ({ app, store, router }, inject) => {
-  inject('modela', (param = {}) => {
-    return new Modela(param)
-  })
-
   inject('eventBus', new Vue())
 
   inject('alerts', new (Vue.extend(appAlerts))())
