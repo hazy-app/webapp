@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import timeago from 'timeago.js'
-import Fingerprint from 'fingerprintjs2'
-import sha256 from 'js-sha256'
+import { getPromise as getFingerprint } from 'fingerprintjs2'
 import appAlerts from '~/components/appAlerts.vue'
 import appHeader from '~/components/appHeader.vue'
 import appInnerContent from '~/components/appInnerContent.vue'
@@ -23,6 +22,20 @@ Vue.filter('dateReadable', date => {
   const dt = new Date(date)
   return `${dt.toDateString()} ${dt.toTimeString()}`
 })
+
+// from https://stackoverflow.com/a/8831937
+function hashCode(str) {
+  var hash = 0
+  if (str.length == 0) {
+    return hash
+  }
+  for (var i = 0; i < str.length; i++) {
+    var char = str.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash = hash & hash // Convert to 32bit integer
+  }
+  return hash
+}
 
 export default ({ app, store, router }, inject) => {
   inject('eventBus', new Vue())
@@ -52,11 +65,11 @@ export default ({ app, store, router }, inject) => {
         ? window.requestIdleCallback
         : action => setTimeout(action, 500)
       timeout(() => {
-        Fingerprint.getPromise({
+        getFingerprint({
           excludes: { language: true, userAgent: true, enumerateDevices: true }
         })
           .then(data => {
-            resolve(sha256(JSON.stringify(data)))
+            resolve(hashCode(JSON.stringify(data)).toString())
           })
           .catch(reject)
       })
