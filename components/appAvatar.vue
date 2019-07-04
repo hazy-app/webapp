@@ -25,7 +25,7 @@ export default {
       if (this.username !== 'anonymous') {
         return this.calcColor(this.username)
       }
-      return '#eee'
+      return '#444'
     }
   },
   methods: {
