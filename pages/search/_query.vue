@@ -15,7 +15,7 @@
         
           :username="user.username" 
         
-          class="fv-border fv-shadow fv-radius" />
+          class="fv-border" />
       </div>
   </div></appInnerContent>
 </template>

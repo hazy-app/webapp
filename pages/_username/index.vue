@@ -5,10 +5,10 @@
     <div class="fv-padding-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
+      class="fv-border fv-margin-bottom" />
     <div 
       v-if="isMine"
-      class="fv-padding fv-text-center fv-border fv-shadow fv-radius fv-margin-bottom">
+      class="fv-padding fv-text-center fv-border fv-margin-bottom">
       <p> <appIcon icon="info" /> Share your profile link to your friends to receive anonymous messages! </p>
       <div  
         class="fv-margin-top">
@@ -19,7 +19,7 @@
     </div>
     <appMessageSender 
       :user="$route.params.username"
-      class="fv-border fv-radius fv-shadow" 
+      class="fv-border" 
       save-button
       @sent="$router.push('/' + $route.params.username + '/messages/' + $event.uuid)"/>
   </appInnerContent>

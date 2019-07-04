@@ -1,5 +1,5 @@
 <template>
-  <div class="app-user-card fv-border fv-radius fv-shadow">
+  <div class="app-user-card fv-border">
     <div class="fv-padding">
       <nuxt-link :to="'/' + user.username">
         <h3 

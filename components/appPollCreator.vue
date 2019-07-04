@@ -1,5 +1,5 @@
 <template>
-  <div class="app-poll-creator fv-border fv-radius fv-shadow">
+  <div class="app-poll-creator fv-border">
     <fvForm 
       method="POST"
       class="fv-row"

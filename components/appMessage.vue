@@ -1,5 +1,5 @@
 <template>
-  <div class="app-message fv-border fv-radius fv-shadow">
+  <div class="app-message fv-border">
     <div class="fv-padding fv-flex header">
       <span v-if="watchAs === 'sender'">
         To <appAccountLink 

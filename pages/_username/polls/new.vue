@@ -5,7 +5,7 @@
     <div class="fv-padding-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border fv-shadow fv-radius fv-margin-bottom" />
+      class="fv-border fv-margin-bottom" />
     <div>
       <appPollCreator 
         :user="$route.params.username"

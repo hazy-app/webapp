@@ -5,7 +5,7 @@
     <div class="fv-padding-sm" />
     <fvForm 
       method="POST"
-      class="fv-row fv-border fv-shadow fv-radius"
+      class="fv-row fv-border"
       @submit="submit">
       <fvFormElement 
         class="fv-col-12" 
