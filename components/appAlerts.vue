@@ -113,8 +113,7 @@ export default {
 <style lang="scss" scoped>
 .app-toast {
   z-index: 1000;
-  & > i {
-    vertical-align: middle;
-  }
+  font-size: 1.2em;
+  font-weight: bold;
 }
 </style>
