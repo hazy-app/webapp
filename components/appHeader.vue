@@ -3,7 +3,7 @@
     <nuxt-link to="/">
       <appLogo class="logo"/>
     </nuxt-link>
-    <div class="vertical-line fv-border-start" />
+    <div class="vertical-line fv-border-start fv-hidden-xs" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light fv-hidden-xs"> <slot name="description"/> </p>
@@ -16,7 +16,9 @@
       :clickable="false" 
       class="fv-button"
       @click.native="$store.commit('ui/openLoggedInUserPopup')">
-      <appIcon icon="chevron-down" />
+      <appIcon 
+        icon="chevron-down" 
+        class="fv-hidden-xs" />
     </appAccountLink>
 
     <a 
