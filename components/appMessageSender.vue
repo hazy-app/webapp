@@ -33,11 +33,11 @@
       </div>
     </fvFormElement>
     <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
-      <p v-if="saveButton"> <appIcon icon="info" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
       <p v-if="typeof message === 'undefined'"> <appIcon icon="info" /> @{{ user }} never understand who you are! </p>
       <p v-if="!$store.state.parsedToken.username"> <appIcon icon="info" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 
         to="/register"> Click here </nuxt-link> to register! </p>
+      <p v-if="saveButton"> <appIcon icon="info" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
     </div>
     <div class="fv-flex fv-col-12">
       <fvButton 
