@@ -19,7 +19,7 @@
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + user.username" 
-          class="fv-button fv-block"> <appIcon icon="send" /> Send Anounymous Message </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="send" /> Send Anonymous Message </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 

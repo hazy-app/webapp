@@ -106,7 +106,7 @@ export default {
     ret.isMine = store.state.parsedToken.username === params.username
     store.commit('ui/setHeader', {
       title: `@${params.username}`,
-      description: `Send anounymous message to @${params.username}`
+      description: `Send anonymous message to @${params.username}`
     })
     return ret
   }
