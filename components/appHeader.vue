@@ -10,9 +10,7 @@
     </div>
 
     <appSearchButton />
-    <!-- <a
-      class="fv-button" 
-      > -->
+
     <appAccountLink
       :username="$store.state.parsedToken.username || undefined"
       :clickable="false" 
@@ -20,10 +18,11 @@
       @click.native="$store.commit('ui/openLoggedInUserPopup')">
       <appIcon icon="chevron-down" />
     </appAccountLink>
-    <!-- </a> -->
+
     <a 
       href="https://github.com/hazy-app"
       target="_blank"
+      rel="noreferrer"
       class="fv-button fv-hidden-xs fv-hidden-sm"> <appIcon icon="github" /> Github </a>
   </fvHeader>
 </template>

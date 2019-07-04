@@ -16,6 +16,7 @@
         <a 
           href="https://github.com/hazy-app"
           class="fv-button fv-col"
+          rel="noreferrer"
           target="_blank"> <appIcon icon="github" /> Github </a>
         <nuxt-link 
           to="/sent-messages"
