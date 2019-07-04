@@ -87,7 +87,7 @@ export default {
           'success'
         )
         this.$root.$loading.finish()
-        this.$router.push(`/users/${this.$route.params.username}/messages`)
+        this.$router.push(`/${this.$route.params.username}/messages`)
       } catch (e) {
         this.$root.$loading.finish()
       }
