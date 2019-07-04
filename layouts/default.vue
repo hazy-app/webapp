@@ -75,8 +75,8 @@ h5 {
   display: block !important;
 }
 .app-menu {
-  min-width: 200px;
-  width: 200px;
+  min-width: 230px;
+  width: 230px;
 }
 
 .fv-button {
