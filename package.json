@@ -5,6 +5,7 @@
   "author": "nainemom <nainemom@gmail.com>",
   "scripts": {
     "dev": "nuxt -p 3003 -H 0.0.0.0",
+    "dev:prod": "cross-env BASE_URL='https://api.hazyapp.com' nuxt -p 3004 -H 0.0.0.0",
     "dev:spa": "nuxt --spa -p 3003 -H 0.0.0.0",
     "build:framevuerk": "framevuerk-builder -c ./framevuerk-config.js",
     "build": "npm run build:framevuerk && nuxt build",
