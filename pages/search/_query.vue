@@ -2,7 +2,7 @@
   <appInnerContent 
     class="fv-padding-sm" 
     sm>
-    <div class="fv-padding-sm" />
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appNothingToShow 
       v-if="users.length === 0" 
     />

@@ -2,10 +2,10 @@
   <appInnerContent 
     class="fv-padding-sm" 
     sm>
-    <div class="fv-padding-sm" />
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border fv-margin-bottom" />
+      class="fv-border-top fv-border-start fv-border-end" />
     <div 
       v-if="isMine"
       class="fv-padding fv-text-center fv-border fv-margin-bottom">
