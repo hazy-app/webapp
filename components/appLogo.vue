@@ -9,6 +9,6 @@
 <style lang="scss" scoped>
 .logo {
   vertical-align: middle;
-  height: 3.4rem;
+  height: 2.8rem;
 }
 </style>
