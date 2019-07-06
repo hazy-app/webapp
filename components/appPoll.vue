@@ -17,10 +17,22 @@
       <span :title="poll.create_date | dateReadable">
         <appIcon icon="calendar" /> {{ poll.create_date | dateFromNow }}
       </span>
+      
       <nuxt-link 
         v-if="openButton" 
         :to="'/' + poll.creator + '/polls/' + poll.uuid" 
-        class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
+        class="fv-margin-start fv-link">
+        <appIcon 
+          v-if="watchAs === 'user'"  
+          icon="check-square"/>
+        <span 
+          v-if="watchAs === 'creator'" 
+          class="fv-hidden-xs"> Open </span>
+        <span v-else> Answer </span> 
+        <appIcon 
+          v-if="watchAs === 'creator'" 
+          icon="arrow-right"/>
+      </nuxt-link>
     </div>
     <div class="fv-padding">
       <p :style="{'direction': $calcDirection(poll.title)}">
