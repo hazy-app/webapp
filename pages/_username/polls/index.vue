@@ -61,8 +61,7 @@ export default {
       page: 1,
       hasNext: true,
       loading: false,
-      polls: [],
-      user: {}
+      polls: []
     }
   },
   methods: {
@@ -97,16 +96,6 @@ export default {
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
-    try {
-      ret.user = await $axios.$get(
-        `${process.env.BASE_URL}/users/${params.username}`
-      )
-    } catch (e) {
-      throw {
-        statusCode: 404,
-        message: 'User not found!'
-      }
-    }
     ret.page = query.page ? parseInt(query.page) : 1
     try {
       const response = await $axios.$get(
