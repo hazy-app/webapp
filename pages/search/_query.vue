@@ -12,9 +12,8 @@
         :key="user.username" 
         class="fv-col-md-6">
         <appAccountAccessLinks 
-        
           :username="user.username" 
-        
+          only-profile
           class="fv-border" />
       </div>
   </div></appInnerContent>
