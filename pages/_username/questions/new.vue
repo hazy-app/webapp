@@ -5,7 +5,8 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border-top fv-border-start fv-border-end" />
+      only-profile
+      class="fv-margin-bottom" />
     <div>
       <appQuestionCreator 
         :user="$route.params.username"
@@ -34,8 +35,11 @@ export default {
     }
   },
   methods: {
-    done(poll) {
-      this.$router.push(`/${this.$route.params.username}`)
+    done(question) {
+      console.log(question)
+      this.$router.push(
+        `/${this.$route.params.username}/questions/${question._id}`
+      )
     }
   },
   asyncData({ store, params }) {
