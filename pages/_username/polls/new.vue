@@ -5,7 +5,8 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border-top fv-border-start fv-border-end" />
+      only-profile
+      class="fv-margin-bottom" />
     <div>
       <appPollCreator 
         :user="$route.params.username"
@@ -37,7 +38,7 @@ export default {
   },
   methods: {
     done(poll) {
-      this.$router.push(`/${this.$route.params.username}/polls`)
+      this.$router.push(`/${this.$route.params.username}/polls/${poll.uuid}`)
     }
   },
   asyncData({ store, params }) {
