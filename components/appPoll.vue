@@ -34,7 +34,7 @@
           icon="arrow-right"/>
       </nuxt-link>
     </div>
-    <div class="fv-padding">
+    <div class="fv-padding fv-font-lg">
       <p :style="{'direction': $calcDirection(poll.title)}">
         {{ poll.title }}
       </p>
