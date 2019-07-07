@@ -77,7 +77,7 @@ export default {
           }
         )
         this.$root.$loading.finish()
-        this.$emit('created', response.data)
+        this.$emit('created', response)
         this.$alerts.toast(`Your question has been created!`, 'success')
       } catch (e) {
         console.log(e)
