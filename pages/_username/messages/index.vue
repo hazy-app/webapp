@@ -11,7 +11,7 @@
       :question="question"
       :edit-buttons="false"
       :send-form="false"
-      :view-replies-button="true"
+      :view-replies-button="false"
       :open-button="true"
       :watch-as="isMine ? 'creator' : 'user'"
       class="fv-border fv-margin-bottom" />
