@@ -17,8 +17,16 @@
       class="fv-border fv-margin-bottom" />
     <label class="fv-control-label fv-margin-bottom"> <appIcon icon="list" /> Answers: </label>
     <appNothingToShow 
-      v-if="messages.length === 0" 
+      v-if="messages.length === 0 && mySentMessages.length === 0" 
     />
+    <appMessage 
+      v-for="message in mySentMessages"
+      :key="'msg' + message._id" 
+      :message="message"
+      :edit-buttons="false"
+      :open-button="true"
+      :reply-section="false"
+      class="fv-margin-bottom i-sent" />
     <appMessage 
       v-for="message in messages"
       :key="'msg' + message._id" 
@@ -63,6 +71,7 @@ export default {
       hasNext: true,
       loading: false,
       messages: [],
+      mySentMessages: [],
       form: {
         text: '',
         recaptcha: false
@@ -74,11 +83,27 @@ export default {
       this.$eventBus.$on('newMessage', this.insertNewMessage)
       window.addEventListener('focus', this.sync)
     }
+    this.mySentMessages = this.loadMySentMessages()
+    console.log(this.mySentMessages)
   },
   beforeDestroy() {
     window.removeEventListener('focus', this.sync)
   },
   methods: {
+    loadMySentMessages() {
+      return this.$sentMessages.getAll().filter(message => {
+        const toThisUser = message.receiver === this.$route.params.username
+        const isDefaultQuestion =
+          this.$route.query.question === 'default' ||
+          !this.$route.query.question
+        return (
+          toThisUser &&
+          (isDefaultQuestion
+            ? !message.question
+            : message.question === this.$route.query.question)
+        )
+      })
+    },
     async sync() {
       this.loading = true
       const response = await this.$axios.$get(
@@ -178,5 +203,9 @@ export default {
 }
 .form {
   padding-top: 4rem;
+}
+
+.i-sent {
+  opacity: 0.5;
 }
 </style>
