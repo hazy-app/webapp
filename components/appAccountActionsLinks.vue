@@ -1,6 +1,6 @@
 <template>
   <div class="app-account-access-links">
-    <div class="fv-border-bottom fv-padding fv-text-center fv-font-lg">
+    <div class="fv-padding-top fv-text-center fv-font-lg">
       <appAvatar 
         :username="username" 
         size="64px"/>
@@ -12,7 +12,7 @@
         v-if="username !== 'anonymous'" 
         class="fv-col" >
         <nuxt-link 
-          :to="'/' + username + '/messages'" 
+          :to="'/' + username" 
           class="fv-button fv-block"> <appIcon icon="user" /> View Profile </nuxt-link>
       </div>
       <div class="fv-col" >
