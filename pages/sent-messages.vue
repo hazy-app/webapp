@@ -71,7 +71,7 @@ export default {
   asyncData({ store }) {
     store.commit('ui/setHeader', {
       title: 'Hazy',
-      description: 'Your sent messages (from local storage)'
+      description: 'Your sent messages'
     })
   }
 }
