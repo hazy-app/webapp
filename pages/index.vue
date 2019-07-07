@@ -77,12 +77,19 @@ export default {
 
 <style lang="scss" scoped>
 .logo-container__logo {
-  height: 300px;
+  height: 240px;
   max-width: 100%;
   margin: 0 auto;
 }
 
 .logo-container__text {
+  line-height: 1.3;
+
+  & > h1 {
+    font-size: 3.5em;
+    margin: 0;
+    padding: 0;
+  }
   & > p {
     font-size: 1.3em;
   }
