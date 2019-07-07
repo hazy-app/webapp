@@ -5,17 +5,17 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      class="fv-border-top fv-border-start fv-border-end" />
-    <div
-      v-if="isMine" 
-      class="fv-padding fv-text-center fv-border fv-margin-bottom">
-      <p> <appIcon icon="info" /> Share your profile link to your friends to receive anonymous messages! </p>
-      <div class="fv-margin-top">
-        <fvButton 
-          class="fv-primary" 
-          @click="copyLink"> <appIcon icon="copy" /> Copy Link </fvButton>
-      </div>
-    </div>
+      class="fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
+    <appQuestion 
+      :question="question"
+      :edit-buttons="false"
+      :send-form="false"
+      :view-replies-button="true"
+      :open-button="true"
+      :watch-as="isMine ? 'creator' : 'user'"
+      class="fv-border fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="list" /> Answers: </label>
     <appNothingToShow 
       v-if="messages.length === 0" 
     />
@@ -43,6 +43,7 @@ import appAccountLink from '~/components/appAccountLink.vue'
 import appMessage from '~/components/appMessage.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appQuestion from '@/components/appQuestion.vue'
 import appIcon from '@/components/appIcon.vue'
 
 export default {
@@ -51,11 +52,13 @@ export default {
     appMessage,
     appNothingToShow,
     appAccountAccessLinks,
+    appQuestion,
     appIcon
   },
   data() {
     return {
       isMine: false,
+      question: {},
       page: 1,
       hasNext: true,
       loading: false,
@@ -142,7 +145,8 @@ export default {
       const response = await $axios.$get(
         `${process.env.BASE_URL}/users/${
           params.username
-        }/messages?per_page=10&page=${ret.page}`
+        }/messages?per_page=10&page=${ret.page}&question=${query.question ||
+          'default'}`
       )
       ret.hasNext = response.hasNext
       ret.totalPages = response.totalPages
@@ -150,6 +154,14 @@ export default {
     } catch (e) {
       return redirect('/login')
     }
+    try {
+      const response = await $axios.$get(
+        `${process.env.BASE_URL}/users/${
+          params.username
+        }/questions/${query.question || 'default'}`
+      )
+      ret.question = response
+    } catch (e) {}
     ret.isMine = store.state.parsedToken.username === params.username
     store.commit('ui/setHeader', {
       title: `@${params.username}`,
