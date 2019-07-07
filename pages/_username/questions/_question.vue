@@ -27,7 +27,7 @@
       :view-replies-button="true"
       class="fv-border"
       @remove="remove"
-      @answered="$router.push('/sent-messages')" />
+      @answered="$router.push('/' + question.creator + '/messages?question=' + question._id)" />
   </appInnerContent>
 </template>
 
