@@ -12,9 +12,16 @@
       :edit-buttons="false"
       :send-form="false"
       :view-replies-button="false"
-      :open-button="true"
+      :open-button="false"
       :watch-as="isMine ? 'creator' : 'user'"
       class="fv-border fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="send" /> Reply: </label>
+    <appMessageSender 
+      :user="$route.params.username"
+      :question="$route.query.question" 
+      class="fv-border fv-margin-bottom"
+      save-button
+      @sent="mySentMessages = loadMySentMessages()"/>
     <label class="fv-control-label fv-margin-bottom"> <appIcon icon="list" /> Answers: </label>
     <appNothingToShow 
       v-if="messages.length === 0 && mySentMessages.length === 0" 
@@ -166,12 +173,12 @@ export default {
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
     ret.page = query.page ? parseInt(query.page) : 1
+    query.question = query.question || 'default'
     try {
       const response = await $axios.$get(
         `${process.env.BASE_URL}/users/${
           params.username
-        }/messages?per_page=10&page=${ret.page}&question=${query.question ||
-          'default'}`
+        }/messages?per_page=10&page=${ret.page}&question=${query.question}`
       )
       ret.hasNext = response.hasNext
       ret.totalPages = response.totalPages
@@ -181,9 +188,9 @@ export default {
     }
     try {
       const response = await $axios.$get(
-        `${process.env.BASE_URL}/users/${
-          params.username
-        }/questions/${query.question || 'default'}`
+        `${process.env.BASE_URL}/users/${params.username}/questions/${
+          query.question
+        }`
       )
       ret.question = response
     } catch (e) {}
