@@ -52,6 +52,15 @@ body,
   font-size: 15px;
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Lobster', sans-serif;
+}
+
 h1 {
   font-size: 2em;
 }
