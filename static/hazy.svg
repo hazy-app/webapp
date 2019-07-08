@@ -4,11 +4,11 @@
 <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="1000px" height="600px" viewBox="0 0 1000 600" enable-background="new 0 0 1000 600" xml:space="preserve">
 <g>
-	<path fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	<path fill="none" stroke="#000000" stroke-width="18" stroke-linejoin="round" stroke-miterlimit="10" d="
 		M190.651,290.539V88.398c0-22,18-40,40-40h538.699c22,0,40,18,40,40v202.142"/>
 </g>
-<line fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="20.508" y1="351.708" x2="979.492" y2="351.708"/>
-<path fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+<line fill="none" stroke="#000000" stroke-width="18" stroke-linejoin="round" stroke-miterlimit="10" x1="20.508" y1="351.708" x2="979.492" y2="351.708"/>
+<path fill="none" stroke="#000000" stroke-width="18" stroke-linejoin="round" stroke-miterlimit="10" d="
 	M809.077,405.184c0,80.865-59.642,146.419-133.214,146.419c-49.747,0-93.125-29.971-116.003-74.382l-0.184,0.118
 	c-28.218-58.134-91.678-58.134-119.896,0l-0.185-0.116c-22.878,44.409-66.256,74.379-116.002,74.379
 	c-73.572,0-133.214-65.554-133.214-146.419"/>
