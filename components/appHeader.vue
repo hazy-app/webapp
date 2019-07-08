@@ -3,7 +3,7 @@
     <nuxt-link to="/">
       <appLogo class="logo"/>
     </nuxt-link>
-    <div class="vertical-line fv-border-start fv-hidden-xs" />
+    <div class="vertical-line fv-border-start" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light fv-hidden-xs"> <slot name="description"/> </p>
