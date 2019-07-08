@@ -1,7 +1,7 @@
 <template>
   <appInnerContent 
     class="fv-padding-sm fv-text-center" 
-    sm>
+    xs>
     <div class="fv-text-center logo-container">
       <img 
         class="logo-container__logo"
@@ -77,9 +77,9 @@ export default {
 
 <style lang="scss" scoped>
 .logo-container__logo {
-  height: 240px;
-  max-width: 290px;
-  margin: 0 auto -40px auto;
+  height: 340px;
+  // max-width: 290px;
+  margin: 0 auto -20px auto;
 }
 
 .logo-container__text {
