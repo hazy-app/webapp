@@ -2,7 +2,7 @@
   <div class="fv-text-center app-nothing-to-show fv-border fv-padding">
     <appIcon icon="thumbs-down" /> 
     <div> Nothing to show! </div>
-    <p class="fv-text-light"> This isn't 404 error, just there is no items yet. </p>
+    <p class="fv-text-light"> This isn't a 404 error, just there are no items yet. </p>
   </div>
 </template>
 
