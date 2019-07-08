@@ -4,7 +4,7 @@
       <appAvatar 
         :username="username" 
         size="64px"/>
-      <b class="fv-block"> {{ username }} </b>
+      <h3> {{ username }} </h3>
     </div>
     <div 
       v-if="!onlyProfile && username !== 'anonymous'" 
