@@ -35,7 +35,7 @@
         <nuxt-link 
           v-if="$store.state.parsedToken.username" 
           :to="'/' + $store.state.parsedToken.username"
-          class="fv-button fv-primary fv-col"> <appIcon icon="user" /> View Profile </nuxt-link>
+          class="fv-button fv-primary fv-col"> <appIcon icon="user" /> My Profile </nuxt-link>
       </div>
     </div>
   </appInnerContent>
