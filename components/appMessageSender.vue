@@ -129,6 +129,8 @@ export default {
         }
         this.$root.$loading.finish()
         this.$emit('sent', response.data)
+        this.form.text = undefined
+        this.form.recaptcha = undefined
         if (this.isReply) {
           this.$alerts.toast(
             `Your reply has been set to that message!`,
