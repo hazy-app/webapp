@@ -27,19 +27,11 @@
         <span class="fv-hidden-xs"> View Replies </span> 
       </nuxt-link>
       <nuxt-link 
-        v-if="openButton" 
+        v-if="openButton && watchAs === 'creator'" 
         :to="'/' + question.creator + '/questions/' + question._id" 
         class="fv-margin-start fv-link">
-        <appIcon 
-          v-if="watchAs === 'user'"  
-          icon="message-circle"/>
-        <span 
-          v-if="watchAs === 'creator'" 
-          class="fv-hidden-xs"> Open </span>
-        <span v-else> Reply </span> 
-        <appIcon 
-          v-if="watchAs === 'creator'" 
-          icon="arrow-right"/>
+        <span class="fv-hidden-xs"> Open </span>
+        <appIcon icon="arrow-right"/>
       </nuxt-link>
     </div>
     <div class="fv-padding fv-font-lg">
