@@ -1,7 +1,7 @@
 <template>
   <appInnerContent 
     class="fv-padding-sm fv-text-center" 
-    xs>
+    sm>
     <div class="fv-text-center logo-container">
       <img 
         class="logo-container__logo"
@@ -83,7 +83,7 @@ export default {
 }
 
 .logo-container__text {
-  line-height: 1.3;
+  line-height: 1.2;
 
   & > h1 {
     font-size: 3.5em;
