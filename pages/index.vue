@@ -78,8 +78,8 @@ export default {
 <style lang="scss" scoped>
 .logo-container__logo {
   height: 240px;
-  max-width: 100%;
-  margin: 0 auto;
+  max-width: 290px;
+  margin: 0 auto -40px auto;
 }
 
 .logo-container__text {
