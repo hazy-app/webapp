@@ -6,7 +6,7 @@
       </span>
       <div class="fv-grow" />
       <span 
-        v-if="editButtons"
+        v-if="editButtons && question._id !== 'default'"
         class="fv-margin-end">
         <a 
           class="fv-link fv-text-danger"
@@ -24,7 +24,7 @@
         :to="'/' + question.creator + '/messages?question=' + question._id" 
         class="fv-margin-start fv-link">
         <appIcon icon="list"/>
-        <span class="fv-hidden-xs"> View Replies </span> 
+        <span class="fv-hidden-xs"> Replies </span> 
       </nuxt-link>
       <nuxt-link 
         v-if="openButton && watchAs === 'creator'" 
@@ -45,7 +45,7 @@
       :question="question._id" 
       class="fv-border-top"
       save-button
-      @sent="$emit('answered', $event)"/>
+      @sent="$emit('message-sent', $event)"/>
   </div>
 </template>
 
