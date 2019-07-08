@@ -6,25 +6,41 @@
     <appAccountAccessLinks 
       :username="$route.params.username" 
       class="fv-margin-bottom" />
+    <div 
+      v-if="isMine"
+      class="fv-padding fv-text-center fv-border fv-margin-bottom">
+      <p> <appIcon icon="info" /> Share your question link to your friends to receive anonymous answers! </p>
+      <div  
+        class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="copyLink"> <appIcon icon="copy" /> Copy Link </fvButton>
+      </div>
+    </div>
     <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
     <appQuestion 
       :question="question"
-      :edit-buttons="false"
-      :send-form="false"
-      :view-replies-button="false"
-      :open-button="false"
+      :edit-buttons="isMine"
       :watch-as="isMine ? 'creator' : 'user'"
-      class="fv-border fv-margin-bottom" />
-    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="send" /> Reply: </label>
-    <appMessageSender 
-      :user="$route.params.username"
-      :question="$route.query.question" 
+      :open-button="false"
+      :view-replies-button="false"
+      :send-form="!isMine"
       class="fv-border fv-margin-bottom"
-      save-button
-      @sent="mySentMessages = loadMySentMessages()"/>
-    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="list" /> Answers: </label>
+      @remove="remove"
+      @message-sent="mySentMessages = loadMySentMessages()" />
+    <!-- <div v-if="!isMine">
+      <label class="fv-control-label fv-margin-bottom"> <appIcon icon="send" /> Reply: </label>
+      <appMessageSender 
+        :user="$route.params.username"
+        :question="$route.query.question" 
+        class="fv-border fv-margin-bottom"
+        save-button
+        @sent="mySentMessages = loadMySentMessages()"/>
+    </div> -->
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="message-circle" /> Replies: </label>
     <appNothingToShow 
       v-if="messages.length === 0 && mySentMessages.length === 0" 
+      class="fv-margin-bottom"
     />
     <appMessage 
       v-for="message in mySentMessages"
@@ -139,6 +155,25 @@ export default {
       }`
       copy(url)
       this.$alerts.toast('Link copied to clipboard!')
+    },
+    async remove(question) {
+      this.$root.$loading.start()
+      try {
+        await this.$axios.$delete(
+          `${process.env.BASE_URL}/users/${
+            this.$store.state.parsedToken.username
+          }/questions/${question._id}`
+        )
+        this.$alerts.toast(
+          'Your question has been successfully deleted!',
+          'success'
+        )
+        this.$root.$loading.finish()
+        this.$router.push(`/${this.$route.params.username}/questions`)
+      } catch (e) {
+        console.log(e)
+        this.$root.$loading.finish()
+      }
     },
     async gotoMessage(message) {
       this.$router.push(`/${message.receiver}/messages/${message.uuid}`)
