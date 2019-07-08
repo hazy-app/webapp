@@ -16,7 +16,7 @@
       :open-button="true"
       :watch-as="isMine ? 'creator' : 'user'"
       class="fv-border fv-margin-bottom" />
-    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="list" /> Answer: </label>
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="message-circle" /> Answer: </label>
     <appMessage 
       :message="message"
       :edit-buttons="isMine"
@@ -32,13 +32,15 @@ import appMessage from '~/components/appMessage.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 import appQuestion from '@/components/appQuestion.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appMessage,
     appAccountLink,
     appAccountAccessLinks,
-    appQuestion
+    appQuestion,
+    appIcon
   },
   data() {
     return {
