@@ -5,7 +5,6 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      only-profile
       class="fv-margin-bottom" />
     <div>
       <appQuestionCreator 

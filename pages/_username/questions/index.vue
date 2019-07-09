@@ -26,7 +26,6 @@
       :edit-buttons="false"
       :open-button="true"
       :send-form="false"
-      :view-replies-button="true"
       :watch-as="isMine ? 'creator' : 'user'"
       class="fv-border fv-margin-bottom" />
     <div class="fv-text-center">
