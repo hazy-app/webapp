@@ -126,8 +126,8 @@ export const actions = {
     }
   },
   logout({ dispatch }) {
-    dispatch('clearAuthorization')
     this.$sentMessages.clear()
+    dispatch('clearAuthorization')
   },
   calcUserAgent({ commit }) {
     if (this.$ua.deviceType() === 'pc') {
