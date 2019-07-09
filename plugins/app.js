@@ -7,6 +7,7 @@ import appInnerContent from '~/components/appInnerContent.vue'
 import appInput from '~/components/appInput.vue'
 import appRecaptcha from '~/components/appRecaptcha.vue'
 import appMessageSender from '~/components/appMessageSender.vue'
+import md5 from '~/plugins/md5.js'
 
 Vue.component('appHeader', appHeader)
 Vue.component('appInnerContent', appInnerContent)
@@ -41,6 +42,10 @@ export default ({ app, store, router }, inject) => {
   inject('eventBus', new Vue())
 
   inject('alerts', new (Vue.extend(appAlerts))())
+
+  inject('md5', md5)
+
+  inject('hashCode', hashCode)
 
   inject('calcDirection', str => {
     if (!str || !/^[\u0600-\u06FF]+$/.test(str.substr(0, 1))) {
