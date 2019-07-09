@@ -3,16 +3,14 @@
     method="POST"
     class="fv-row"
     @submit="send">
-    <fvFormElement 
-      :label="messageLabel" 
-      class="fv-col-12">
+    <fvFormElement class="fv-col-12">
       <fvTextarea 
         ref="input" 
         v-model="form.text"
         placeholder="Enter your message"
-        autofocus
         auto-height
         required
+        @focus.native="recaptchaVisibility = true"
         @input="setInputDirection"/>
     </fvFormElement>
     <!-- <fvFormElement 
@@ -25,6 +23,7 @@
     </fvFormElement> -->
     <fvFormElement
       v-if="recaptcha"
+      v-show="recaptchaVisibility"
       class="fv-col-12">
       <div class="fv-text-center">
         <no-ssr>
@@ -68,10 +67,6 @@ export default {
       type: String,
       default: undefined
     },
-    messageLabel: {
-      type: String,
-      default: 'Message'
-    },
     buttonText: {
       type: String,
       default: 'Send'
@@ -90,6 +85,7 @@ export default {
       text: '',
       recaptcha: false
     },
+    recaptchaVisibility: false,
     saveToLocalStorage: true
   }),
   computed: {
