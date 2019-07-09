@@ -5,7 +5,8 @@ export const state = () => {
     loggedInUserPopup: false,
     headerTitle: 'Hazy',
     headerDescription: '',
-    avatarChangerModal: false
+    avatarChangerModal: false,
+    avatarsCustomRefreshHash: {}
   }
 }
 
@@ -28,6 +29,9 @@ export const mutations = {
   },
   openAvatarChangerModal(state) {
     state['avatarChangerModal'] = true
+  },
+  resetAvatarRefreshHash(state, username) {
+    state['avatarsCustomRefreshHash'][username] = Date.now()
   },
   setHeader(state, { title, description = undefined }) {
     state['headerTitle'] = title
