@@ -6,7 +6,7 @@ export default function(
   title = undefined
 ) {
   return {
-    title: title || objectType,
+    title: title || `Hazy - ${username} ${objectType}`,
     meta: [
       {
         property: 'twitter:card',
@@ -20,7 +20,7 @@ export default function(
       },
       {
         property: 'twitter:title',
-        content: title || `${username} ${objectType} - Hazy`
+        content: title || `Hazy - ${username} ${objectType}`
       },
       {
         property: 'twitter:description',
