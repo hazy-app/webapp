@@ -93,7 +93,7 @@ export default {
           recaptcha: this.form.recaptcha
         })
         const redirect = decodeURIComponent(
-          this.$route.query.redirect || `/${this.form.username}/messages`
+          this.$route.query.redirect || `/${this.form.username}`
         )
         this.$root.$loading.finish()
         this.$alerts.toast('Welcome to Hazy!', 'success')
