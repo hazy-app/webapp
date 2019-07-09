@@ -74,7 +74,7 @@ export default {
       undefined,
       undefined,
       'Your sent messages',
-      `Sent Messages - Hazy`
+      `Hazy - Sent Messages`
     )
   },
   asyncData({ store }) {

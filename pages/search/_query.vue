@@ -43,8 +43,8 @@ export default {
     return twitterCard(
       undefined,
       undefined,
-      `Look at search result for '${this.$route.params.query}'!`,
-      `${this.$route.params.query} - Hazy`
+      `Look at search result for '${this.$route.params.query}'`,
+      `Hazy - Search '${this.$route.params.query}'`
     )
   },
   async asyncData({ params, query, store, $axios, redirect }) {
