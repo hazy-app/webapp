@@ -6,7 +6,7 @@
     <div class="fv-col-12 fv-text-center">
       <appAvatar 
         :username="username" 
-        :avatar="syncedGravatarUrl"
+        :avatar="syncedHashedEmail"
         size="96px" />
     </div>
     <fvFormElement 
@@ -54,26 +54,20 @@ export default {
   },
   data: () => ({
     email: undefined,
-    syncedGravatarUrl: '',
+    syncedHashedEmail: '',
     syncingTimer: undefined
   }),
   computed: {
     hashedEmail() {
       return this.$md5(this.email || '')
-    },
-    gravatarUrl() {
-      if (!this.email) {
-        return undefined
-      }
-      return `https://www.gravatar.com/avatar/${this.hashedEmail}?size=96`
     }
   },
   watch: {
     email(email) {
       clearTimeout(this.syncingTimer)
       this.syncingTimer = setTimeout(() => {
-        if (this.gravatarUrl) {
-          this.syncedGravatarUrl = this.gravatarUrl
+        if (this.email) {
+          this.syncedHashedEmail = this.hashedEmail
         }
       }, 500)
     }
