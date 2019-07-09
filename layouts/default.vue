@@ -25,17 +25,27 @@
       @click.native="$store.commit('ui/closeLoggedInUserPopup')">
       <appAccountActionsLinks :username="$store.state.parsedToken.username || undefined" />
     </fvMenu>
+    <fvDialog 
+      :value="$store.state.ui.avatarChangerModal" 
+      class="fv-col-sm-12 fv-col-md-8 fv-col-lg-6 fv-col-xl-4"
+      @input="$store.commit('ui/closeAvatarChangerModal')">
+      <appAvatarChanger 
+        :username="$store.state.parsedToken.username || undefined" 
+        @changed="$store.commit('ui/closeAvatarChangerModal')"/>
+    </fvDialog>
   </div>
 </template>
 
 <script>
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 import appAccountActionsLinks from '@/components/appAccountActionsLinks.vue'
+import appAvatarChanger from '@/components/appAvatarChanger.vue'
 
 export default {
   components: {
     appAccountAccessLinks,
-    appAccountActionsLinks
+    appAccountActionsLinks,
+    appAvatarChanger
   }
 }
 </script>
