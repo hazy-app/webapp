@@ -17,7 +17,6 @@
           @click="copyLink"> <appIcon icon="copy" /> Copy Link </fvButton>
       </div>
     </div>
-    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
     <appQuestion 
       :question="question"
       :edit-buttons="isMine"
