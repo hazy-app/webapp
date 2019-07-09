@@ -5,7 +5,7 @@
     :size="size" 
     :style="{ backgroundColor: bgColor }"
     :class="{ anonymous: username === 'anonymous'}"
-    class="app-avatar square" />
+    class="app-avatar" />
 
 </template>
 
