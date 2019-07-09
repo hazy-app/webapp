@@ -39,13 +39,21 @@
         {{ question.text }}
       </p>
     </div>
-    <appMessageSender 
+    <div 
       v-if="sendForm" 
-      :user="question.creator"
-      :question="question._id" 
-      class="fv-border-top"
-      save-button
-      @sent="$emit('message-sent', $event)"/>
+      class="fv-border-top">
+      <div class="fv-padding fv-flex header">
+        <span>
+          <appIcon icon="message-square" /> Reply as <appAccountLink />
+        </span>
+      </div>
+      <appMessageSender 
+        v-if="sendForm" 
+        :user="question.creator"
+        :question="question._id"
+        save-button
+        @sent="$emit('message-sent', $event)"/>
+    </div>
   </div>
 </template>
 
