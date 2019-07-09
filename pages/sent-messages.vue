@@ -5,7 +5,7 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <div 
       class="fv-padding fv-text-center fv-border fv-margin-bottom">
-      <p> <appIcon icon="info" /> Feel free to clear list anytime you want. There is nothing related to your account. </p>
+      <p> <appIcon icon="info" /> The messages are stored on your device only and not on the server. </p>
       <div 
         v-if="messages.length !== 0" 
         class="fv-margin-top">
