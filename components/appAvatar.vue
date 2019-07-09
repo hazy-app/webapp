@@ -27,7 +27,9 @@ export default {
   },
   data() {
     return {
-      u: '0'
+      u:
+        this.$store.state.ui.avatarsCustomRefreshHash[this.username] ||
+        'default'
     }
   },
   computed: {
@@ -42,7 +44,7 @@ export default {
         return `https://www.gravatar.com/avatar/${this.avatar}?size=${parseInt(
           this.size
         )}`
-      } else {
+      } else if (this.username && this.username !== 'anonymous') {
         return `${process.env.BASE_URL}/users/${
           this.username
         }/avatar.jpg?size=${parseInt(this.size)}&u=${this.u}`
@@ -68,7 +70,9 @@ export default {
     },
     onChange(user) {
       if (user === this.username) {
-        this.u = Date.now()
+        this.u =
+          this.$store.state.ui.avatarsCustomRefreshHash[this.username] ||
+          'default'
       }
     }
   }
