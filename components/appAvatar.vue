@@ -1,8 +1,7 @@
 <template>
   <fvAvatar 
     :name="username"
-    :src="gravatarUrl"
-    :title="avatar"
+    :src="avatarUrl"
     :size="size" 
     :style="{ backgroundColor: bgColor }"
     :class="{ anonymous: username === 'anonymous'}"
@@ -28,7 +27,7 @@ export default {
   },
   data() {
     return {
-      gravatar: this.avatar
+      u: '0'
     }
   },
   computed: {
@@ -38,24 +37,24 @@ export default {
       }
       return '#444'
     },
-    gravatarUrl() {
-      const avat = this.avatar || this.gravatar || undefined
-      if (!avat) {
-        return undefined
+    avatarUrl() {
+      if (this.avatar) {
+        return `https://www.gravatar.com/avatar/${this.avatar}?size=${parseInt(
+          this.size
+        )}`
+      } else {
+        return `${process.env.BASE_URL}/users/${
+          this.username
+        }/avatar.jpg?size=${parseInt(this.size)}&u=${this.u}`
       }
-      return `https://www.gravatar.com/avatar/${avat}?size=${parseInt(
-        this.size
-      )}`
     }
   },
-  // async beforeMount() {
-  //   if (!this.avatar && this.username && this.username !== 'anonymous') {
-  //     const response = await this.$axios.$get(
-  //       `${process.env.BASE_URL}/users/${this.username}`
-  //     )
-  //     this.gravatar = response.gravatar
-  //   }
-  // },
+  created() {
+    this.$eventBus.$on('avatarChange', this.onChange)
+  },
+  beforeDestroy() {
+    this.$eventBus.$off('avatarChange', this.onChange)
+  },
   methods: {
     calcColor(str) {
       const ascii = str.charCodeAt(0) % 256
@@ -66,6 +65,11 @@ export default {
       arr[section] = ascii
       arr[section2] = ascii2
       return `rgba(${arr.join(',')}, 0.5)`
+    },
+    onChange(user) {
+      if (user === this.username) {
+        this.u = Date.now()
+      }
     }
   }
 }
