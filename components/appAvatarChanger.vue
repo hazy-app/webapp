@@ -86,6 +86,7 @@ export default {
           authorization: response
         })
         this.email = ''
+        this.$eventBus.$emit('avatarChange', this.username)
         this.$root.$loading.finish()
         this.$emit('changed', response)
         this.$alerts.toast(
