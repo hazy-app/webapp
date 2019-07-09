@@ -49,7 +49,7 @@ export default {
   props: {
     username: {
       type: String,
-      required: true
+      default: undefined
     }
   },
   data: () => ({
@@ -86,6 +86,7 @@ export default {
           authorization: response
         })
         this.email = ''
+        this.$store.commit('ui/resetAvatarRefreshHash', this.username)
         this.$eventBus.$emit('avatarChange', this.username)
         this.$root.$loading.finish()
         this.$emit('changed', response)
