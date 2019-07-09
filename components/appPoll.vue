@@ -17,12 +17,24 @@
       <span :title="poll.create_date | dateReadable">
         <appIcon icon="calendar" /> {{ poll.create_date | dateFromNow }}
       </span>
+      
       <nuxt-link 
         v-if="openButton" 
         :to="'/' + poll.creator + '/polls/' + poll.uuid" 
-        class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
+        class="fv-margin-start fv-link">
+        <appIcon 
+          v-if="watchAs === 'user'"  
+          icon="check-square"/>
+        <span 
+          v-if="watchAs === 'creator'" 
+          class="fv-hidden-xs"> Open </span>
+        <span v-else> Answer </span> 
+        <appIcon 
+          v-if="watchAs === 'creator'" 
+          icon="arrow-right"/>
+      </nuxt-link>
     </div>
-    <div class="fv-padding">
+    <div class="fv-padding fv-font-lg">
       <p :style="{'direction': $calcDirection(poll.title)}">
         {{ poll.title }}
       </p>
@@ -33,16 +45,16 @@
         v-if="totalVotes > 0" 
         class="choices-chart fv-bg-info">
         <div 
-          v-for="(choice, index) in activeChoices"
-          :key="'choice' + index"
-          :style="{width: votesPercetange[index] + '%'}"
-          :title="choice + ', <br>' + poll.answers[index]" 
-          :class="{ 'open': infoPopup === true && infoPopupItem === index }"
+          v-for="choiceItem in activeChoices"
+          :key="'choice' + choiceItem.index"
+          :style="{width: votesPercetange[choiceItem.index] + '%'}"
+          :title="choiceItem.choice + ' ' + poll.answers[choiceItem.index]" 
+          :class="{ 'open': infoPopup === true && infoPopupItem === choiceItem.index }"
           class="choice fv-pointer"
-          @click="toggleInfoPopup(index)">
+          @click="toggleInfoPopup(choiceItem.index)">
           <b 
-            :style="{'direction': $calcDirection(choice)}" 
-            v-text="choice"/> {{ parseFloat(votesPercetange[index]).toFixed(1) }}%
+            :style="{'direction': $calcDirection(choiceItem.choice)}" 
+            v-text="choiceItem.choice"/> {{ parseFloat(votesPercetange[choiceItem.index]).toFixed(1) }}%
         </div>
         <fvMenu 
           v-model="infoPopup" 
@@ -150,13 +162,19 @@ export default {
       )
     },
     activeChoices() {
-      return this.poll.choices.filter((choice, index) => {
-        return this.poll.answers[index] > 0
-      })
+      return this.poll.choices
+        .map((choice, index) => {
+          return {
+            choice,
+            index
+          }
+        })
+        .filter((choice, index) => {
+          return this.poll.answers[index] > 0
+        })
     },
     votesPercetange() {
       const totalVotes = this.totalVotes
-      totalVotes
       return this.poll.answers.map(vote => (vote * 100) / totalVotes)
     }
   },

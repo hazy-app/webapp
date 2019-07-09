@@ -1,34 +1,36 @@
 <template>
   <div class="app-account-access-links">
-    <div class="fv-border-bottom fv-padding fv-text-center fv-font-lg">
+    <div class="fv-padding-top fv-text-center fv-font-lg">
       <appAvatar 
         :username="username" 
         size="64px"/>
-      <b class="fv-block"> {{ username }} </b>
+      <h3> {{ username }} </h3>
     </div>
     <div 
-      v-if="username !== 'anonymous'" 
+      v-if="!onlyProfile && username !== 'anonymous'" 
       class="fv-row">
       <div 
-        v-if="!isMine" 
         class="fv-col">
         <nuxt-link 
-          :to="'/' + username" 
-          :class="{'fv-disabled': isMine}"
+          :to="'/' + username + '/questions'" 
           exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="send" /> Anonymous Chat </nuxt-link>
-      </div>
-      <div class="fv-col">
-        <nuxt-link 
-          :to="'/' + username + '/messages'" 
-          exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="inbox" /> {{ !isMine ? 'Public Messages' : 'Inbox' }}  </nuxt-link>
+          class="fv-button fv-block"> <appIcon icon="message-square" /> Questions </nuxt-link>
       </div>
       <div class="fv-col">
         <nuxt-link 
           :to="'/' + username + '/polls'" 
           exact-active-class="link-active"
           class="fv-button fv-block"> <appIcon icon="check-square" /> Polls </nuxt-link>
+      </div>
+    </div>
+    <div 
+      v-else-if="onlyProfile && username !== 'anonymous'" 
+      class="fv-row">
+      <div class="fv-col">
+        <nuxt-link 
+          :to="'/' + username" 
+          exact-active-class="link-active"
+          class="fv-button fv-block"> <appIcon icon="user" />View Profile </nuxt-link>
       </div>
     </div>
     <div 
@@ -52,6 +54,10 @@ export default {
     username: {
       type: String,
       default: ''
+    },
+    onlyProfile: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

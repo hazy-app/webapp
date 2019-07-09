@@ -34,8 +34,8 @@
           class="fv-button fv-primary fv-col"> <appIcon icon="user-plus" /> Register </nuxt-link>
         <nuxt-link 
           v-if="$store.state.parsedToken.username" 
-          :to="'/' + $store.state.parsedToken.username + '/messages'"
-          class="fv-button fv-primary fv-col"> <appIcon icon="inbox" /> Inbox </nuxt-link>
+          :to="'/' + $store.state.parsedToken.username"
+          class="fv-button fv-primary fv-col"> <appIcon icon="user" /> My Profile </nuxt-link>
       </div>
     </div>
   </appInnerContent>
@@ -77,12 +77,19 @@ export default {
 
 <style lang="scss" scoped>
 .logo-container__logo {
-  height: 300px;
-  max-width: 100%;
-  margin: 0 auto;
+  height: 340px;
+  // max-width: 290px;
+  margin: 0 auto -20px auto;
 }
 
 .logo-container__text {
+  line-height: 1.2;
+
+  & > h1 {
+    font-size: 3.5em;
+    margin: 0;
+    padding: 0;
+  }
   & > p {
     font-size: 1.3em;
   }

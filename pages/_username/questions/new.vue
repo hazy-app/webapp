@@ -8,43 +8,44 @@
       only-profile
       class="fv-margin-bottom" />
     <div>
-      <appPollCreator 
+      <appQuestionCreator 
         :user="$route.params.username"
-        :title.sync="poll.title" 
-        :choices.sync="poll.choices"
+        :text.sync="question.text" 
         @created="done" />
     </div>
   </appInnerContent>
 </template>
 
 <script>
-import appPollCreator from '~/components/appPollCreator.vue'
+import appQuestionCreator from '~/components/appQuestionCreator.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 
 export default {
   components: {
-    appPollCreator,
+    appQuestionCreator,
     appAccountLink,
     appAccountAccessLinks
   },
   data() {
     return {
-      poll: {
-        choices: ['', '', ''],
-        title: ''
+      question: {
+        text: ''
       }
     }
   },
   methods: {
-    done(poll) {
-      this.$router.push(`/${this.$route.params.username}/polls/${poll.uuid}`)
+    done(question) {
+      console.log(question)
+      this.$router.push(
+        `/${this.$route.params.username}/questions/${question._id}`
+      )
     }
   },
   asyncData({ store, params }) {
     store.commit('ui/setHeader', {
       title: `@${params.username}`,
-      description: 'Create new poll'
+      description: 'Create new question'
     })
   }
 }

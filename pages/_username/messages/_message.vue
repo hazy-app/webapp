@@ -2,11 +2,21 @@
   <appInnerContent 
     class="fv-padding-sm" 
     sm>
-    <div class="fv-padding-sm" />
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
+      only-profile
+      class="fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
+    <appQuestion 
+      :question="question"
+      :edit-buttons="false"
+      :send-form="false"
+      :view-replies-button="false"
+      :open-button="true"
+      :watch-as="isMine ? 'creator' : 'user'"
       class="fv-border fv-margin-bottom" />
-
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="message-circle" /> Answer: </label>
     <appMessage 
       :message="message"
       :edit-buttons="isMine"
@@ -21,17 +31,22 @@ import copy from 'clipboard-copy'
 import appMessage from '~/components/appMessage.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appQuestion from '@/components/appQuestion.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appMessage,
     appAccountLink,
-    appAccountAccessLinks
+    appAccountAccessLinks,
+    appQuestion,
+    appIcon
   },
   data() {
     return {
       isMine: false,
-      message: {}
+      message: {},
+      question: {}
     }
   },
   head() {
@@ -114,6 +129,13 @@ export default {
         message: 'Message not found!'
       }
     }
+    try {
+      const response = await $axios.$get(
+        `${process.env.BASE_URL}/users/${params.username}/questions/${ret
+          .message.question_id || 'default'}`
+      )
+      ret.question = response
+    } catch (e) {}
     store.commit('ui/setHeader', {
       title: `@${params.username}`,
       description: `Received message for @${params.username}`

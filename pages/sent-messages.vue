@@ -2,7 +2,7 @@
   <appInnerContent 
     sm 
     class="fv-padding-sm">
-    <div class="fv-padding-sm" />
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <div 
       class="fv-padding fv-text-center fv-border fv-margin-bottom">
       <p> <appIcon icon="info" /> The messages are stored on your device only and not on the server. </p>
@@ -71,7 +71,7 @@ export default {
   asyncData({ store }) {
     store.commit('ui/setHeader', {
       title: 'Hazy',
-      description: 'Your sent messages (from local storage)'
+      description: 'Your sent messages'
     })
   }
 }

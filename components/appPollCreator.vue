@@ -131,7 +131,7 @@ export default {
           }
         )
         this.$root.$loading.finish()
-        this.$emit('created', response.data)
+        this.$emit('created', response)
         this.$alerts.toast(`Your poll has been created!`, 'success')
       } catch (e) {
         console.log(e)

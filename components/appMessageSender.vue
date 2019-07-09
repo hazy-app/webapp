@@ -15,14 +15,14 @@
         required
         @input="setInputDirection"/>
     </fvFormElement>
-    <fvFormElement 
+    <!-- <fvFormElement 
       v-if="saveButton"
       label="Save to Local Storage" 
       class="fv-col-12"
       inline>
       <fvSwitch 
         v-model="saveToLocalStorage" />
-    </fvFormElement>
+    </fvFormElement> -->
     <fvFormElement
       v-if="recaptcha"
       class="fv-col-12">
@@ -37,7 +37,6 @@
       <p v-if="!$store.state.parsedToken.username"> <appIcon icon="info" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 
         to="/register"> Click here </nuxt-link> to register! </p>
-      <p v-if="saveButton"> <appIcon icon="info" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
     </div>
     <div class="fv-flex fv-col-12">
       <fvButton 
@@ -65,6 +64,10 @@ export default {
       type: String,
       default: undefined
     },
+    question: {
+      type: String,
+      default: undefined
+    },
     messageLabel: {
       type: String,
       default: 'Message'
@@ -75,7 +78,7 @@ export default {
     },
     saveButton: {
       type: Boolean,
-      default: false
+      default: true
     },
     recaptcha: {
       type: Boolean,
@@ -99,7 +102,9 @@ export default {
           this.message
         }`
       }
-      return `${process.env.BASE_URL}/users/${this.user}/messages`
+      return `${process.env.BASE_URL}/users/${this.user}/messages?question=${
+        this.question
+      }`
     }
   },
   methods: {
@@ -124,6 +129,8 @@ export default {
         }
         this.$root.$loading.finish()
         this.$emit('sent', response.data)
+        this.form.text = undefined
+        this.form.recaptcha = undefined
         if (this.isReply) {
           this.$alerts.toast(
             `Your reply has been set to that message!`,

@@ -3,7 +3,7 @@
     <nuxt-link to="/">
       <appLogo class="logo"/>
     </nuxt-link>
-    <div class="vertical-line fv-border-start fv-hidden-xs" />
+    <div class="vertical-line fv-border-start" />
     <div class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light fv-hidden-xs"> <slot name="description"/> </p>
@@ -18,7 +18,7 @@
       @click.native="$store.commit('ui/openLoggedInUserPopup')">
       <appIcon 
         icon="chevron-down" 
-        class="fv-hidden-xs" />
+        class="fv-hidden-xs fv-hidden-sm" />
     </appAccountLink>
 
     <a 
@@ -54,7 +54,7 @@ export default {
   background: transparent;
 
   & /deep/ header {
-    padding: 0.4em 1em;
+    padding: 0.4em;
 
     & .vertical-line {
       margin: 0 10px 0 4px;
@@ -73,6 +73,14 @@ export default {
     & .fv-button {
       margin: 0 0 0 4px;
       min-width: 40px;
+      @media screen and (max-width: 768px) {
+        border: 0 !important;
+        padding-left: 0.1em !important;
+        padding-right: 0.1em !important;
+        &.search-btn.searching {
+          padding-left: 0.5em !important;
+        }
+      }
     }
   }
 }

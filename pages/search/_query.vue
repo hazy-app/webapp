@@ -2,7 +2,7 @@
   <appInnerContent 
     class="fv-padding-sm" 
     sm>
-    <div class="fv-padding-sm" />
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appNothingToShow 
       v-if="users.length === 0" 
     />
@@ -12,9 +12,8 @@
         :key="user.username" 
         class="fv-col-md-6">
         <appAccountAccessLinks 
-        
           :username="user.username" 
-        
+          only-profile
           class="fv-border" />
       </div>
   </div></appInnerContent>

@@ -92,7 +92,12 @@ const ret = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap'
+          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap&subset=latin'
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Lobster:400&display=swap&subset=latin'
       }
     ]
   },
