@@ -6,7 +6,7 @@
     @click="onClick">
     <appAvatar 
       :username="username" 
-      size="24px" /> <span class="fv-hidden-xs fv-hidden-sm"> {{ username }} </span> <slot />
+      size="24px" /> <span> {{ username }} </span> <slot />
   </a>
 </template>
 
