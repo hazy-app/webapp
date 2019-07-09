@@ -20,8 +20,8 @@
         class="fv-col" >
         <a 
           href="#" 
-          class="fv-button fv-block fv-disabled"
-          zclick="$store.commit('ui/openAvatarChangerModal')"> <appIcon icon="image" /> Change Avatar </a>
+          class="fv-button fv-block"
+          @click="$store.commit('ui/openAvatarChangerModal')"> <appIcon icon="image" /> Change Avatar </a>
       </div>
       <div class="fv-col" >
         <nuxt-link 
