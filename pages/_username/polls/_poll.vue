@@ -46,7 +46,8 @@ export default {
   data() {
     return {
       isMine: false,
-      poll: {}
+      poll: {},
+      refreshTimer: undefined
     }
   },
   head() {
@@ -63,10 +64,14 @@ export default {
   mounted() {
     if (this.isMine) {
       window.addEventListener('focus', this.sync)
+      this.refreshTimer = setInterval(() => {
+        this.sync()
+      }, 45000)
     }
   },
   beforeDestroy() {
     window.removeEventListener('focus', this.sync)
+    clearInterval(this.refreshTimer)
   },
   methods: {
     async sync() {
