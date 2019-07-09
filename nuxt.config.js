@@ -7,7 +7,7 @@ const ret = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Hazy',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
