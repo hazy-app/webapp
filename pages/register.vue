@@ -130,7 +130,7 @@ export default {
       undefined,
       undefined,
       'Register a new account',
-      `Register - Hazy`
+      `Hazy - Register`
     )
   },
   asyncData({ store }) {

@@ -118,7 +118,7 @@ export default {
       undefined,
       undefined,
       'Login to your account',
-      `Login - Hazy`
+      `Hazy - Login`
     )
   },
   asyncData({ store }) {
