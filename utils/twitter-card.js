@@ -10,7 +10,7 @@ export default function(
     meta: [
       {
         property: 'twitter:card',
-        content: 'summary_large_image'
+        content: 'summary'
       },
       {
         property: 'twitter:image:src',
