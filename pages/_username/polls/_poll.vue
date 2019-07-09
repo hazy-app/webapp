@@ -24,6 +24,7 @@
       :watch-as="isMine ? 'creator' : 'user'"
       :open-button="false"
       :vote-form="!isMine"
+      class="fv-margin-bottom"
       @remove="remove"
       @vote="vote" />
   </appInnerContent>
