@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     done(question) {
-      console.log(question)
       this.$router.push(
         `/${this.$route.params.username}/questions/${question._id}`
       )

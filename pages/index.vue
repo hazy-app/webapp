@@ -42,12 +42,11 @@
 </template>
 
 <script>
-import appNumberBanner from '~/components/appNumberBanner.vue'
+import twitterCard from '~/utils/twitter-card.js'
 import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appNumberBanner,
     appIcon
   },
   data() {
@@ -56,15 +55,12 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: 'Send and Receive anonymous messages'
-        }
-      ]
-    }
+    return twitterCard(
+      undefined,
+      undefined,
+      'Send and Receive anonymous messages',
+      `Hazy`
+    )
   },
   asyncData({ store }) {
     store.commit('ui/setHeader', {

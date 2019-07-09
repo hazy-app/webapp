@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appAccountAccessLinks from '~/components/appAccountAccessLinks.vue'
@@ -39,15 +40,12 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: `Searching for ${this.$route.params.query}`
-        }
-      ]
-    }
+    return twitterCard(
+      undefined,
+      undefined,
+      `Look at search result for '${this.$route.params.query}'!`,
+      `${this.$route.params.query} - Hazy`
+    )
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
@@ -69,9 +67,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.profile-container {
-  margin-bottom: -4rem;
-}
-</style>

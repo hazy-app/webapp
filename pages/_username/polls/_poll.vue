@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import copy from 'clipboard-copy'
 import appPoll from '~/components/appPoll.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
@@ -51,15 +52,7 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: `Look at created poll by @${this.$route.params.username}!`
-        }
-      ]
-    }
+    return twitterCard(this.$route.params.username, 'Poll')
   },
   mounted() {
     if (this.isMine) {

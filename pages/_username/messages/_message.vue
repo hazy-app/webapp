@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import copy from 'clipboard-copy'
 import appMessage from '~/components/appMessage.vue'
 import appAccountLink from '~/components/appAccountLink.vue'
@@ -50,17 +51,11 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: `Look at anonymous message sent for @${
-            this.$route.params.username
-          }!`
-        }
-      ]
-    }
+    return twitterCard(
+      this.$route.params.username,
+      undefined,
+      `Look at anonymous message sent for @${this.$route.params.username}!`
+    )
   },
   methods: {
     async reload() {

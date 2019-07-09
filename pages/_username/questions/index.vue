@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import copy from 'clipboard-copy'
 import appAccountLink from '~/components/appAccountLink.vue'
 import appQuestion from '~/components/appQuestion.vue'
@@ -84,17 +85,7 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: `Look at created questions by @${
-            this.$route.params.username
-          }!`
-        }
-      ]
-    }
+    return twitterCard(this.$route.params.username, 'Questions')
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}

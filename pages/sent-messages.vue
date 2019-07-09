@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import appMessage from '~/components/appMessage.vue'
 import appNothingToShow from '~/components/appNothingToShow.vue'
 import appIcon from '@/components/appIcon.vue'
@@ -67,6 +68,14 @@ export default {
         this.$root.$loading.finish()
       }
     }
+  },
+  head() {
+    return twitterCard(
+      undefined,
+      undefined,
+      'Your sent messages',
+      `Sent Messages - Hazy`
+    )
   },
   asyncData({ store }) {
     store.commit('ui/setHeader', {

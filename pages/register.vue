@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import appIcon from '@/components/appIcon.vue'
 
 export default {
@@ -125,9 +126,12 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy'
-    }
+    return twitterCard(
+      undefined,
+      undefined,
+      'Register a new account',
+      `Register - Hazy`
+    )
   },
   asyncData({ store }) {
     store.commit('ui/setHeader', {
