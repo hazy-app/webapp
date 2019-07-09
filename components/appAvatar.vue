@@ -1,6 +1,8 @@
 <template>
   <fvAvatar 
     :name="username"
+    :src="avatar"
+    :title="avatar"
     :size="size" 
     :style="{ backgroundColor: bgColor }"
     :class="{ anonymous: username === 'anonymous'}"
@@ -14,6 +16,10 @@ export default {
     username: {
       type: String,
       default: 'anonymous'
+    },
+    avatar: {
+      type: String,
+      default: ''
     },
     size: {
       type: String,
