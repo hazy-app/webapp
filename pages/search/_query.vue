@@ -10,7 +10,7 @@
       <div 
         v-for="user in users" 
         :key="user.username" 
-        class="fv-col-md-6">
+        class="fv-col">
         <appAccountAccessLinks 
           :username="user.username" 
           only-profile
