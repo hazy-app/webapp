@@ -27,15 +27,6 @@
       class="fv-border fv-margin-bottom"
       @remove="remove"
       @message-sent="mySentMessages = loadMySentMessages()" />
-    <!-- <div v-if="!isMine">
-      <label class="fv-control-label fv-margin-bottom"> <appIcon icon="send" /> Reply: </label>
-      <appMessageSender 
-        :user="$route.params.username"
-        :question="$route.query.question" 
-        class="fv-border fv-margin-bottom"
-        save-button
-        @sent="mySentMessages = loadMySentMessages()"/>
-    </div> -->
     <label class="fv-control-label fv-margin-bottom"> <appIcon icon="message-circle" /> Replies: </label>
     <appNothingToShow 
       v-if="messages.length === 0 && mySentMessages.length === 0" 
