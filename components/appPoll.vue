@@ -78,38 +78,56 @@
       <p 
         class="fv-padding fv-border-top"> <label class="fv-text-light"> Total votes: </label> {{ totalVotes }} </p>
     </div>
-    <fvForm 
+    <div 
       v-if="voteForm" 
-      class="fv-padding fv-border-top choices"
-      method="POST"
-      @submit="vote">
-      <fvFormElement inline>
-        <div 
-          v-for="(choice, index) in poll.choices"
-          :key="'choice' + index" 
-          class="fv-flex choice">
-          <fvCheck 
-            v-model="selectedChoice"
-            :content="index"
-            class="fv-margin-end"
-            tabindex="-1"> {{ choice }} </fvCheck>
-        </div>
-      </fvFormElement>
-      <fvFormElement class="fv-col-12">
-        <div class="fv-text-center">
-          <no-ssr>
-            <appRecaptcha v-model="recaptcha" />
-          </no-ssr>
-        </div>
-      </fvFormElement>
-      <div class="fv-flex">
-        <fvButton 
-          type="submit" 
-          class="fv-primary fv-grow">
-          <appIcon icon="check" /> Submit
-        </fvButton>
+      class="fv-border-top">
+      <div class="fv-padding fv-flex header">
+        <span>
+          <appIcon icon="check-square" /> Answer as <appAccountLink />
+        </span>
       </div>
-    </fvForm>
+      <fvForm 
+        v-if="voteForm" 
+        class="fv-padding choices"
+        method="POST"
+        @submit="vote">
+        <fvFormElement inline>
+          <div 
+            v-for="(choice, index) in poll.choices"
+            :key="'choice' + index" 
+            class="fv-flex choice fv-padding-start-sm fv-padding-end-sm">
+            <fvCheck 
+              v-model="selectedChoice"
+              :content="index"
+              class="fv-margin-end"
+              tabindex="-1"
+              @focus.native="showRecaptcha = true"> {{ choice }} </fvCheck>
+          </div>
+        </fvFormElement>
+        <fvFormElement 
+          v-show="showRecaptcha" 
+          class="fv-col-12">
+          <div class="fv-text-center">
+            <no-ssr>
+              <appRecaptcha v-model="recaptcha" />
+            </no-ssr>
+          </div>
+        </fvFormElement>
+        <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm fv-margin-top">
+          <p> <appIcon icon="info" /> @{{ poll.creator }} never understand who you are! </p>
+          <p v-if="!$store.state.parsedToken.username"> <appIcon icon="info" /> You can create polls and receive anonymous answers too! <nuxt-link 
+            class="fv-link" 
+            to="/register"> Click here </nuxt-link> to register! </p>
+        </div>
+        <div class="fv-flex fv-col-12">
+          <fvButton 
+            type="submit" 
+            class="fv-primary fv-grow">
+            <appIcon icon="check" /> Submit
+          </fvButton>
+        </div>
+      </fvForm>
+    </div>
   </div>
 </template>
 
@@ -151,7 +169,8 @@ export default {
       userFingerprint: undefined,
       recaptcha: false,
       infoPopupItem: undefined,
-      infoPopup: false
+      infoPopup: false,
+      showRecaptcha: false
     }
   },
   computed: {
