@@ -7,7 +7,7 @@ import appInnerContent from '~/components/appInnerContent.vue'
 import appInput from '~/components/appInput.vue'
 import appRecaptcha from '~/components/appRecaptcha.vue'
 import appMessageSender from '~/components/appMessageSender.vue'
-import md5 from '~/plugins/md5.js'
+import md5 from '~/utils/md5.js'
 
 Vue.component('appHeader', appHeader)
 Vue.component('appInnerContent', appInnerContent)
