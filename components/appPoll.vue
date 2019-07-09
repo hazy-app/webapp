@@ -83,7 +83,7 @@
       class="fv-border-top">
       <div class="fv-padding fv-flex header">
         <span>
-          <appIcon icon="check-square" /> Answer as <appAccountLink />
+          Answer as <appAccountLink />
         </span>
       </div>
       <fvForm 

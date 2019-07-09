@@ -20,18 +20,19 @@
         <appIcon icon="calendar" /> {{ question.create_date | dateFromNow }}
       </span>
       <nuxt-link 
-        v-if="viewRepliesButton" 
-        :to="'/' + question.creator + '/messages?question=' + question._id" 
-        class="fv-margin-start fv-link">
-        <appIcon icon="list"/>
-        <span class="fv-hidden-xs"> Replies </span> 
-      </nuxt-link>
-      <nuxt-link 
-        v-if="openButton && watchAs === 'creator'" 
+        v-if="openButton" 
         :to="'/' + question.creator + '/questions/' + question._id" 
         class="fv-margin-start fv-link">
-        <span class="fv-hidden-xs"> Open </span>
-        <appIcon icon="arrow-right"/>
+        <appIcon 
+          v-if="watchAs === 'user'"  
+          icon="message-square"/>
+        <span 
+          v-if="watchAs === 'creator'" 
+          class="fv-hidden-xs"> Open </span>
+        <span v-else> Reply </span> 
+        <appIcon 
+          v-if="watchAs === 'creator'" 
+          icon="arrow-right"/>
       </nuxt-link>
     </div>
     <div class="fv-padding fv-font-lg">
@@ -44,7 +45,7 @@
       class="fv-border-top">
       <div class="fv-padding fv-flex header">
         <span>
-          <appIcon icon="message-square" /> Reply as <appAccountLink />
+          Reply as <appAccountLink />
         </span>
       </div>
       <appMessageSender 
@@ -78,10 +79,6 @@ export default {
       default: false
     },
     editButtons: {
-      type: Boolean,
-      default: false
-    },
-    viewRepliesButton: {
       type: Boolean,
       default: false
     },
