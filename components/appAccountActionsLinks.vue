@@ -15,6 +15,14 @@
           :to="'/' + username" 
           class="fv-button fv-block"> <appIcon icon="user" /> View Profile </nuxt-link>
       </div>
+      <div 
+        v-if="username !== 'anonymous'" 
+        class="fv-col" >
+        <a 
+          href="#" 
+          class="fv-button fv-block"
+          @click="$store.commit('ui/openAvatarChangerModal')"> <appIcon icon="image" /> Change Avatar </a>
+      </div>
       <div class="fv-col" >
         <nuxt-link 
           :to="'/sent-messages'" 
