@@ -52,7 +52,7 @@ export default {
     }
   },
   head() {
-    return twitterCard(this.$route.params.username, 'Poll')
+    return twitterCard(this.$route.params.username, 'Poll', this.poll.title)
   },
   mounted() {
     if (this.isMine) {

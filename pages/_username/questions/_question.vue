@@ -97,7 +97,6 @@ export default {
       window.addEventListener('focus', this.sync)
     }
     this.mySentMessages = this.loadMySentMessages()
-    console.log(this.mySentMessages)
   },
   beforeDestroy() {
     window.removeEventListener('focus', this.sync)
@@ -183,7 +182,11 @@ export default {
     }
   },
   head() {
-    return twitterCard(this.$route.params.username, 'Question')
+    return twitterCard(
+      this.$route.params.username,
+      'Question',
+      this.question.text
+    )
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
