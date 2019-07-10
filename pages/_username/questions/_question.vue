@@ -139,10 +139,7 @@ export default {
       this.$refs.input.$el.style.direction = direction
     },
     copyLink() {
-      const url = `${document.location.protocol}//${document.location.host}/${
-        this.$route.params.username
-      }`
-      copy(url)
+      copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
     },
     async remove(question) {
