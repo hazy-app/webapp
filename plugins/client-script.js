@@ -2,10 +2,6 @@ import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 
 export default async ({ store, app: { $alerts, $eventBus } }) => {
-  if ('Notification' in window) {
-    await Notification.requestPermission()
-  }
-
   // Firebase init
   var config = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -16,9 +12,11 @@ export default async ({ store, app: { $alerts, $eventBus } }) => {
     firebase.initializeApp(config)
     const messaging = firebase.messaging()
     const fcmToken = await messaging.getToken()
-    window.localStorage.setItem('fcmToken', fcmToken)
-    if (store.state.parsedToken.username) {
-      await store.dispatch('setMyFcmToken', { fcmToken })
+    if (fcmToken) {
+      window.localStorage.setItem('fcmToken', fcmToken)
+      if (store.state.parsedToken.username) {
+        await store.dispatch('setMyFcmToken', { fcmToken })
+      }
     }
 
     messaging.onMessage(e => {

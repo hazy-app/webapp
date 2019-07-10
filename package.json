@@ -1,10 +1,11 @@
 {
   "name": "Hazy",
-  "version": "1.6.2",
+  "version": "2.0.0",
   "description": "Send and Receive anonymous messages",
   "author": "nainemom <nainemom@gmail.com>",
   "scripts": {
     "dev": "nuxt -p 3003 -H 0.0.0.0",
+    "demo": "cross-env BASE_URL='https://api.hazyapp.com' nuxt -p 3004 -H 0.0.0.0",
     "dev:spa": "nuxt --spa -p 3003 -H 0.0.0.0",
     "build:framevuerk": "framevuerk-builder -c ./framevuerk-config.js",
     "build": "npm run build:framevuerk && nuxt build",
@@ -16,23 +17,21 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/pwa": "^2.6.0",
     "base-64": "^0.1.0",
     "clipboard-copy": "^2.0.1",
     "cookie-universal-nuxt": "^2.0.5",
-    "cross-env": "^5.2.0",
+    "fingerprintjs2": "^2.1.0",
     "firebase": "^5.6.0",
-    "font-awesome": "^4.7.0",
-    "framevuerk": "^2.1.2",
-    "modela": "^0.4.0",
+    "framevuerk": "^2.2.3",
     "nuxt": "^2.2.0",
     "nuxt-user-agent": "^1.0.2",
     "timeago.js": "^4.0.0-beta.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^3.1.0",
     "eslint-loader": "^2.0.0",
@@ -42,6 +41,7 @@
     "node-sass": "^4.10.0",
     "nodemon": "^1.11.0",
     "prettier": "1.14.3",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "vue-svg-loader": "^0.12.0"
   }
 }

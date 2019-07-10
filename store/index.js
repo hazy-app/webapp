@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/messaging'
+import { decode as base64Decode } from 'base-64'
 
 export const state = () => {
   return {
@@ -48,7 +49,7 @@ export const actions = {
         token = token.split(' ')[1]
       }
       const parsed = JSON.parse(
-        require('base-64').decode(
+        base64Decode(
           token
             .split('.')[1]
             .replace('-', '+')
@@ -92,6 +93,9 @@ export const actions = {
       })
       this.$sentMessages.clear()
       if (window && window.localStorage.fcmToken) {
+        if ('Notification' in window) {
+          await Notification.requestPermission()
+        }
         await dispatch('setMyFcmToken', {
           fcmToken: window.localStorage.fcmToken
         })
@@ -122,8 +126,8 @@ export const actions = {
     }
   },
   logout({ dispatch }) {
-    dispatch('clearAuthorization')
     this.$sentMessages.clear()
+    dispatch('clearAuthorization')
   },
   calcUserAgent({ commit }) {
     if (this.$ua.deviceType() === 'pc') {

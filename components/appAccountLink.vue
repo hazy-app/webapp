@@ -1,42 +1,38 @@
 <template>
-  <div 
-    :style="{width: size, height: size}" 
-    class="hazy fv-border fv-shadow">
-    <img 
-      :src="'/hazy.svg'" 
-      alt="Hazy" >
-  </div>
+  <a 
+    :class="{'non-clickable': !clickable}"
+    :tabindex="clickable ? 0 : -1"
+    class="profile-link"
+    @click="onClick">
+    <appAvatar 
+      :username="username" 
+      size="24px" /> <span> {{ username }} </span> <slot />
+  </a>
 </template>
 
 <script>
+import appAvatar from '@/components/appAvatar.vue'
+
 export default {
+  components: {
+    appAvatar
+  },
   props: {
-    size: {
+    username: {
       type: String,
-      default: '4rem'
+      default: 'anonymous'
+    },
+    clickable: {
+      type: Boolean,
+      default: true
     }
   },
-  data() {
-    return {
-      username: undefined
+  methods: {
+    onClick() {
+      if (this.clickable) {
+        this.$store.commit('ui/openUserPopup', this.username)
+      }
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.hazy {
-  display: inline-block;
-  background-color: #fff;
-  border-radius: 50%;
-  overflow: visible;
-  position: sticky;
-  top: 0.5rem;
-
-  & > img {
-    width: 130%;
-    margin-left: -15%;
-    margin-top: -25%;
-  }
-}
-</style>

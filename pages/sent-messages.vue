@@ -1,79 +1,47 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true">
-        Sent Messages
-      </appHeader>
-
-      <appInnerContent 
-        class="fv-padding-sm"
-        sm>
-        <div 
-          class="fv-padding fv-text-center fv-margin-bottom">
-          <p
-            v-if="messages.length === 0"
-            class="fv-text-center">
-            <i class="fa fa-circle-o" /> Local storage is empty!
-          </p>
-          <p
-            v-else
-            class="fv-text-center">
-            <i class="fa fa-info-circle" /> Feel free to clear list anytime you want.
-          </p>
-          <div class="fv-margin-top">
-            <fvButton 
-              v-if="messages.length !== 0"
-              class="fv-primary fv-size-sm" 
-              @click="clear"> <i class="fa fa-trash" /> Clear </fvButton>
-          </div>
-        </div>
-
-        <div 
-          v-for="message in messages"
-          :key="message._id" 
-          class="fv-margin-bottom fv-flex">
-          <div class="fv-border fv-shadow fv-radius fv-grow">
-            <p 
-              :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><nuxt-link 
-                :to="'/' + message.receiver + '/messages/' + message.uuid" 
-                class="fv-block">{{ message.text }}</nuxt-link></p>
-            <small class="fv-flex fv-padding-sm fv-padding-top">
-              <div class="fv-grow" />
-              <div 
-                :title="message.create_date | dateReadable" 
-                class="fv-margin-end fv-hidden-xs">
-                <span class="fa fa-text-gray">
-                  <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
-                </span>
-              </div>
-              <div class="fv-margin-end">
-                <nuxt-link 
-                  :to="'/' + message.receiver" 
-                  class="fv-link fa-text-info">
-                  <i class="fa fa-user-circle" /> @{{ message.receiver }}
-                </nuxt-link>
-              </div>
-              <div class="fv-margin-end">
-                <nuxt-link 
-                  :to="'/' + message.receiver + '/messages/' + message.uuid" 
-                  class="fv-link fa-text-info">
-                  <i class="fa fa-envelope-o" /> Open
-                </nuxt-link>
-              </div>
-            </small>
-          </div>
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    sm 
+    class="fv-padding-sm">
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
+    <div 
+      class="fv-padding fv-text-center fv-border fv-margin-bottom">
+      <p> <appIcon icon="info" /> The messages are stored on your device only and not on the server. </p>
+      <div 
+        v-if="messages.length !== 0" 
+        class="fv-margin-top">
+        <fvButton 
+          class="fv-primary" 
+          @click="clear"> <appIcon icon="trash" /> Clear </fvButton>
+      </div>
+    </div>
+    <appNothingToShow 
+      v-if="messages.length === 0" 
+    />
+    <appMessage 
+      v-for="message in messages"
+      :key="'msg' + message._id" 
+      :message="message"
+      :edit-button="false"
+      :reply-section="false"
+      open-button
+      is-mine
+      watch-as="sender"
+      class="fv-margin-bottom"/>
+  </appInnerContent>
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
+import appMessage from '~/components/appMessage.vue'
+import appNothingToShow from '~/components/appNothingToShow.vue'
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appMessage,
+    appNothingToShow,
+    appIcon
+  },
   data() {
     return {
       messages: []
@@ -100,6 +68,20 @@ export default {
         this.$root.$loading.finish()
       }
     }
+  },
+  head() {
+    return twitterCard(
+      undefined,
+      undefined,
+      'Your sent messages',
+      `Hazy - Sent Messages`
+    )
+  },
+  asyncData({ store }) {
+    store.commit('ui/setHeader', {
+      title: 'Hazy',
+      description: 'Your sent messages'
+    })
   }
 }
 </script>

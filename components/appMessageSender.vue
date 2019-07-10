@@ -3,28 +3,27 @@
     method="POST"
     class="fv-row"
     @submit="send">
-    <fvFormElement 
-      :label="messageLabel" 
-      class="fv-col-12">
+    <fvFormElement class="fv-col-12">
       <fvTextarea 
         ref="input" 
         v-model="form.text"
         placeholder="Enter your message"
-        autofocus
         auto-height
         required
+        @focus.native="recaptchaVisibility = true"
         @input="setInputDirection"/>
     </fvFormElement>
-    <fvFormElement 
+    <!-- <fvFormElement 
       v-if="saveButton"
       label="Save to Local Storage" 
       class="fv-col-12"
       inline>
       <fvSwitch 
         v-model="saveToLocalStorage" />
-    </fvFormElement>
+    </fvFormElement> -->
     <fvFormElement
       v-if="recaptcha"
+      v-show="recaptchaVisibility"
       class="fv-col-12">
       <div class="fv-text-center">
         <no-ssr>
@@ -33,9 +32,8 @@
       </div>
     </fvFormElement>
     <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
-      <p v-if="saveButton"> <i class="fa fa-info-circle" /> Saving message to Local Storage only save the message to your local machine storage and not related to your account. We dont sent even a single byte of this private data to server and you can clear it anytime you want. </p>
-      <p v-if="typeof message === 'undefined'"> <i class="fa fa-info-circle" /> @{{ user }} never understand who you are! </p>
-      <p v-if="!$store.state.parsedToken.username"> <i class="fa fa-info-circle" /> You can receive anonymous messages too! <nuxt-link 
+      <p v-if="typeof message === 'undefined'"> <appIcon icon="info" /> @{{ user }} never understand who you are! </p>
+      <p v-if="!$store.state.parsedToken.username"> <appIcon icon="info" /> You can receive anonymous messages too! <nuxt-link 
         class="fv-link" 
         to="/register"> Click here </nuxt-link> to register! </p>
     </div>
@@ -43,14 +41,19 @@
       <fvButton 
         type="submit" 
         class="fv-primary fv-grow">
-        <i :class="buttonIcon" /> {{ buttonText }}
+        <appIcon icon="send" /> {{ buttonText }}
       </fvButton>
     </div>
   </fvForm>
 </template>
 
 <script>
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   props: {
     user: {
       type: String,
@@ -60,21 +63,17 @@ export default {
       type: String,
       default: undefined
     },
-    messageLabel: {
+    question: {
       type: String,
-      default: 'Message'
+      default: undefined
     },
     buttonText: {
       type: String,
       default: 'Send'
     },
-    buttonIcon: {
-      type: String,
-      default: 'fa fa-send'
-    },
     saveButton: {
       type: Boolean,
-      default: false
+      default: true
     },
     recaptcha: {
       type: Boolean,
@@ -86,6 +85,7 @@ export default {
       text: '',
       recaptcha: false
     },
+    recaptchaVisibility: false,
     saveToLocalStorage: true
   }),
   computed: {
@@ -98,7 +98,9 @@ export default {
           this.message
         }`
       }
-      return `${process.env.BASE_URL}/users/${this.user}/messages`
+      return `${process.env.BASE_URL}/users/${this.user}/messages?question=${
+        this.question
+      }`
     }
   },
   methods: {
@@ -123,6 +125,8 @@ export default {
         }
         this.$root.$loading.finish()
         this.$emit('sent', response.data)
+        this.form.text = undefined
+        this.form.recaptcha = undefined
         if (this.isReply) {
           this.$alerts.toast(
             `Your reply has been set to that message!`,
@@ -139,7 +143,10 @@ export default {
         this.form.recaptcha = false
         this.$root.$loading.finish()
         this.$emit('error', e.response)
-        this.$alerts.toast(e.response.data.message, 'failed')
+        this.$alerts.toast(
+          (((e || {}).response || {}).data || {}).message || 'Unhandled Error!',
+          'failed'
+        )
       }
     },
     setInputDirection(str) {

@@ -1,115 +1,61 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader
-        :inbox="$store.state.parsedToken.username"
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"
-        :home="true">
-        Message for <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>
-      </appHeader>
-
-      <appInnerContent 
-        class="fv-padding-sm" 
-        sm>
-        <div 
-          class="fv-padding fv-text-center fv-margin-bottom">
-          <p v-if="isMine"> <i class="fa fa-info-circle" /> You can share this message! </p>
-          <p v-else-if="!isMine"> <i class="fa fa-info-circle" /> If you are not <nuxt-link :to="'/' + $route.params.username"> @{{ $route.params.username }} </nuxt-link>, be careful for sharing this message to public places. </p>
-          <div class="fv-margin-top">
-            <fvButton 
-              class="fv-primary fv-size-sm" 
-              @click="copyLink"> <i class="fa fa-copy" /> Copy Link </fvButton>
-            <span 
-              v-if="isMine" 
-              class="fv-padding-sm"> | </span>
-            <fvFormElement 
-              v-if="isMine" 
-              class="public-switch"
-              inline
-              single-line
-              label="Show on My Profile">
-              <fvSwitch
-                :value="message.public"
-                class="fv-default fv-size-sm"
-                @input="changePrivacy" />
-            </fvFormElement>
-          </div>
-        </div>
-
-        <div class="fv-margin-top fv-flex">
-          <div class="fv-border fv-shadow fv-radius fv-grow">
-            <p 
-              :style="{'direction': $calcDirection(message.text)}" 
-              class="fv-padding-sm fv-font-lg message-text fv-padding-bottom"><span class="fv-text-light">@anonymous:</span> {{ message.text }}</p>
-            <small class="fv-flex fv-padding-sm fv-padding-top">
-              <div class="fv-grow" />
-              <div 
-                :title="message.create_date | dateReadable">
-                <span class="fa fa-text-gray">
-                  <i class="fa fa-calendar" /> {{ message.create_date | dateFromNow }}
-                </span>
-              </div>
-            </small>
-            <div class="fv-border-bottom"/>
-            <div 
-              v-if="!isMine && !message.reply">
-              <p class="fv-padding-sm fv-text-light">
-                @{{ $route.params.username }} didn't replied yet. </p>
-            </div> 
-            <appMessageSender 
-              v-else-if="isMine && !message.reply"
-              :user="$route.params.username" 
-              :message="message.uuid" 
-              :recaptcha="false"
-              message-label="Reply to message"
-              button-text="Reply"
-              button-icon="fa fa-reply"
-              @sent="reload"/>
-            <div 
-              v-else>
-              <p 
-                :style="{'direction': $calcDirection(message.reply)}" 
-                class="fv-padding-sm fv-font-lg message-text"><span class="fv-text-light">@{{ $route.params.username }}:</span> {{ message.reply }}</p>
-              <small class="fv-flex fv-padding-sm fv-margin-top fv-padding-top">
-                <div class="fv-grow" />
-                <div 
-                  :title="message.reply_date | dateReadable">
-                  <span class="fa fa-text-gray">
-                    <i class="fa fa-calendar" /> {{ message.reply_date | dateFromNow }}
-                  </span>
-                </div>
-              </small>
-            </div> 
-          </div>
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    class="fv-padding-sm" 
+    sm>
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
+    <appAccountAccessLinks 
+      :username="$route.params.username" 
+      only-profile
+      class="fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
+    <appQuestion 
+      :question="question"
+      :edit-buttons="false"
+      :send-form="false"
+      :view-replies-button="false"
+      :open-button="true"
+      :watch-as="isMine ? 'creator' : 'user'"
+      class="fv-border fv-margin-bottom" />
+    <label class="fv-control-label fv-margin-bottom"> <appIcon icon="message-circle" /> Answer: </label>
+    <appMessage 
+      :message="message"
+      :edit-buttons="isMine"
+      :open-button="false"
+      @remove="remove"
+      @privacyChange="privacyChange" />
+  </appInnerContent>
 </template>
 
 <script>
+import twitterCard from '~/utils/twitter-card.js'
 import copy from 'clipboard-copy'
+import appMessage from '~/components/appMessage.vue'
+import appAccountLink from '~/components/appAccountLink.vue'
+import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
+import appQuestion from '@/components/appQuestion.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
+  components: {
+    appMessage,
+    appAccountLink,
+    appAccountAccessLinks,
+    appQuestion,
+    appIcon
+  },
   data() {
     return {
       isMine: false,
-      message: {}
+      message: {},
+      question: {}
     }
   },
   head() {
-    return {
-      title: 'Hazy',
-      meta: [
-        {
-          property: 'twitter:description',
-          content: `Look at anonymous message sent for @${
-            this.$route.params.username
-          }!`
-        }
-      ]
-    }
+    return twitterCard(
+      this.$route.params.username,
+      undefined,
+      `Look at anonymous message sent for @${this.$route.params.username}!`
+    )
   },
   methods: {
     async reload() {
@@ -121,22 +67,40 @@ export default {
       )
       this.$root.$loading.finish()
     },
-    async changePrivacy(newValue) {
+    async privacyChange(message) {
       this.$root.$loading.start()
       try {
         const response = await this.$axios.$put(
           `${process.env.BASE_URL}/users/${
             this.$route.params.username
-          }/messages/${this.$route.params.message}`,
+          }/messages/${message.uuid}`,
           {
-            public: newValue
+            public: message.public
           }
         )
-        this.message.public = newValue
+        this.message.public = message.public
       } catch (e) {
-        this.message.public = this.message.public
+        this.message.public = !message.public
       }
       this.$root.$loading.finish()
+    },
+    async remove(message) {
+      this.$root.$loading.start()
+      try {
+        await this.$axios.$delete(
+          `${process.env.BASE_URL}/users/${
+            this.$store.state.parsedToken.username
+          }/messages/${message.uuid}`
+        )
+        this.$alerts.toast(
+          'Your message has been successfully deleted!',
+          'success'
+        )
+        this.$root.$loading.finish()
+        this.$router.push(`/${this.$route.params.username}/messages`)
+      } catch (e) {
+        this.$root.$loading.finish()
+      }
     },
     copyLink() {
       copy(window.document.location.href)
@@ -160,13 +124,18 @@ export default {
         message: 'Message not found!'
       }
     }
+    try {
+      const response = await $axios.$get(
+        `${process.env.BASE_URL}/users/${params.username}/questions/${ret
+          .message.question_id || 'default'}`
+      )
+      ret.question = response
+    } catch (e) {}
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `Received message for @${params.username}`
+    })
     return ret
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.public-switch {
-  display: inline-flex;
-}
-</style>

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="app-recaptcha">
+    <fvLoading 
+      v-if="loading" 
+      class="loading"/>
     <script 
       src="https://www.google.com/recaptcha/api.js" 
       async 
@@ -23,7 +26,8 @@ export default {
     return {
       sitekey: process.env.RECAPTCHA_SITE_KEY,
       widgetId: 0,
-      timer: null
+      timer: null,
+      loading: true
     }
   },
   computed: {
@@ -45,12 +49,20 @@ export default {
     this.$el.remove()
   },
   methods: {
+    focus() {
+      if (!this.fvValidate) {
+        this.$el.classList.add('fv-invalid')
+        setTimeout(() => {
+          this.$el.classList.remove('fv-invalid')
+        }, 100)
+      }
+    },
     timerHandler() {
       if (window.grecaptcha && window.grecaptcha.render) {
         clearInterval(this.timer)
         setTimeout(() => {
           this.render()
-        }, 100)
+        }, 1000)
       }
     },
     onVerify(response) {
@@ -71,11 +83,27 @@ export default {
           this.onVerify(response)
         }
       })
+      const renderingInterval = setInterval(() => {
+        if (this.$el.querySelector('iframe')) {
+          this.loading = false
+          clearInterval(renderingInterval)
+        }
+      }, 100)
     }
   }
 }
 </script>
 <style>
+.app-recaptcha {
+  position: relative;
+  min-height: 100px;
+}
+.app-recaptcha > .loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .grecaptcha {
   display: inline-block;
   max-width: 100%;

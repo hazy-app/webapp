@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import 'font-awesome/css/font-awesome.css'
 
 // Initializing Framevuerk
 const Framevuerk = require(`framevuerk/dist/framevuerk-${

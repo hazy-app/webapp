@@ -1,74 +1,53 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader
-        :inbox="$store.state.parsedToken.username"
-        :login="!$store.state.parsedToken.username"
-        :logout="$store.state.parsedToken.username"> Hazy </appHeader>
-      <appInnerContent 
-        class="fv-padding-sm fv-text-center" 
-        sm>
-        <div class="fv-text-center logo-container">
-          <img 
-            class="logo-container__logo"
-            src="/hazy.svg" 
-            alt="Hazy" >
-          <div class="logo-container__text">
-            <h2> Hazy </h2>
-            <p> Send and Receive anonymous messages </p>
-          </div>
-          <br>
-          <div class="logo-container__buttons">
-            <a 
-              href="https://github.com/hazy-app"
-              class="fv-button"
-              target="_blank"> <i class="fa fa-github" /> Github </a>
-            <nuxt-link 
-              to="/sent-messages"
-              class="fv-button"> <i class="fa fa-commenting-o" /> Sent Messages </nuxt-link>
-            <nuxt-link 
-              v-if="!$store.state.parsedToken.username" 
-              to="/login"
-              class="fv-button"> <i class="fa fa-sign-in" /> Login </nuxt-link>
-            <fvButton 
-              v-if="$store.state.parsedToken.username"
-              @click="$logout"> <i class="fa fa-sign-out" /> Logout </fvButton>
-            <nuxt-link 
-              v-if="!$store.state.parsedToken.username"
-              to="/register"
-              class="fv-button fv-primary"> <i class="fa fa-sign-in" /> Register </nuxt-link>
-            <nuxt-link 
-              v-if="$store.state.parsedToken.username" 
-              :to="'/' + $store.state.parsedToken.username"
-              class="fv-button fv-primary"> <i class="fa fa-inbox" /> Inbox </nuxt-link>
-          </div>
-        </div>
-        <div class="fv-padding-top fv-padding-bottom"/>
-        <div class="fv-text-center fv-padding-start fv-padding-end fv-border fv-radius fv-shadow report-container">
-          <span class="fv-inline-block">
-            <div class="fv-padding">
-              <h2><appNumberBanner :number="report.total_users"/></h2>
-              <p>Users</p>
-            </div>
-          </span>
-          <span class="fv-inline-block">
-            <div class="fv-padding">
-              <h2><appNumberBanner :number="report.total_messages"/></h2>
-              <p>Messages</p>
-            </div>
-          </span>
-        </div>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    class="fv-padding-sm fv-text-center" 
+    xs>
+    <div class="fv-text-center logo-container">
+      <img 
+        class="logo-container__logo"
+        src="/hazy.svg" 
+        alt="Hazy" >
+      <div class="logo-container__text">
+        <h1> Hazy </h1>
+        <p> Send and Receive anonymous messages </p>
+      </div>
+      <br>
+      <div class="logo-container__buttons fv-row">
+        <a 
+          href="https://github.com/hazy-app"
+          class="fv-button fv-col"
+          rel="noreferrer"
+          target="_blank"> <appIcon icon="github" /> Github </a>
+        <nuxt-link 
+          to="/sent-messages"
+          class="fv-button fv-col"> <appIcon icon="lock" /> Sent Messages </nuxt-link>
+        <nuxt-link 
+          v-if="!$store.state.parsedToken.username" 
+          to="/login"
+          class="fv-button fv-col"> <appIcon icon="log-in" /> Login </nuxt-link>
+        <fvButton 
+          v-if="$store.state.parsedToken.username"
+          @click="$logout"> <appIcon icon="log-out" /> Logout </fvButton>
+        <nuxt-link 
+          v-if="!$store.state.parsedToken.username"
+          to="/register"
+          class="fv-button fv-primary fv-col"> <appIcon icon="user-plus" /> Register </nuxt-link>
+        <nuxt-link 
+          v-if="$store.state.parsedToken.username" 
+          :to="'/' + $store.state.parsedToken.username"
+          class="fv-button fv-primary fv-col"> <appIcon icon="user" /> My Profile </nuxt-link>
+      </div>
+    </div>
+  </appInnerContent>
 </template>
 
 <script>
-import appNumberBanner from '~/components/appNumberBanner.vue'
+import twitterCard from '~/utils/twitter-card.js'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
-    appNumberBanner
+    appIcon
   },
   data() {
     return {
@@ -76,33 +55,37 @@ export default {
     }
   },
   head() {
-    return {
-      title: 'Hazy'
-    }
+    return twitterCard(
+      undefined,
+      undefined,
+      'Send and Receive anonymous messages',
+      `Hazy`
+    )
   },
-  async asyncData({ params, query, store, $axios, redirect }) {
-    const ret = {}
-    try {
-      ret.report = await $axios.$get(`${process.env.BASE_URL}/report`)
-    } catch (e) {
-      ret.report = {
-        total_messages: undefined,
-        total_users: undefined
-      }
-    }
-    return ret
+  asyncData({ store }) {
+    store.commit('ui/setHeader', {
+      title: 'Hazy',
+      description: 'Send and Receive anonymous messages'
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .logo-container__logo {
-  height: 300px;
-  max-width: 100%;
-  margin: 0 auto;
+  height: 340px;
+  // max-width: 290px;
+  margin: 0 auto -20px auto;
 }
 
 .logo-container__text {
+  line-height: 1.2;
+
+  & > h1 {
+    font-size: 3.5em;
+    margin: 0;
+    padding: 0;
+  }
   & > p {
     font-size: 1.3em;
   }
@@ -113,7 +96,7 @@ export default {
 }
 
 .report-container {
-  max-width: 400px;
+  max-width: calc(100% - 1.5em);
   margin: 0 auto;
 }
 </style>

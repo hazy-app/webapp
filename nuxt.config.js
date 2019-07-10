@@ -7,7 +7,7 @@ const ret = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Hazy',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -29,7 +29,7 @@ const ret = {
       },
       {
         itemprop: 'image',
-        content: 'https://hazy.herokuapp.com/hazy.jpg'
+        content: 'https://hazyapp.com/hazy.jpg'
       },
       // Open Graph
       {
@@ -50,7 +50,7 @@ const ret = {
       },
       {
         property: 'og:image',
-        content: 'https://hazy.herokuapp.com/hazy.jpg'
+        content: 'https://hazyapp.com/hazy.jpg'
       },
       // twitter
       {
@@ -75,7 +75,7 @@ const ret = {
       },
       {
         property: 'twitter:image:src',
-        content: 'https://hazy.herokuapp.com/hazy_card.png'
+        content: 'https://hazyapp.com/hazy_card.png'
       },
       // facebook
       {
@@ -87,15 +87,17 @@ const ret = {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'https://hazy.herokuapp.com/favicon.ico'
+        href: 'https://hazyapp.com/favicon.ico'
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Lobster'
+        href:
+          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap&subset=latin'
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Lato'
+        href:
+          'https://fonts.googleapis.com/css?family=Lobster:400&display=swap&subset=latin'
       }
     ]
   },
@@ -116,7 +118,8 @@ const ret = {
   manifest: {
     lang: 'en',
     /* Do not change this id. it's static and is not current app id */
-    gcm_sender_id: '103953800507'
+    gcm_sender_id: '103953800507',
+    theme_color: '#000'
   },
 
   /*
@@ -193,6 +196,12 @@ const ret = {
           exclude: /(node_modules)/
         })
       }
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: 'vue-svg-loader'
+      })
     }
   }
 }

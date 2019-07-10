@@ -1,58 +1,59 @@
 <template>
-  <fvMain>
-    <fvContent>
-      <appHeader :home="true"> Password Reset </appHeader>
-      <appInnerContent 
-        class="fv-padding-sm" 
-        xs>
-        <fvForm 
-          method="POST"
-          class="fv-row fv-border fv-shadow fv-radius"
-          @submit="submit">
-          <fvFormElement 
-            class="fv-col-12" 
-            label="Password*">
-            <fvInput 
-              v-model="form.password"
-              type="password" 
-              name="password"
-              placeholder="Enter your password"
-              required />
-          </fvFormElement>
-          <fvFormElement 
-            class="fv-col-12" 
-            label="Password Again*">
-            <fvInput 
-              v-model="form.password2"
-              :required="passwordAgainChecker"
-              type="password"
-              placeholder="Enter your password again" 
-            />
-          </fvFormElement>
-          <fvFormElement 
-            class="fv-col-12" 
-            label="Password Hint">
-            <fvInput 
-              v-model="form.password_hint"
-              placeholder="Enter your password hint" />
-          </fvFormElement>
-          <small class="fv-col-12 fv-text-light"> Password hint can help you to recover your password if you forgot it. </small>
-          <div class="fv-flex fv-col-12">
-            <fvButton 
-              type="submit" 
-              class="fv-primary fv-grow">
-              <i class="fa fa-check" /> Submit
-            </fvButton>
-          </div>
-        </fvForm>
-      </appInnerContent>
-    </fvContent>
-  </fvMain>
+  <appInnerContent 
+    class="fv-padding-sm" 
+    xs>
+    <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
+    <fvForm 
+      method="POST"
+      class="fv-row fv-border"
+      @submit="submit">
+      <fvFormElement 
+        class="fv-col-12" 
+        label="Password*">
+        <fvInput 
+          v-model="form.password"
+          type="password" 
+          name="password"
+          placeholder="Enter your password"
+          required />
+      </fvFormElement>
+      <fvFormElement 
+        class="fv-col-12" 
+        label="Password Again*">
+        <fvInput 
+          v-model="form.password2"
+          :required="passwordAgainChecker"
+          type="password"
+          placeholder="Enter your password again" 
+        />
+      </fvFormElement>
+      <fvFormElement 
+        class="fv-col-12" 
+        label="Password Hint">
+        <fvInput 
+          v-model="form.password_hint"
+          placeholder="Enter your password hint" />
+      </fvFormElement>
+      <small class="fv-col-12 fv-text-light"> Password hint can help you to recover your password if you forgot it. </small>
+      <div class="fv-flex fv-col-12">
+        <fvButton 
+          type="submit" 
+          class="fv-primary fv-grow">
+          <appIcon icon="check" /> Submit
+        </fvButton>
+      </div>
+    </fvForm>
+  </appInnerContent>
 </template>
 
 <script>
 import copy from 'clipboard-copy'
+import appIcon from '@/components/appIcon.vue'
+
 export default {
+  components: {
+    appIcon
+  },
   data() {
     return {
       form: {
@@ -110,6 +111,12 @@ export default {
     return {
       title: 'Hazy'
     }
+  },
+  asyncData({ store, params }) {
+    store.commit('ui/setHeader', {
+      title: `@${params.username}`,
+      description: `Reset password`
+    })
   }
 }
 </script>

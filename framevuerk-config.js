@@ -1,5 +1,6 @@
-const configs = []
-const baseConfig = {
+module.exports = {
+  'config-name': 'ltr',
+  direction: 'ltr',
   'primary-color': '#000',
   'secondary-color': '#A08C08',
   'danger-color': '#BF2B2B',
@@ -9,17 +10,8 @@ const baseConfig = {
   'header-bg-color': '#000',
   'sidebar-bg-color': '#000',
   'footer-bg-color': '#000',
-  padding: '1.3em',
+  padding: '1em',
   'transition-speed': '0.35s',
-  'border-radius': '5px',
-  'shadow-size': '6px'
+  'border-radius': '0',
+  'shadow-size': '0'
 }
-
-configs.push(
-  Object.assign(JSON.parse(JSON.stringify(baseConfig)), {
-    'config-name': 'ltr',
-    direction: 'ltr'
-  })
-)
-
-module.exports = configs
