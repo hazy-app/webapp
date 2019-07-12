@@ -98,7 +98,7 @@ export default {
         )
         this.$root.$loading.finish()
         this.$alerts.toast('Welcome to Hazy!', 'success')
-        this.$router.push(redirect)
+        docment.location = redirect
       } catch (e) {
         this.form.recaptcha = false
         this.$root.$loading.finish()
