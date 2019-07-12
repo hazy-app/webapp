@@ -50,8 +50,7 @@
       </p>
     </div>
     <div 
-      v-if="replySection" 
-      class="fv-border-top">
+      v-if="replySection">
       <div v-if="editButtons && !message.reply_date">
         <appMessageSender 
           :user="message.receiver" 

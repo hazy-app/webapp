@@ -1,52 +1,12 @@
 <template>
-  <div class="app-account-access-links">
-    <div class="fv-padding-top fv-text-center fv-font-lg">
-      <appAvatar 
-        :username="username" 
-        size="96px"/>
-      <h3> {{ username }} </h3>
-    </div>
-    <div 
-      v-if="!onlyProfile && username !== 'anonymous'" 
-      class="fv-row">
-      <div 
-        class="fv-col">
-        <nuxt-link 
-          :to="'/' + username + '/questions'" 
-          exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="message-square" /> Questions </nuxt-link>
-      </div>
-      <div class="fv-col">
-        <nuxt-link 
-          :to="'/' + username + '/polls'" 
-          exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="check-square" /> Polls </nuxt-link>
-      </div>
-      <div 
-        v-if="$nuxt.$store.state.parsedToken.role && $nuxt.$store.state.parsedToken.role.indexOf('admin') > -1" 
-        class="fv-col">
-        <nuxt-link 
-          :to="'/' + username + '/reset-password?action=copy'" 
-          exact-active-class="link-active"
-          class="fv-button fv-block fv-text-danger"> <appIcon icon="lock" /> Reset Password </nuxt-link>
-      </div>
-    </div>
-    <div 
-      v-else-if="onlyProfile && username !== 'anonymous'" 
-      class="fv-row">
-      <div class="fv-col">
-        <nuxt-link 
-          :to="'/' + username" 
-          exact-active-class="link-active"
-          class="fv-button fv-block"> <appIcon icon="user" />View Profile </nuxt-link>
-      </div>
-    </div>
-    <div 
-      v-else 
-      class="fv-padding">
-      We don't have any data from this person.
-    </div>
-  </div>
+  <nuxt-link 
+    :to="selfLink" 
+    class="fv-padding fv-text-center fv-font-xl fv-block">
+    <appAvatar 
+      :username="username" 
+      size="128px"/>
+    <h3 > {{ username }} </h3>
+  </nuxt-link>
 </template>
 
 <script>
@@ -74,6 +34,9 @@ export default {
         this.$store.state.parsedToken.username &&
         this.username === this.$store.state.parsedToken.username
       )
+    },
+    selfLink() {
+      return this.username !== 'anonymous' ? `/${this.username}` : '/'
     }
   }
 }
