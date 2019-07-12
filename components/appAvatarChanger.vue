@@ -11,21 +11,20 @@
     </div>
     <fvFormElement 
       class="fv-col-12" 
-      label="Email address">
+      label="Email address or Gravatar hash">
       <fvInput 
         v-model="email"
-        type="email"
-        placeholder="Enter your email address"
+        placeholder="Enter your email address or just Gravatar hash"
         required/>
     </fvFormElement>
-
     <div class="fv-text-light fv-padding-start-sm fv-padding-end-sm">
       <p> <appIcon icon="info" /> Put your <a 
         class="fv-link" 
         target="_blank" 
         rel="noreferrer" 
         href="https://en.gravatar.com">Gravatar</a> registred email address! </p>
-      <p> <appIcon icon="info" /> Your email address don't save anywhere! We hash it locally on your machine and then save hashed version to find your Gravatar avatar! </p> 
+      <p> <appIcon icon="info" /> We hash your email address it localy on your machine and just save hashed version to find your Gravatar avatar! </p> 
+      <p> <appIcon icon="info" /> Also you can put your MD5 hashed email address if you feel better. </p> 
     </div>
     <div class="fv-flex fv-col-12">
       <fvButton 
@@ -59,7 +58,10 @@ export default {
   }),
   computed: {
     hashedEmail() {
-      return this.$md5(this.email || '')
+      if (this.email && this.email.indexOf('@') !== -1) {
+        return this.$md5(this.email || '')
+      }
+      return this.email || ''
     }
   },
   watch: {

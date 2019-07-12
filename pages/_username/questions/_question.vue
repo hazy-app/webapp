@@ -97,7 +97,6 @@ export default {
       window.addEventListener('focus', this.sync)
     }
     this.mySentMessages = this.loadMySentMessages()
-    console.log(this.mySentMessages)
   },
   beforeDestroy() {
     window.removeEventListener('focus', this.sync)
@@ -140,10 +139,7 @@ export default {
       this.$refs.input.$el.style.direction = direction
     },
     copyLink() {
-      const url = `${document.location.protocol}//${document.location.host}/${
-        this.$route.params.username
-      }`
-      copy(url)
+      copy(window.document.location.href)
       this.$alerts.toast('Link copied to clipboard!')
     },
     async remove(question) {
@@ -183,7 +179,11 @@ export default {
     }
   },
   head() {
-    return twitterCard(this.$route.params.username, 'Question')
+    return twitterCard(
+      this.$route.params.username,
+      'Question',
+      this.question.text
+    )
   },
   async asyncData({ params, query, store, $axios, redirect }) {
     const ret = {}
