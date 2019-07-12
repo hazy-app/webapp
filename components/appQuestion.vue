@@ -1,5 +1,8 @@
 <template>
-  <div class="app-message">
+  <div 
+    :class="openButton ? 'fv-pointer' : ''"
+    class="app-message" 
+    @click="$router.push(openButton ? selfLink : '')">
     <div class="fv-padding fv-flex header">
       <span>
         <appAccountLink :username="question.creator"/>
@@ -10,7 +13,7 @@
         class="fv-margin-end">
         <a 
           class="fv-link fv-text-danger"
-          @click="remove">
+          @click.stop="remove">
           <appIcon icon="trash" /> <span class="fv-hidden-xs"> Remove </span>
         </a>
       </span>
@@ -21,7 +24,7 @@
       </span>
       <nuxt-link 
         v-if="openButton" 
-        :to="'/' + question.creator + '/questions/' + question._id" 
+        :to="selfLink" 
         class="fv-margin-start fv-link">
         <appIcon 
           v-if="watchAs === 'user'"  
@@ -95,6 +98,11 @@ export default {
   data() {
     return {
       recaptcha: false
+    }
+  },
+  computed: {
+    selfLink() {
+      return `/${this.question.creator}/questions/${this.question._id}`
     }
   },
   methods: {

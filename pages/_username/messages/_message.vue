@@ -5,7 +5,6 @@
     <div class="fv-padding-sm fv-hidden-xs fv-hidden-sm" />
     <appAccountAccessLinks 
       :username="$route.params.username" 
-      only-profile
       class="fv-margin-bottom" />
     <label class="fv-control-label fv-margin-bottom"> <appIcon icon="help-circle" /> Question: </label>
     <appQuestion 
@@ -53,7 +52,7 @@ export default {
   head() {
     return twitterCard(
       this.$route.params.username,
-      undefined,
+      'Message',
       `Look at anonymous message sent for @${this.$route.params.username}!`
     )
   },

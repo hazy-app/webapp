@@ -1,5 +1,8 @@
 <template>
-  <div class="app-message fv-border">
+  <div 
+    :class="openButton ? 'fv-pointer' : ''" 
+    class="app-message fv-border"
+    @click="$router.push(openButton ? selfLink : '')">
     <div class="fv-padding fv-flex header">
       <span>
         <appAccountLink :username="poll.creator"/>
@@ -10,7 +13,7 @@
         class="fv-margin-end">
         <a 
           class="fv-link fv-text-danger"
-          @click="remove">
+          @click.stop="remove">
           <appIcon icon="trash" /> <span class="fv-hidden-xs"> Remove </span>
         </a>
       </span>
@@ -20,7 +23,7 @@
       
       <nuxt-link 
         v-if="openButton" 
-        :to="'/' + poll.creator + '/polls/' + poll.uuid" 
+        :to="selfLink" 
         class="fv-margin-start fv-link">
         <appIcon 
           v-if="watchAs === 'user'"  
@@ -50,8 +53,7 @@
           :style="{width: votesPercetange[choiceItem.index] + '%'}"
           :title="choiceItem.choice + ' ' + poll.answers[choiceItem.index]" 
           :class="{ 'open': infoPopup === true && infoPopupItem === choiceItem.index }"
-          class="choice fv-pointer"
-          @click="toggleInfoPopup(choiceItem.index)">
+          class="choice fv-pointer">
           <b 
             :style="{'direction': $calcDirection(choiceItem.choice)}" 
             v-text="choiceItem.choice"/> {{ parseFloat(votesPercetange[choiceItem.index]).toFixed(1) }}%
@@ -174,6 +176,9 @@ export default {
     }
   },
   computed: {
+    selfLink() {
+      return `/${this.poll.creator}/polls/${this.poll.uuid}`
+    },
     totalVotes() {
       return this.poll.answers.reduce(
         (total, item) => (total = total + item),
