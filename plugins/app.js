@@ -4,14 +4,12 @@ import { getPromise as getFingerprint } from 'fingerprintjs2'
 import appAlerts from '~/components/appAlerts.vue'
 import appHeader from '~/components/appHeader.vue'
 import appInnerContent from '~/components/appInnerContent.vue'
-import appInput from '~/components/appInput.vue'
 import appRecaptcha from '~/components/appRecaptcha.vue'
 import appMessageSender from '~/components/appMessageSender.vue'
 import md5 from '~/utils/md5.js'
 
 Vue.component('appHeader', appHeader)
 Vue.component('appInnerContent', appInnerContent)
-Vue.component('appInput', appInput)
 Vue.component('appRecaptcha', appRecaptcha)
 Vue.component('appMessageSender', appMessageSender)
 
