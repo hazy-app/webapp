@@ -90,7 +90,7 @@ export default {
           const tempUrl = `https://hazyapp.com/${
             this.$route.params.username
           }/reset-password?token=${encodeURIComponent(
-            response.data
+            `bearer ${response.data}`
           )}&action=redirect`
           copy(tempUrl)
           this.$alerts.toast('Link copied to clipboard!')
