@@ -1,5 +1,9 @@
 <template>
   <fvHeader class="transparent header">
+    <a 
+      href="#"
+      class="fv-button fv-margin-end"
+      @click="$router.go(-1)"> <appIcon icon="chevron-left" /> <span class="fv-hidden-sm fv-hidden-xs"> Back </span> </a>
     <nuxt-link to="/">
       <appLogo class="logo"/>
     </nuxt-link>
