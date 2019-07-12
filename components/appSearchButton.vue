@@ -37,9 +37,11 @@ export default {
       this.$nextTick(() => {
         this.$refs.searchBox.focus()
       })
+      this.$emit('startSearch')
     },
     cancelSearch() {
       this.searchQuery = null
+      this.$emit('endSearch')
     },
     startSearch() {
       if (this.searchQuery.length < 3) {
@@ -58,15 +60,15 @@ export default {
 .search-btn {
   &.searching {
     background: #f5f5f5;
-    @media screen {
+    @media screen and (max-width: 768px) {
+      flex-grow: 2;
     }
   }
   & .search-query {
     border: none;
     box-shadow: none;
     background: transparent;
-    min-width: 90px;
-    max-width: 90px;
+    width: 100%;
   }
 }
 </style>
