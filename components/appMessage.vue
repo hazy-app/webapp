@@ -58,7 +58,8 @@
           :message="message.uuid" 
           :recaptcha="false"
           message-label="Reply to message"
-          button-text="Reply" />
+          button-text="Reply"
+          @sent="reply" />
       </div>
       <div 
         v-else-if="message.reply_date"
