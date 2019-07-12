@@ -120,9 +120,6 @@ export default {
           requestConfig.headers.authorization = ':D'
         }
         const response = await this.$axios(requestConfig)
-        if (this.saveButton && this.saveToLocalStorage && this.$sentMessages) {
-          this.$sentMessages.save(response.data)
-        }
         this.$root.$loading.finish()
         this.$emit('sent', response.data)
         this.form.text = undefined
@@ -133,6 +130,13 @@ export default {
             'success'
           )
         } else {
+          if (
+            this.saveButton &&
+            this.saveToLocalStorage &&
+            this.$sentMessages
+          ) {
+            this.$sentMessages.save(response.data)
+          }
           this.$alerts.toast(
             `Your message has been sent to ${this.user} successfully!`,
             'success'
