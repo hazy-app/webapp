@@ -1,21 +1,28 @@
 <template>
   <fvHeader class="transparent header">
     <a 
+      :class="{'fv-hidden-xs fv-hidden-sm': searching}"
       href="#"
       class="fv-button fv-margin-end"
       @click="$router.go(-1)"> <appIcon icon="chevron-left" /> <span class="fv-hidden-sm fv-hidden-xs"> Back </span> </a>
     <nuxt-link to="/">
       <appLogo class="logo"/>
     </nuxt-link>
-    <div class="vertical-line fv-border-start" />
-    <div class="fv-grow title">
+    <div 
+      class="vertical-line fv-border-start"/>
+    <div 
+      :class="{'fv-hidden-xs fv-hidden-sm': searching}"
+      class="fv-grow title">
       <h2> <slot name="title"/> </h2>
       <p class="fv-text-light fv-hidden-xs"> <slot name="description"/> </p>
     </div>
 
-    <appSearchButton />
+    <appSearchButton 
+      @startSearch="searching = true" 
+      @endSearch="searching = false"/>
 
     <appAccountLink
+      :class="{'fv-hidden-xs fv-hidden-sm': searching}"
       :username="$store.state.parsedToken.username || undefined"
       :clickable="false" 
       class="fv-button"
@@ -49,6 +56,11 @@ export default {
     appAccountActionsLinks,
     appSearchButton,
     appIcon
+  },
+  data() {
+    return {
+      searching: false
+    }
   }
 }
 </script>
