@@ -21,6 +21,7 @@
       :edit-buttons="isMine"
       :open-button="false"
       @remove="remove"
+      @reply="reload"
       @privacyChange="privacyChange" />
   </appInnerContent>
 </template>

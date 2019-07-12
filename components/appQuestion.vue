@@ -1,8 +1,6 @@
 <template>
   <div 
-    :class="openButton ? 'fv-pointer' : ''"
-    class="app-message" 
-    @click="$router.push(openButton ? selfLink : '')">
+    class="app-message">
     <div class="fv-padding fv-flex header">
       <span>
         <appAccountLink :username="question.creator"/>
@@ -38,7 +36,9 @@
           icon="arrow-right"/>
       </nuxt-link>
     </div>
-    <div class="fv-padding fv-font-lg">
+    <div 
+      class="fv-padding fv-font-lg" 
+      @click="$router.push(openButton ? selfLink : '')">
       <p :style="{'direction': $calcDirection(question.text)}">
         {{ question.text }}
       </p>
