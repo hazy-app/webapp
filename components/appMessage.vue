@@ -1,8 +1,6 @@
 <template>
   <div 
-    :class="openButton ? 'fv-pointer' : ''" 
-    class="app-message fv-border"
-    @click="$router.push(openButton ? selfLink : '')">
+    class="app-message fv-border">
     <div class="fv-padding fv-flex header">
       <span v-if="watchAs === 'sender'">
         To <appAccountLink 
@@ -44,7 +42,9 @@
         :to="selfLink" 
         class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
     </div>
-    <div class="fv-padding">
+    <div 
+      class="fv-padding" 
+      @click="$router.push(openButton ? selfLink : '')">
       <p :style="{'direction': $calcDirection(message.text)}">
         {{ message.text }}
       </p>

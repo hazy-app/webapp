@@ -1,8 +1,6 @@
 <template>
   <div 
-    :class="openButton ? 'fv-pointer' : ''" 
-    class="app-message fv-border"
-    @click="$router.push(openButton ? selfLink : '')">
+    class="app-message fv-border">
     <div class="fv-padding fv-flex header">
       <span>
         <appAccountLink :username="poll.creator"/>
@@ -37,13 +35,16 @@
           icon="arrow-right"/>
       </nuxt-link>
     </div>
-    <div class="fv-padding fv-font-lg">
+    <div 
+      class="fv-padding fv-font-lg" 
+      @click="$router.push(openButton ? selfLink : '')">
       <p :style="{'direction': $calcDirection(poll.title)}">
         {{ poll.title }}
       </p>
     </div>
     <div 
-      class="fv-border-top choices">
+      class="fv-border-top choices"
+      @click="$router.push(openButton ? selfLink : '')">
       <div 
         v-if="totalVotes > 0" 
         class="choices-chart fv-bg-info">
@@ -53,7 +54,7 @@
           :style="{width: votesPercetange[choiceItem.index] + '%'}"
           :title="choiceItem.choice + ' ' + poll.answers[choiceItem.index]" 
           :class="{ 'open': infoPopup === true && infoPopupItem === choiceItem.index }"
-          class="choice fv-pointer">
+          class="choice">
           <b 
             :style="{'direction': $calcDirection(choiceItem.choice)}" 
             v-text="choiceItem.choice"/> {{ parseFloat(votesPercetange[choiceItem.index]).toFixed(1) }}%
