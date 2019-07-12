@@ -22,6 +22,14 @@
           exact-active-class="link-active"
           class="fv-button fv-block"> <appIcon icon="check-square" /> Polls </nuxt-link>
       </div>
+      <div 
+        v-if="$nuxt.$store.state.parsedToken.role && $nuxt.$store.state.parsedToken.role.indexOf('admin') > -1" 
+        class="fv-col">
+        <nuxt-link 
+          :to="'/' + username + '/reset-password?action=copy'" 
+          exact-active-class="link-active"
+          class="fv-button fv-block fv-text-danger"> <appIcon icon="lock" /> Reset Password </nuxt-link>
+      </div>
     </div>
     <div 
       v-else-if="onlyProfile && username !== 'anonymous'" 
