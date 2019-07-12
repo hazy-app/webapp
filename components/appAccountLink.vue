@@ -3,7 +3,7 @@
     :class="{'non-clickable': !clickable}"
     :tabindex="clickable ? 0 : -1"
     class="profile-link"
-    @click="onClick">
+    @click.stop="onClick">
     <appAvatar 
       :username="username" 
       size="24px" /> <span> {{ username }} </span> <slot />

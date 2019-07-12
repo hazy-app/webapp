@@ -1,5 +1,8 @@
 <template>
-  <div class="app-message fv-border">
+  <div 
+    :class="openButton ? 'fv-pointer' : ''" 
+    class="app-message fv-border"
+    @click="$router.push(openButton ? selfLink : '')">
     <div class="fv-padding fv-flex header">
       <span v-if="watchAs === 'sender'">
         To <appAccountLink 
@@ -38,7 +41,7 @@
       </span>
       <nuxt-link 
         v-if="openButton" 
-        :to="'/' + message.receiver + '/messages/' + message.uuid" 
+        :to="selfLink" 
         class="fv-margin-start fv-link"> <span class="fv-hidden-xs"> Open </span> <appIcon icon="arrow-right" /> </nuxt-link>
     </div>
     <div class="fv-padding">
@@ -117,6 +120,11 @@ export default {
       type: String,
       validator: v => ['receiver', 'sender'].indexOf(v) > -1,
       default: 'receiver'
+    }
+  },
+  computed: {
+    selfLink() {
+      return `/${this.message.receiver}/messages/${this.message.uuid}`
     }
   },
   methods: {
