@@ -8,7 +8,7 @@
       class="fv-margin-bottom" />
     <div 
       v-if="isMine"
-      class="fv-padding fv-text-center fv-border fv-margin-bottom">
+      class="fv-border fv-padding fv-text-center fv-margin-bottom">
       <p> <appIcon icon="info" /> Share your question link to your friends to receive anonymous answers! </p>
       <div  
         class="fv-margin-top">
