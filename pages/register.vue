@@ -114,7 +114,7 @@ export default {
           'Your account successfully created on Hazy!',
           'success'
         )
-        docment.location = '/login'
+        document.location = '/login'
       } catch (e) {
         this.form.recaptcha = false
         this.$root.$loading.finish()
