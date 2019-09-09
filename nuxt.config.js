@@ -101,32 +101,31 @@ const ret = {
       }
     ]
   },
-  pwa: {
-    // pwa meta
-    meta: {
-      mobileApp: true,
-      mobileAppIOS: true,
-      appleStatusBarStyle: 'default',
-      author: 'Nainemom',
-      theme_color: '#000000',
-      nativeUI: true
-    },
-    // pwa icon
-    icon: {
-      iconSrc: './static/hazy.jpg'
-    },
-    workbox: {
-      dev: true,
-      offlineAssets: ['*.svg', '*.png', '*.jpg', '*.js', '*.css', '*.ico']
-    },
-    // pwa manifest
-    manifest: {
-      lang: 'en',
-      /* Do not change this id. it's static and is not current app id */
-      gcm_sender_id: '103953800507',
-      theme_color: '#000'
-    }
+  // pwa: {
+  // pwa meta
+  meta: {
+    mobileApp: true,
+    mobileAppIOS: true,
+    appleStatusBarStyle: 'default',
+    author: 'Nainemom',
+    theme_color: '#000000',
+    nativeUI: true
   },
+  // pwa icon
+  icon: {
+    iconSrc: './static/hazy.jpg'
+  },
+  workbox: {
+    offlineAssets: ['*.svg', '*.png', '*.jpg', '*.js', '*.css', '*.ico']
+  },
+  // pwa manifest
+  manifest: {
+    lang: 'en',
+    /* Do not change this id. it's static and is not current app id */
+    gcm_sender_id: '103953800507',
+    theme_color: '#000'
+  },
+  // },
 
   /*
   ** Customize the progress-bar color
