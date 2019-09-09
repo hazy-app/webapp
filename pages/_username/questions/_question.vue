@@ -169,8 +169,9 @@ export default {
       this.page++
       const response = await this.$axios.$get(
         `${process.env.BASE_URL}/users/${
-          this.$store.state.parsedToken.username
-        }/messages?per_page=10&page=${this.page}`
+          this.$route.params.username
+        }/messages?per_page=10&page=${this.page}&question=${this.$route.params
+          .question || 'default'}`
       )
       this.messages = this.messages.concat(response.result)
       this.hasNext = response.hasNext
