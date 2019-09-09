@@ -115,9 +115,6 @@ const ret = {
   icon: {
     iconSrc: './static/hazy.jpg'
   },
-  workbox: {
-    offlineAssets: ['*.svg', '*.png', '*.jpg', '*.js', '*.css', '*.ico']
-  },
   // pwa manifest
   manifest: {
     lang: 'en',
