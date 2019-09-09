@@ -117,14 +117,7 @@ const ret = {
     },
     workbox: {
       dev: true,
-      offlineAssets: [
-        '*.svg',
-        '*.png',
-        '*.jpg',
-        '*.js',
-        '*.css',
-        '*.ico',
-      ]
+      offlineAssets: ['*.svg', '*.png', '*.jpg', '*.js', '*.css', '*.ico']
     },
     // pwa manifest
     manifest: {
@@ -132,7 +125,7 @@ const ret = {
       /* Do not change this id. it's static and is not current app id */
       gcm_sender_id: '103953800507',
       theme_color: '#000'
-    },
+    }
   },
 
   /*

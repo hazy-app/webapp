@@ -140,9 +140,12 @@ export default {
       this.$emit('reply', this.message)
     },
     privacyChange(newValue) {
-      this.$emit('privacyChange', Object.assign(this.message, {
-        public: newValue
-      }))
+      this.$emit(
+        'privacyChange',
+        Object.assign(this.message, {
+          public: newValue
+        })
+      )
     }
   }
 }
