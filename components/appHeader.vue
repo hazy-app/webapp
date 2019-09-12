@@ -71,6 +71,7 @@ export default {
 
   & /deep/ header {
     padding: 0.4em;
+    height: 4.1rem;
 
     & .vertical-line {
       margin: 0 10px 0 4px;
