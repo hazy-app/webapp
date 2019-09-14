@@ -16,7 +16,7 @@ export default function(
         property: 'twitter:image:src',
         content: !!username
           ? `${process.env.BASE_URL}/users/${username}/avatar.jpg`
-          : 'https://hazyapp.com/hazy_card.png'
+          : '/hazy_card.png'
       },
       {
         property: 'twitter:title',
