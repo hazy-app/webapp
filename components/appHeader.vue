@@ -1,6 +1,7 @@
 <template>
   <fvHeader class="transparent header">
     <a 
+      v-if="!hideBackButton"
       :class="{'fv-hidden-xs fv-hidden-sm': searching}"
       href="#"
       class="fv-button fv-margin-end"
@@ -56,6 +57,12 @@ export default {
     appAccountActionsLinks,
     appSearchButton,
     appIcon
+  },
+  props: {
+    hideBackButton: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
