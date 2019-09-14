@@ -10,12 +10,17 @@
         </appHeader>
         <nuxt/>
         <fvFooter class="transparent fv-text-center fv-margin-top fv-font-sm fv-no-border">
-          Licenced over <b>GPL v2</b>, Maintained using <a 
+          Licenced over <b>GPL v2</b>, Deployed on <a 
+            href="https://fandogh.cloud" 
+            target="_blank">
+            <b> <appIcon icon="fandogh" /> Fandogh</b>
+          </a>, Maintained using <a 
             class="fv-link"
             href="https://github.com" 
-            target="_blank"><b>Github</b></a>, deployed on <a 
-              href="https://fandogh.cloud" 
-              target="_blank"><b>Fandogh</b></a>. <br>
+            target="_blank">
+            <b> <appIcon icon="github" /> Github</b>
+          </a>.
+          <br>
           Copyright © 2018 by <b>Amir Momenian</b>, All rights reserved.
         </fvFooter>
       </fvContent>
@@ -49,12 +54,14 @@
 import appAccountAccessLinks from '@/components/appAccountAccessLinks.vue'
 import appAccountActionsLinks from '@/components/appAccountActionsLinks.vue'
 import appAvatarChanger from '@/components/appAvatarChanger.vue'
+import appIcon from '@/components/appIcon.vue'
 
 export default {
   components: {
     appAccountAccessLinks,
     appAccountActionsLinks,
-    appAvatarChanger
+    appAvatarChanger,
+    appIcon
   }
 }
 </script>
