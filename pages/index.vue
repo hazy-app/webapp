@@ -117,7 +117,8 @@ export default {
   asyncData({ store }) {
     store.commit('ui/setHeader', {
       title: 'Hazy',
-      description: 'Send and Receive anonymous messages'
+      description: 'Send and Receive anonymous messages',
+      hideBackButton: true
     })
   }
 }
