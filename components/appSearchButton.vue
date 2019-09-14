@@ -51,6 +51,7 @@ export default {
         )
       }
       this.$router.push(`/search/${this.searchQuery}`)
+      this.cancelSearch()
     }
   }
 }
@@ -58,9 +59,13 @@ export default {
 
 <style lang="scss" scoped>
 .search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   &.searching {
     background: #f5f5f5;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 960px) {
       flex-grow: 2;
     }
   }
