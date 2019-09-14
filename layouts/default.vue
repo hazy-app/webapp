@@ -2,7 +2,7 @@
   <div id="app-layout-wrapper">
     <fvMain>
       <fvContent>
-        <appHeader>
+        <appHeader :hide-back-button="$store.state.ui.hideBackButton">
           <template slot="title"> {{ $store.state.ui.headerTitle }} </template>
           <template 
             v-if="$store.state.ui.headerDescription" 
