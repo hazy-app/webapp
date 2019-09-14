@@ -9,6 +9,15 @@
             slot="description"> {{ $store.state.ui.headerDescription }} </template>
         </appHeader>
         <nuxt/>
+        <fvFooter class="transparent fv-text-center fv-margin-top fv-font-sm fv-no-border">
+          Licenced over <b>GPL v2</b>, Maintained using <a 
+            class="fv-link"
+            href="https://github.com" 
+            target="_blank"><b>Github</b></a>, deployed on <a 
+              href="https://fandogh.cloud" 
+              target="_blank"><b>Fandogh</b></a>. <br>
+          Copyright © 2018 by <b>Amir Momenian</b>, All rights reserved.
+        </fvFooter>
       </fvContent>
     </fvMain>
     <fvMenu 
