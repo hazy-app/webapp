@@ -89,7 +89,7 @@ export const actions = {
       })
       console.log('login() => passed. so setting accestoken.')
       await dispatch('setAuthorization', {
-        authorization: response.data
+        authorization: `${response.data.type} ${response.data.token}`
       })
       this.$sentMessages.clear()
       if (window && window.localStorage.fcmToken) {
