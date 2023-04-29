@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
-    "@nuxtjs/pwa": "^2.6.0",
+    "@nuxtjs/pwa": "^3.3.5",
     "base-64": "^0.1.0",
     "clipboard-copy": "^2.0.1",
     "cookie-universal-nuxt": "^2.0.5",
