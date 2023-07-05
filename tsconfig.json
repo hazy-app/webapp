@@ -20,10 +20,6 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Node */
-    // "composite": true,
-    // "skipLibCheck": true,
-    // "module": "ESNext",
-    // "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
 
     /* resolve @ to root */
@@ -35,5 +31,5 @@
     /* Types */
     "types": ["vite/client", "node"],
   },
-  "include": ["client", "server", "shared", "env.d.ts", "index.ts"],
+  "include": ["client", "server", "shared", "*.ts"],
 }
