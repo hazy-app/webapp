@@ -15,7 +15,7 @@ export default defineConfig(({ command, ssrBuild }) => ({
     target: 'node',
   },
   server: {
-    port: 5170,
+    port: +process.env.PORT,
   },
   plugins: [
     react(),
