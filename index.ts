@@ -2,7 +2,7 @@ import { default as createExpressApp, static as createStaticRouter } from 'expre
 import router from './server/main';
 import { existsSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { resolve, basename } from 'path';
+import { resolve } from 'path';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_PATH = resolve(ROOT, './public');
@@ -10,7 +10,7 @@ const PUBLIC_PATH = resolve(ROOT, './public');
 const app = createExpressApp();
 app.use(process.env.API_BASEURL, router);
 
-if (basename(process.argv[1]) !== 'vite') {
+if (process.argv.includes('--start')) {
   if (!existsSync(PUBLIC_PATH)) {
     throw new Error('The client bundle need to be generated before starting server!');
   }
