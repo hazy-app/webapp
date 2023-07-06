@@ -1,17 +1,18 @@
 import logo from '/hazy.svg'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Database } from '../shared/types';
+import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 function App() {
   const queryClient = useQueryClient();
 
-  const users = useQuery<Database['public']['Tables']['users']['Row'][]>({
+  const users = useQuery<PostgrestSingleResponse<Database['public']['Tables']['users']['Row'][]>>({
     queryKey: ['users'],
     queryFn: () => fetch(process.env.API_BASEURL + '/users').then((x) => x.json()),
   });
 
   const createUser = useMutation({
-    mutationFn: (payload) => fetch(process.env.API_BASEURL + '/users', {
+    mutationFn: (payload: Database['public']['Tables']['users']['Insert']) => fetch(process.env.API_BASEURL + '/users', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +41,7 @@ function App() {
       <img src={logo} className="logo" alt="Hazy logo" width="120" onClick={() => users.refetch()} />
       <ul>
         { users.isLoading && 'loading...' }
-        { users.data?.map?.((user) => (
+        { users.data?.data?.map?.((user) => (
           <li key={user.id}>
             { user.username } ({ user.password })
             <button
@@ -51,14 +52,10 @@ function App() {
         ))}
         <button
           disabled={createUser.isLoading}
-          onClick={() => createUser.mutate(
-            JSON.parse(
-              prompt(
-                'new user:',
-                '{"username":"","password":""}',
-              ) as string,
-            ),
-          )}
+          onClick={() => createUser.mutate({
+            username: prompt('username') || '',
+            password: prompt('password') || '',
+          })}
         >add</button>
       </ul>
     </>

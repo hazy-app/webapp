@@ -14,7 +14,7 @@
     "build": "tsc && vite build --ssr index.ts && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "start": "node dist --start",
-    "generate:db:types": "supabase gen types typescript --project-id '$SUPABASE_REF' > shared/types.ts"
+    "generate:db:types": "supabase gen types typescript --project-id $SUPABASE_REF > shared/types.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.26.0",

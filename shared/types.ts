@@ -20,7 +20,7 @@ export interface Database {
           created_at?: string | null
           id?: number
           password: string
-          username?: string
+          username: string
         }
         Update: {
           created_at?: string | null

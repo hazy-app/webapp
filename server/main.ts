@@ -1,27 +1,14 @@
 import { Router as createExpressRouter, json } from 'express';
-import { getDatabase } from './lib/database';
+import { handleCreateUser, handleDeleteUser, handleEditUser, handleGetUser, handleGetUsers } from './controllers/users';
 
 const router = createExpressRouter();
 
 router.use(json());
 
-router.get('/users', async (_req, res) => {
-  const db = getDatabase();
-  const users = await db.from('users').select('*');
-  res.json(users.data);
-});
-
-router.post('/users', async (req, res) => {
-  const db = getDatabase();
-  const body = req.body;
-  const user = await db.from('users').insert(body);
-  res.json(user.data);
-});
-
-router.delete('/users/:user_id', async (req, res) => {
-  const db = getDatabase();
-  const user = await db.from('users').delete().eq('id', req.params.user_id);
-  res.json(user.data);
-});
+router.get('/users', handleGetUsers);
+router.post('/users', handleCreateUser);
+router.get('/users/:user', handleGetUser);
+router.delete('/users/:user', handleDeleteUser);
+router.patch('/users/:user', handleEditUser);
 
 export default router;
